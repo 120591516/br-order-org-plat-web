@@ -1,0 +1,523 @@
+<section class="content-header">
+	<div class="margin-bottom">
+		<h2><small>内容展示</small></h2>
+	</div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">首页展示</a>
+		</li>
+		<li class="active">内容展示</li>
+	</ol>
+	<div class="box container-fluid no-margin">
+		<div class="box-header">
+			<div class="row margin-bottom">
+				<form class="form-group container-fluid">
+					<div class="row margin-bottom">
+						<div class="col-md-12" style="margin-top:10px;">
+							<div class="col-md-1">
+								<h3 class="box-title">添加套餐</h3>
+							</div>
+							<div class="input-group" type="hidden">
+								<input name='firstdatashowDataType' value="0" type="hidden" id="storeType" />
+								<input name='firstdatashowDataType' value="1" type="hidden" id="suitType" />
+							</div>
+							<div class="col-md-5">
+								<input class="hidden" id="currentOrgId" name="orgId">
+								<div class="col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon">套餐</span>
+										<select class="form-control selectpicker" id="addSuitId" name="examSuiteId">
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="col-md-6 col-md-push-6">
+									<div class="input-group">
+										<a data-toggle="modal" href="#addSuitModel" id="addSuitInfo" class="btn btn-default">添加</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-1">
+								<h3 class="box-title">添加门店</h3>
+							</div>
+							<div class="col-md-5">
+								<div class="col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon">门店</span>
+										<select class="form-control selectpicker" id="addStoreBranchId" name="branchId">
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="col-md-6 col-md-push-6">
+									<div class="input-group">
+										<a data-toggle="modal" href="#addBranchModel" id="addBranchInfo" class="btn btn-default">添加</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- /.box-header -->
+		</div>
+	</div>
+</section>
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+					<div class="row">
+						<div class="col-md-8">
+							<h3 class="box-title margin">列表</h3>
+						</div>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>编辑</th>
+								<th>机构名称</th>
+								<th>门店/套餐名称</th>
+								<th>类型名称</th>
+								<th>图片</th>
+								<th>描述</th>
+								<th>状态</th>
+							</tr>
+							<tr class="warning no-result">
+								<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+							</tr>
+						</thead>
+						<tbody id="homeTbody">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--添加套餐-->
+<div class="modal fade" id="addSuitModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">添加套餐</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example-form form-horizontal" role="form">
+					<div class="row margin-bottom padding_14px">
+						<div class="col-md-12 input-group home-img" id="addSuitImgInput">
+							<span class="input-group-addon">套餐图片</span>
+							<ul class="SuitPicture picture" id="addSuitPictureShowId">
+							</ul>
+						</div>
+					</div>
+					<div class="row margin-bottom">
+						<div class="col-md-12">
+							<div class="input-group">
+								<span class="input-group-addon">描述</span>
+								<textarea id="addSuitNoteInput" class="form-control"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row margin-bottom">
+						<div class="col-md-12">
+							<div class="input-group">
+								<span class="input-group-addon">套餐图片</span>
+								<input id="editSuitImg" class="file" type="file" name="file" multiple>
+								<input type="hidden" name="imgId" id="editSuitImgId" value="" />
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id="suitImgSubmit">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--添加门店-->
+<div class="modal fade" id="addBranchModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">添加门店</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form">
+					<div class="row margin-bottom">
+						<div class="col-md-12 input-group padding_14px" id="addStoreImgInput" style="border:1px solid #eee;width:360px;height:200px;">
+
+							<span class="input-group-addon">门店图片</span>
+							<ul class="branchPicture picture" id="addStorePictureShowId">
+							</ul>
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div class="row margin-bottom">
+						<div class="col-md-12 input-group">
+							<span class="input-group-addon">描述</span>
+							<textarea id="addNoteInput" class="form-control"></textarea>
+						</div>
+					</div>
+					<div class="row margin-bottom">
+						<div class="col-md-12">
+							<div class="input-group">
+								<span class="input-group-addon">门店照片</span>
+								<input id="editStoreImg" class="file" type="file" name="file" multiple>
+								<input type="hidden" name="imgId" id="editStoreImgId" value="" />
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id="storeImgSubmit">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/org_plat/js/plugins/extendPagination.js"></script>
+<script src="/org_plat/js/create/Ajax.js"></script>
+<script>
+	//	$(document).ready(function() {
+	init_page();
+	suitImgInfo(); //执行套餐图片上传
+	storeImgInfo(); //执行门店图片上传
+	//	})
+
+	//添加套餐信息下拉框回显
+	getSuiteByOrg('#addSuitId', '#addSuitImgInput');
+	//添加门店信息下拉框回显
+	getBranchByOrg('#addStoreBranchId');
+	//  分页
+	function init_page() {
+		$('#homeTbody').empty();
+		page_curr = 1;
+		init_list();
+		init_pager();
+	}
+
+	function init_list() {
+		$('#homeTbody').empty();
+		var otype = "post";
+		var osync = false;
+		var param = {
+			"page": page_curr,
+			"rows": count_curr
+		};
+		var reqResult = httpRequest(showFirstDataUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			total_count = reqResult.total;
+			createTable(page_curr, limit, total_count, reqResult);
+		}
+		return false;
+	}
+	//  初始化分页信息
+	function init_pager() {
+		$('#callBackPager').extendPagination({
+			totalCount: total_count,
+			showCount: count_curr,
+			limit: limit,
+			callback: function(curr, limit, totalCount) {
+				page_curr = curr;
+				total_count = totalCount;
+				init_list();
+			}
+		});
+	}
+	getOrgId();
+
+	function getOrgId() {
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(footer_getUserPermission_url, null, otype, osync);
+		if(reqResult.result == 0) {
+			var orgId = reqResult.userRole.orgId;
+			$('#currentOrgId').val(orgId);
+		}
+		return false;
+	}
+	//  列表展示
+	function createTable(currPage, limit, total, dataBack) {
+		var showNum = limit;
+		//获取操作类型
+		//		var operationList = dataBack.operationList;
+		//		//			判断添加按钮
+		//		if(operationList.add == 1) {
+		//			$('#addBranchInfo').show();
+		//			$('#addSuitInfo').show();
+		//		} else {
+		//			$('#addBranchInfo').hide();
+		//			$('#addSuitInfo').hide();
+		//		}
+		if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+		for(var i = 0; i < showNum; i++) {
+			var Tbody = document.getElementById('homeTbody');
+			var lRow = Tbody.insertRow(); //创建行
+			//			var operationList = dataBack.operationList; //获取操作类型
+			//			var operationListAddBranchInfo = document.getElementById('addBranchInfo'); //获取添加按钮
+			//			var operationListAddSuitInfo = document.getElementById('addSuitInfo'); //获取添加按钮
+			//			//				判断操作类型
+			//			(operationList.add === 0) ? operationListAddBranchInfo.style.display = 'none': operationListAddBranchInfo.style.display = ''; //1为添加
+			//			(operationList.add === 0) ? operationListAddSuitInfo.style.display = 'none': operationListAddSuitInfo.style.display = '';
+			//			//				判断状态
+			var firstdatashowDataStatus = (dataBack.data[i].firstdatashowDataStatus === 0) ? "启用" : "禁用";
+			var firstdatashowDataType = (dataBack.data[i].firstdatashowDataType === 0) ? "门店" : "套餐";
+			//创建列
+			var firstColumn = lRow.insertCell();
+			var secondColumn = lRow.insertCell();
+			var thirdColumn = lRow.insertCell();
+			var forthAddColumn = lRow.insertCell();
+			var forthColumn = lRow.insertCell();
+			var fifthColumn = lRow.insertCell();
+			var sixthColumn = lRow.insertCell();
+			firstColumn.setAttribute('firstdatashowId', dataBack.data[i].firstdatashowId); //给td添加属性
+			//添加第一列内容
+			//创建删除标签
+			var aDelete = document.createElement("a");
+			var iElement = document.createElement("i");
+			//			(operationList.delete === 1) ? iElement.className = "fa fa-trash-o": ''; 
+			iElement.className = "fa fa-trash-o";
+			aDelete.appendChild(iElement);
+			aDelete.style.marginLeft = "15px";
+			aDelete.onclick = function() {
+				delOrgInfo(this)
+			};
+			firstColumn.appendChild(aDelete);
+			//添加第二列内容	
+			secondColumn.innerText = dataBack.data[i].orgName;
+			//添加第三列内容	
+			thirdColumn.innerText = dataBack.data[i].firstdatashowDataName;
+			//添加第四列内容	
+			var imgNode = document.createElement("img");
+			imgNode.setAttribute('src', oplatIp + dataBack.data[i].imgURL);
+			imgNode.setAttribute('width', '40px');
+			imgNode.setAttribute('height', '40px');
+			forthColumn.appendChild(imgNode);
+			//添加第五列内容	
+			if(dataBack.data[i].firstdatashowDataDescribe.length > 10) {
+				fifthColumn.innerText = dataBack.data[i].firstdatashowDataDescribe.substring(0, 9) + "...";
+			} else {
+				fifthColumn.innerText = dataBack.data[i].firstdatashowDataDescribe;
+			}
+			//				添加第六列内容	
+			sixthColumn.innerText = firstdatashowDataStatus;
+			forthAddColumn.innerText = firstdatashowDataType;
+		}
+		return false;
+	}
+	//		门店图片上传
+	function storeImgInfo() {
+		$("#editStoreImg").fileinput({
+			uploadUrl: uploadImagesUrl, // you must set a valid URL here else you will get an error
+			allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg', 'bmp'],
+			overwriteInitial: false,
+			maxFileSize: 100000,
+			maxFilesNum: 1,
+			slugCallback: function(filename) {
+				return filename.replace('(', '_').replace(']', '_');
+			}
+		})
+
+		$("#editStoreImg").on("fileuploaded", function(event, data, previewId, index) {
+			$('#editStoreImgId').val(data.response.imgId);
+		});
+	}
+	//	套餐图片上传
+	function suitImgInfo() {
+		$("#editSuitImg").fileinput({
+			uploadUrl: uploadImagesUrl, // you must set a valid URL here else you will get an error
+			allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg', 'bmp'],
+			overwriteInitial: false,
+			maxFileSize: 100000,
+			maxFilesNum: 1,
+			slugCallback: function(filename) {
+				return filename.replace('(', '_').replace(']', '_');
+			}
+		})
+
+		$("#editSuitImg").on("fileuploaded", function(event, data, previewId, index) {
+			$('#editSuitImgId').val(data.response.imgId);
+		});
+	}
+
+	//添加门店
+	//选取套餐图片
+	$('#addSuitId').on('change', function() {
+			branchSuitPicture($("#addSuitId").val(), '2');
+		})
+		//	选取门店图片
+	$('#addStoreBranchId').on('change', function() {
+		branchSuitPicture($("#addStoreBranchId").val(), '1');
+	})
+
+	//门店保存图片
+	$('#storeImgSubmit').on('click', function() {
+		var imgPosition = $('.file-preview-frame').children().length;
+		var addStoreImgInput = $('#addStoreImgInput').children();
+		var addNoteInput = $('#addNoteInput').val();
+		var currentOrgId = $('#currentOrgId').val();
+		var addStoreBranchId = $('#addStoreBranchId').val();
+		if($('#editStoreImgId').val() != '') {
+			var storeImgId = $('#editStoreImgId').val();
+		} else {
+			var storeImgId = $('#addStorePictureShowId li[class="liOtherCss"] img').attr('id');
+		}
+		var storeType = $('#storeType').val();
+		var storeName = $('#addStoreBranchId').children(':selected').attr("storeName");
+		var uploadStoreImg = $('#editStoreImgId').val();
+		if(addStoreImgInput == '' || addNoteInput == '') {
+			alert('请输选择门店信息');
+			return false;
+		} else if(imgPosition == 0 && addStoreImgInput != '' && addNoteInput !== '') {
+			var param = {
+				"firstdatashowDataType": storeType,
+				"firstdatashowDataDescribe": addNoteInput,
+				"firstdatashowDataImageId": storeImgId,
+				"firstdatashowOrgId": currentOrgId,
+				"firstdatashowDataId": addStoreBranchId,
+				"firstdatashowDataName": storeName
+			};
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(saveShowFirstDataurl, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('编辑成功');
+				window.location.reload();
+			} else {
+				alert('编辑失败!');
+			}
+		} else {
+			var param = {
+				"firstdatashowDataType": storeType,
+				"firstdatashowDataDescribe": addNoteInput,
+				"firstdatashowDataImageId": uploadStoreImg,
+				"firstdatashowOrgId": currentOrgId,
+				"firstdatashowDataId": addStoreBranchId,
+				"firstdatashowDataName": storeName
+			};
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(saveShowFirstDataurl, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('编辑成功');
+				window.location.reload();
+			} else {
+				alert('编辑失败!');
+			}
+		}
+	})
+
+	//		图片动画
+	$('#addStorePictureShowId,#addSuitPictureShowId').on('click', 'li', function() {
+		if(!$(this).attr('value')) {
+			$(this).addClass('liOtherCss').removeClass('liCss').siblings().removeClass('liOtherCss').addClass('liCss');
+			$(this).attr('value');
+		} else {
+			$(this).addClass('liCss');
+			$(this).removeAttrttr('value');
+		}
+		return false;
+	})
+
+	//套餐保存图片
+	$('#suitImgSubmit').on('click', function() {
+		var imgPosition = $('.file-preview-frame').children().length;
+		var addSuitImgInput = $('#addSuitImgInput').children();
+		var addSuitNoteInput = $('#addSuitNoteInput').val();
+		if($('#editSuitImgId').val() != '') {
+			var suitImgId = $('#editSuitImgId').val();
+		} else {
+			var suitImgId = $('#addSuitPictureShowId li[class="liOtherCss"] img').attr('id');
+		}
+		var suitType = $('#suitType').val();
+		var examSuiteName = $('#addSuitId').children(':selected').attr("examSuiteName");
+		var currentOrgId = $('#currentOrgId').val();
+		var addSuitId = $('#addSuitId').val();
+		var uploadSuitImg = $('#editSuitImgId').val();
+		if(addSuitImgInput == '' || addSuitNoteInput == '') {
+			alert('请输入完整信息');
+			return false;
+		} else if(imgPosition == 0 && addSuitImgInput != '' && addSuitNoteInput !== '') {
+			var param = {
+				"firstdatashowDataType": suitType,
+				"firstdatashowDataDescribe": addSuitNoteInput,
+				"firstdatashowDataImageId": suitImgId,
+				"firstdatashowOrgId": currentOrgId,
+				"firstdatashowDataId": addSuitId,
+				"firstdatashowDataName": examSuiteName
+			};
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(saveShowFirstDataurl, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('编辑成功');
+				window.location.reload();
+			} else {
+				alert('编辑失败!');
+			}
+		} else {
+			var param = {
+				"firstdatashowDataType": suitType,
+				"firstdatashowDataDescribe": addSuitNoteInput,
+				"firstdatashowDataImageId": uploadSuitImg,
+				"firstdatashowOrgId": currentOrgId,
+				"firstdatashowDataId": addSuitId,
+				"firstdatashowDataName": examSuiteName
+			};
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(saveShowFirstDataurl, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('编辑成功');
+				window.location.reload();
+			} else {
+				alert('编辑失败!');
+			}
+		}
+	})
+
+	//  删除信息
+	function delOrgInfo(del_li) {
+		if(confirm("确认删除此条信息吗？")) {
+			var delInfo = $(del_li).parent().attr("firstdatashowId");
+			var param = {
+				"firstdatashowId": delInfo
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(deleteShowFirstDataUrl, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("删除成功！");
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+</script>

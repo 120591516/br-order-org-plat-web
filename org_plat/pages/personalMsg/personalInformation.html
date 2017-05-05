@@ -1,0 +1,125 @@
+
+	<!-- Content Header (Page header) -->
+	<div class="fakeloader"></div>
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>个人信息设置</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">个人设置</a>
+			</li>
+			<li class="active">个人信息</li>
+		</ol>
+		<a href="/org_plat/pages/system/index.html" class="user_mar btn btn-default">返回</a>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content margin_top_15">
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-lg-8 col-md-6 col-md-push-2 col-xs-push-3 col-sm-push-3">
+				<div class="box ">
+					<!--box-header -->
+					<div class="box-header">
+						<h3 class="box-title noacess"><strong class='vertical_position_sub'>个人信息设置</strong></h3>
+						<!--<button type="submit" class="btn btn-default pull-right" id='personal_edit_btn'>编辑</button>-->
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<form class="bs-example bs-example-form" id='personal_form' role="form" method="post" novalidate="novalidate">
+							<input type="hidden" id="empId" name="empId" />
+							<div class="input-group">
+								<label class="input-group-addon">登录名</label>
+								<input type="text" class="form-control" id='checkLoginName' name="loginName" aria-describedby="basic-addon1" minlength='6' maxlength="10" required disabled="disabled">
+							</div>
+							<div class="input-group">
+								<label class="input-group-addon">姓名</label>
+								<input type="text" class="form-control" id='checkName' name="name" aria-describedby="basic-addon1" minlength='6' maxlength="10" required disabled="disabled">
+							</div>
+							<div class="input-group">
+								<label class="input-group-addon">手机号</label>
+								<input type="text" class="form-control check_userphone_validate" id='checkPhone' name="phone" aria-describedby="basic-addon1" required disabled="disabled">
+							</div>
+							<div class="input-group">
+								<label class="input-group-addon letter_spacing_50">邮箱</label>
+								<input type="text" id='checkEmail' class="form-control" name="email" aria-describedby="basic-addon1" required disabled="disabled">
+							</div>
+							<div class="input-group">
+								<label class="input-group-addon">创建时间</label>
+								<input type="text" class="form-control check_userphone_validate" id='check_create_time' name="create_time" aria-describedby="basic-addon1" required disabled="disabled">
+							</div>
+							<!--<div class="input-group">
+								<button type="submit" id='personal_save_btn' class="btn btn-default noacess">保存</button>
+							</div>-->
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+</div>
+<!--<script src="/org_plat/js/laydate/laydate.js"></script>-->
+<!--<script src="/org_plat/js/plugins/formValidator-4.0.1.js"></script>-->
+	<!--动画js-->
+<script src="/org_plat/js/plugins/fakeLoader.min.js"></script>
+<script>
+	$(document).ready(function(){ 
+		$('#personal_form input').empty();
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(personalInforUrl, null, otype, osync)
+		if(reqResult.result == 0 && reqResult.data) {
+			var datal=reqResult.data;
+			$('#checkLoginName').val(datal.loginName);
+			$('#checkName').val(datal.name);
+			$('#checkPhone').val(datal.phone);
+			$('#checkEmail').val(datal.email);
+			$('#check_create_time').val(getLocalTime(datal.create_time));
+		} 
+		return false;
+	})
+	
+	
+//	$('#personal_save_btn').on('click',function(){
+//				var phone=$('.check_userphone_validate');
+//				if($(".check_userphone_validate").val()==""){
+//				   $(".userlist_checkphone").html("<font class='font'>手机号码不能为空，请重新输入！</font>");
+//				   $(".check_userphone_validate").focus();
+//				   return false;
+//				 }else if (!phone.val().match( /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/)){
+//					$(".userlist_checkphone").html("<font class='fontphone'>手机号码格式不正确！请重新输入</font>");
+//					return false;
+//					}else{
+//						$(".userlist_checkphone").html("");
+//						var param = $('#personal_form').serialize();
+//						var otype = "post";
+//						var osync = false;
+//						var reqResult = httpRequest(personalInformation_updateEmp_url, param, otype, osync);
+//						if(reqResult.result == 0) {
+//							if(reqResult.data == 1) {
+//								alert('保存成功！');
+//								window.location.reload();
+//								return false;
+//							} else {
+//								alert(reqResult.message);
+//							}
+//						} else {
+//							alert('保存失败!');
+//						}
+//					}
+//				$(".check_userphone_validate").blur(checkphone());		
+//		})
+//		$('#personal_edit_btn').on('click',function(){
+//			$("input").removeAttr("disabled");
+//			$('#personal_save_btn').fadeIn();
+//			$('#personal_form label').css('border','1px solid #ddd');
+//			$('#personal_form input').css('border','1px solid #ddd');
+//		})
+//		$('#personal_backbtn').on('click',function(){
+//			userrole_back_userlist();
+//		})
+//		function userrole_back_userlist(){
+//				history.go(-1) ;
+//		}
+</script>

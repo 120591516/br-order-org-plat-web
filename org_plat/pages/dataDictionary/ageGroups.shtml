@@ -1,0 +1,451 @@
+
+	<section class="content-header">
+		<div class="margin-bottom">
+			<h2><small>年龄分组</small></h2>
+		</div>
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">字典维护</a>
+			</li>
+			<li class="active">年龄分组</li>
+		</ol>
+	</section>
+	<!-- /Content Header (Page header) -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<div class="row">
+							<div class="col-md-8">
+								<h3 class="box-title margin">列表</h3>
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-4 col-md-offset-8">
+										<a href="#add_agegroup" data-toggle="modal" class="btn btn-default margin" id="addConTypeDic">添加</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-body">
+						<table class="table formCss">
+							<thead>
+								<tr>
+									<th>操作</th>
+									<th>年龄分组名称</th>
+									<th>分组上限</th>
+									<th>分组下限</th>
+									<th>年龄分组描述</th>
+									<th>行序</th>
+									<th>创建时间</th>
+									<th>状态</th>
+								</tr>
+								<tr class="warning no-result">
+									<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+								</tr>
+							</thead>
+							<tbody id="agegroup_tbody_main">
+								<tr>
+									<th></th>
+									<th></th>
+									<th></th>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /Main content -->
+	<!--模态框添加-->
+	<div class="modal fade" id="add_agegroup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">年龄分组</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="add_agegroup_formNews">
+						<div class="input-group">
+							<span class="input-group-addon">年龄分组名称</span>
+							<input type="text" id="add_agegroup_name" class="form-control" name="agegroupName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">年龄分组上限</span>
+							<input type="text" id="add_agegroup_up" class="form-control check_userloginname_validate" name="agegroupUp" aria-describedby="basic-addon1" maxlength='10' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">年龄分组下限</span>
+							<input type="text" id="add_agegroup_down" class="form-control check_userloginname_validate" name="agegroupDown" aria-describedby="basic-addon1" maxlength='10' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">年龄分组描述</span>
+							<input type="text" id="add_agegroup_text" class="form-control check_userloginname_validate" name="agegroupText" aria-describedby="basic-addon1" maxlength='10' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon letter_spacing_30">行序</span>
+							<input type="text" id="add_agegroup_input_code" class="form-control check_userphone_validate" name="agegroupOrder" aria-describedby="basic-addon1" required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" id="add_agegroup_btn">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框修改-->
+	<div class="modal fade" id="edit_agegroup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">年龄分组</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="edit_agegroup_formNews">
+						<input type="hidden" name="agegroupId" id="edit_agegroupId_hidden" />
+
+						<div class="input-group">
+							<span class="input-group-addon">年龄分组名称</span>
+							<input type="text" id="edit_agegroup_name" class="form-control" name="agegroupName" aria-describedby="basic-addon1" maxlength='12' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">年龄分组上限</span>
+							<input type="text" id="edit_agegroup_up" class="form-control check_userloginname_validate" name="agegroupUp" aria-describedby="basic-addon1" maxlength='10' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">年龄分组下限</span>
+							<input type="text" id="edit_agegroup_down" class="form-control check_userloginname_validate" name="agegroupDown" aria-describedby="basic-addon1" maxlength='10' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">年龄分组描述</span>
+							<input type="text" id="edit_agegroup_code" class="form-control check_userloginname_validate" name="agegroupText" aria-describedby="basic-addon1" maxlength='10' required>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">行序</span>
+							<input type="text" id="edit_agegroup_input_code" class="form-control check_userphone_validate" name="agegroupOrder" aria-describedby="basic-addon1" required>
+						</div>
+						<div class="input-group" id='edit_agegroup_status'>
+							<span class="input-group-addon userlist_agegroupStatus_right_border">状 态</span>
+							<input type="radio" name='agegroupStatus' value="0" class="userlist_agegroupStatusinput_vertical" />启用
+							<input type="radio" name='agegroupStatus' value="1" class="userlist_agegroupStatusinput_vertical" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" id='edit_agegroup_save'>保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框查看-->
+	<div class="modal fade" id="check_agegroup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">年龄分组</h4>
+				</div>
+				<div class="modal-body">
+					<form class="bs-example bs-example-form" role="form" id="check_agegroup_formNews">
+
+						<div class="input-group">
+							<span class="input-group-addon">年龄分组名称</span>
+							<input type="text" id="check_agegroup_name" class="form-control" name="agegroupName" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">年龄分组上限</span>
+							<input type="text" id="check_agegroup_up" class="form-control check_userloginname_validate" name="agegroupUp" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">年龄分组下限</span>
+							<input type="text" id="check_agegroup_down" class="form-control check_userloginname_validate" name="agegroupDown" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">年龄分组描述</span>
+							<input type="text" id="check_agegroup_code" class="form-control check_userloginname_validate" name="agegroupText" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">行序</span>
+							<input type="text" id="check_agegroup_input_code" class="form-control check_userphone_validate" name="agegroupOrder" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+
+						<div class="input-group">
+							<span class="input-group-addon">创建时间</span>
+							<input type="text" id="check_agegroup_create_time" class="form-control" name="agegroupCreatetime" aria-describedby="basic-addon1" disabled="disabled">
+						</div>
+						<div class="input-group" id='check_agegroup_agegroupStatus'>
+							<span class="input-group-addon userlist_agegroupStatus_right_border">状 态</span>
+							<input type="radio" name='agegroupStatus' value="0" class="userlist_agegroupStatusinput_vertical" disabled="disabled" />启用
+							<input type="radio" name='agegroupStatus' value="1" class="userlist_agegroupStatusinput_vertical" disabled="disabled" />禁用
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/org_plat/js/plugins/extendPagination.js"></script>
+	<script>
+		//  分页
+		init_page();
+
+		function init_page() {
+			$('#agegroup_tbody_main').empty();
+			init_list();
+			init_pager();
+		}
+
+		function init_list() {
+			$('#agegroup_tbody_main').empty();
+			var otype = "post";
+			var osync = false;
+			var param = {
+				"page": page_curr,
+				"rows": count_curr
+			};
+			var reqResult = httpRequest(ageGroup_getAllDictagegroup_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				total_count = reqResult.data.total;
+				createTable(page_curr, limit, total_count, reqResult);
+			}
+			return false;
+		}
+		// 初始化分页信息
+		function init_pager() {
+			$('#callBackPager').extendPagination({
+				totalCount: total_count,
+				showCount: count_curr,
+				limit: limit,
+				callback: function(curr, limit, totalCount) {
+					page_curr = curr;
+					total_count = totalCount;
+					init_list();
+				}
+			});
+		}
+		//  列表展示
+		function createTable(currPage, limit, total, dataBack) {
+			var showNum = limit;
+			if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+			for(var i = 0; i < showNum; i++) {
+				var Tbody = document.getElementById('agegroup_tbody_main');
+				var lRow = Tbody.insertRow(); //创建行
+				var agegroupStatus = (dataBack.data.list[i].agegroupStatus === 0) ? "启用" : "禁用";
+				var operationByRole = dataBack.operationList; //获取操作类型
+				var operationByRoleAdd = document.getElementById('addConTypeDic'); //获取添加按钮
+//								判断操作类型
+				(operationByRole.dictagegroup_insert === false) ? operationByRoleAdd.style.display = 'none': operationByRoleAdd.style.display = ''; //1为添加				//创建列
+				var firstColumn = lRow.insertCell();
+				var thirdColumn = lRow.insertCell();
+				var forthColumn = lRow.insertCell();
+				var fifthColumn = lRow.insertCell();
+				var sixthColumn = lRow.insertCell();
+				var seventhColumn = lRow.insertCell();
+				var eighthColumn = lRow.insertCell();
+				var ninthColumn = lRow.insertCell();
+				firstColumn.setAttribute('agegroupid', dataBack.data.list[i].agegroupId); //给td添加属性
+				//添加第一列内容
+				//创建查看标签
+				var aCheck = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.dictagegroup_detail === true) ? iElement.className = "fa fa-eye": ''; //4为查看
+				aCheck.appendChild(iElement);
+				aCheck.setAttribute("href", "#check_agegroup");
+				aCheck.setAttribute("data-toggle", "modal");
+				aCheck.style.marginLeft = "5px";
+				aCheck.onclick = function() {
+					check_agegroup(this)
+				};
+				firstColumn.appendChild(aCheck);
+				//创建编辑标签
+				var aEdit = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.dictagegroup_update === true) ? iElement.className = "fa fa-pencil": ''; //3为更新
+				aEdit.appendChild(iElement);
+				aEdit.setAttribute("href", "#edit_agegroup");
+				aEdit.setAttribute("data-toggle", "modal");
+				aEdit.style.marginLeft = "5px";
+				aEdit.onclick = function() {
+					edit_agegroup(this)
+				};
+				firstColumn.appendChild(aEdit);
+				//创建删除标签
+				var aDelete = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.dictagegroup_delete === true) ? iElement.className = "fa fa-trash-o": ''; //2为删除
+				aDelete.appendChild(iElement);
+				aDelete.style.marginLeft = "5px";
+				aDelete.onclick = function() {
+					del_agegroup(this)
+				};
+				firstColumn.appendChild(aDelete);
+				//添加第三列内容	
+				thirdColumn.innerText = dataBack.data.list[i].agegroupName;
+				//添加第四列内容	
+				forthColumn.innerText = dataBack.data.list[i].agegroupUp;
+				//添加第五列内容	
+				fifthColumn.innerText = dataBack.data.list[i].agegroupDown;
+				//添加第六列内容	
+				sixthColumn.innerText = dataBack.data.list[i].agegroupText;
+				//添加第七列内容	
+				seventhColumn.innerText = dataBack.data.list[i].agegroupOrder;
+				//添加第八列内容	
+				eighthColumn.innerText = getLocalTime(dataBack.data.list[i].agegroupCreatetime);
+				//添加第九列内容	
+				ninthColumn.innerText = agegroupStatus;
+			}
+			return false;
+		}
+		//  添加信息
+		$('#add_agegroup_btn').on('click', function() {
+				var agegroup_name = $('#add_agegroup_name').val();
+				var agegroup_up = $('#add_agegroup_up').val();
+				var agegroup_down = $('#add_agegroup_down').val();
+				var agegroup_code = $('#add_agegroup_text').val();
+				var agegroup_agegroupOrder = $('#add_agegroup_input_code').val();
+				if(agegroup_name == '' || agegroup_code == '' || agegroup_agegroupOrder == '') {
+					return false;
+				} else {
+					var param = {
+						'agegroupName': agegroup_name,
+						'agegroupUp': agegroup_up,
+						'agegroupDown': agegroup_down,
+						'agegroupText': agegroup_code,
+						'agegroupOrder': agegroup_agegroupOrder
+					};
+					var otype = "post";
+					var osync = false;
+					var reqResult = httpRequest(ageGroup_addDictAgeGroup_url, param, otype, osync);
+					if(reqResult.result == 0) {
+						alert("添加成功");
+						window.location.reload();
+					} else {
+						alert(reqResult.message);
+					}
+				}
+			})
+			//	查看回显信息
+		function check_agegroup(check) {
+			var edit_agegroup_id = $(check).parent().attr("agegroupid");
+			var param = {
+				"agegroupId": edit_agegroup_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(ageGroup_getDictAgeGroupById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				var agegroupName = $('#check_agegroup_name');
+				var agegroupUp = $('#check_agegroup_up');
+				var agegroupDown = $('#check_agegroup_down');
+				var agegroupText = $('#check_agegroup_code');
+				var agegroupOrder = $('#check_agegroup_input_code');
+				var agegroupCreatetime = $('#check_agegroup_create_time');
+				var agegroupStatus = $('#check_agegroup_agegroupStatus input');
+				agegroupName.val(reqResult.data.agegroupName);
+				agegroupUp.val(reqResult.data.agegroupUp);
+				agegroupDown.val(reqResult.data.agegroupDown);
+				agegroupText.val(reqResult.data.agegroupText);
+				agegroupOrder.val(reqResult.data.agegroupOrder);
+				agegroupCreatetime.val(getLocalTime(reqResult.data.agegroupCreatetime));
+				if(reqResult.data.agegroupStatus == 0) {
+					agegroupStatus[0].checked = "checked";
+				} else {
+					agegroupStatus[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//  删除信息
+		function del_agegroup(del_li) {
+			if(confirm("确认禁用该年龄分组吗？")) {
+				var del_agegroup_id = $(del_li).parent().attr("agegroupid");
+				var param = {
+					"agegroupId": del_agegroup_id
+				};
+				var otype = "get";
+				var osync = false;
+				var reqResult = httpRequest(ageGroup_deleteDictagegroup_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("禁用成功！");
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+		//	编辑回显信息
+		function edit_agegroup(edit_li) {
+			var edit_agegroup_id = $(edit_li).parent().attr("agegroupid");
+			var param = {
+				"agegroupId": edit_agegroup_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(ageGroup_getDictAgeGroupById_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				$('#edit_agegroupId_hidden').val(reqResult.data.agegroupId); //回显
+				var agegroupName = $('#edit_agegroup_name');
+				var agegroupUp = $('#edit_agegroup_up');
+				var agegroepDown = $('#edit_agegroup_down');
+				var agegroupText = $('#edit_agegroup_code');
+				var agegroupOrder = $('#edit_agegroup_input_code');
+				var agegroupStatus = $('#edit_agegroup_status input');
+				agegroupName.val(reqResult.data.agegroupName);
+				agegroupUp.val(reqResult.data.agegroupUp);
+				agegroepDown.val(reqResult.data.agegroupDown);
+				agegroupText.val(reqResult.data.agegroupText);
+				agegroupOrder.val(reqResult.data.agegroupOrder);
+				if(reqResult.data.agegroupStatus == 0) {
+					agegroupStatus[0].checked = "checked";
+				} else {
+					agegroupStatus[1].checked = "checked";
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//  编辑保存信息
+		$('#edit_agegroup_save').on('click', function() {
+			var editagegroup_name = $('#edit_agegroup_name').val();
+			var editagegroup_up = $('#edit_agegroup_up').val();
+			var editagegroup_down = $('#edit_agegroup_down').val();
+			var editagegroup_code = $('#edit_agegroup_code').val();
+			var editagegroup_agegroupOrder = $('#edit_agegroup_input_code').val();
+			var editagegroup_agegroupStatus = $('#edit_agegroup_status input').val();
+			if(editagegroup_name == '' || editagegroup_up == '' || editagegroup_down == '' || editagegroup_code == '' || editagegroup_agegroupOrder == '' || editagegroup_agegroupStatus == '') {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				var param = $('#edit_agegroup_formNews').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(ageGroup_updateDictagegroup_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功!');
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		})
+	</script>

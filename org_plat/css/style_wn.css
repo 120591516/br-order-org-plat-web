@@ -1,0 +1,325 @@
+.daohang {
+	height: 15px;
+	width: 5px;
+	border-left-width: 5px;
+	border-left-style: solid;
+	border-left-color: #036;
+	margin-top: 12px;
+	margin-left: 15px;
+}
+
+.user_bg {
+	background-color: rgb(248, 248, 248);
+	height: 40px;
+	line-height: 40px;
+	margin-bottom: 15px;
+	vertical-align: middle;
+	width: 100%;
+}
+
+.user_mar {
+	float: right;
+	margin: 6px;
+	padding: 0.2em 0.8em!important;
+	line-height: 2!important;
+}
+
+.results tr[visible='false'],
+.no-result {
+	display: none;
+}
+
+.results tr[visible='true'] {
+	display: table-row;
+}
+
+.counter {
+	padding: 8px;
+	color: #ccc;
+}
+
+.lef_css {
+	padding: 0 30px;
+}
+
+
+/*userlist*/
+
+.userlist_status_right_border {
+	border-right: 1px solid #d2d6de!important;
+}
+
+.userlist_statusinput_vertical {
+	margin: 0 5px!important;
+	vertical-align: middle;
+}
+
+
+/*userPower*/
+
+#user_tree,
+#user_tree ul {
+	list-style: none;
+}
+
+#form_power_permission {
+	/*line-height: 40px;*/
+	/*border: 2px solid #ccc;*/
+	border-radius: 3px;
+	/*height: 600px;*/
+	padding: 30px 20px;
+}
+
+#form_power_permission div input,
+textarea,
+button,
+select {
+	border-radius: 3px;
+}
+
+
+/*权限编辑功能表单样式*/
+
+label {
+	text-align: right;
+}
+
+#user_power_edit h2 {
+	text-align: center;
+}
+
+#user_power_edit {
+	line-height: 20px;
+	padding: 10px;
+}
+
+form div {
+	border-radius: 10px;
+	vertical-align: middle;
+}
+
+.user_power_btn {
+	text-align: center;
+}
+
+#user_add_nav {
+	padding: 0 10px;
+	margin-bottom: -12px;
+}
+
+#table_power_permission_list {
+	margin-top: 10px;
+}
+
+#form_power_permission_list div input,
+textarea,
+button,
+select {
+	border-radius: 3px;
+}
+
+.userAdmin_height_40 {
+	height: 40px;
+}
+
+
+/*权限无数据时提示样式*/
+
+.noacess {
+	text-align: center;
+}
+
+
+/*修改密码*/
+
+.letter_spacing_100 {
+	letter-spacing: 1em;
+}
+
+.letter_spacing_67 {
+	letter-spacing: 0.67em;
+}
+
+.letter_spacing_72 {
+	letter-spacing: 0.72em;
+}
+
+.letter_spacing_55 {
+	letter-spacing: 0.55em;
+}
+
+.letter_spacing_50 {
+	letter-spacing: 0.5em;
+}
+
+.letter_spacing_30 {
+	letter-spacing: 0.3em;
+}
+
+.margin_top_15 {
+	margin-top: 100px;
+}
+
+.vertical_position_sub {
+	vertical-align: sub;
+}
+
+
+/*个人信息设置*/
+
+#personal_form label {
+	border: 0;
+}
+
+#personal_form input {
+	border: 0;
+}
+
+#personal_save_btn {
+	display: none;
+}
+
+.padding_4px {
+	padding: 4px;
+}
+
+.padding_14px{
+	padding:14px!important;
+}
+
+.store_form_border {
+	border: 1px solid #d2d6de;
+	border-radius: 1%;
+	padding: 20px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.none_cursor {
+	cursor: default;
+}
+
+.a_hover:hover {
+	font-size: larger;
+	border-radius: 50%;
+}
+
+.store_img_css {
+	position: absolute;
+	width: 100%;
+	height: 220px!important;
+	vertical-align: middle;
+	border: 0;
+	display: table;
+	margin: 8px;
+	padding: 6px;
+	float: left;
+	text-align: center;
+}
+
+.fa_red {
+	color: red;
+	border: 1px solid #ccc;
+	border-radius: 20%;
+}
+
+.store_img_borderdiv {
+	border: 0;
+	display: table;
+	padding: 6px;
+}
+
+.position_absolute {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -110px;
+	margin-top: 0px;
+	width: 250px;
+	height: 250px;
+	padding: 5px;
+	box-shadow: 1px 1px 5px 0px #a2958a;
+	background-size: 100% 100%;
+}
+
+.position_relative {
+	position: relative;
+	width: 250px;
+	height: 250px;
+}
+
+.float_left {
+	float: left;
+}
+
+.clear {
+	clear: both;
+}
+
+.margin_top_34px {
+	margin-top: 34px;
+}
+
+.margin_left_100px {
+	margin-left: -100px;
+}
+
+
+/*字体*/
+
+.font_16 {
+	font-size: 14px!important;
+}
+
+
+/*颜色*/
+
+.color_rgba {
+	color: rgba(177, 10, 100, 0.3);
+}
+
+
+/*行块转换*/
+
+.dis_flex {
+	display: flex;
+}
+.display_none{
+	display:none;
+}
+
+/*定位*/
+
+.ctr {
+	text-align: right;
+}
+
+.margin_top_20px {
+	margin-top: 20px;
+}
+
+/*宽*/
+.width_100{
+	width:50%!important;
+}
+/*数据导出按钮*/
+
+.exportInfoBtn:before {
+	background-color: green;
+	content: url(/org_plat/img/exportImg/ixls.png);
+	margin-right: 10px;
+	padding: 12px;
+	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 1200px) #search_storenews {
+	width: 100%!important;
+}
+
+@media (min-width: 992px) #search_storenews {
+	width: 100%!important;
+}
+
+@media (min-width: 768px) #search_storenews {
+	width: 100%!important;
+}

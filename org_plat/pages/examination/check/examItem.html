@@ -1,0 +1,361 @@
+<section class="content-header">
+	<div class="margin-bottom">
+		<h2><small>体检项</small></h2>
+	</div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">套餐</a>
+		</li>
+		<li class="active">体检项</li>
+	</ol>
+	<div class="box container-fluid no-margin">
+		<div class="box-header">
+			<div class="row margin-bottom">
+				<div class="col-md-10">
+					<h3 class="box-title">搜索</h3>
+				</div>
+				<div class="col-md-2">
+					<div class="input-group pull-right">
+						<a onclick='loadpage("/org_plat/pages/examination/check/addExamItem.html")' data-toggle="modal" id="addExamItemInfo" class="btn btn-default">添加</a>
+					</div>
+				</div>
+			</div>
+			<div class="row margin-bottom">
+				<form class="form-group container-fluid">
+					<div class="row margin-bottom">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon">体检项名称</span>
+										<input type="text" class="form-control" namae="examItemName" id="serExamItemName" placeholder="体检项名称">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon">体检项英文名称</span>
+										<input type="text" class="form-control" name="examItemNameEng" id="serExamItemNameEng" placeholder="体检项英文名称">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon">体检项代码</span>
+										<input type="text" class="form-control" namae="examItemCode" id="serExamItemCode" placeholder="体检项代码">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon">项目类型</span>
+										<select class="form-control selectpicker getEitemId" id="serExamItemTypeId" name="examItemTypeId">
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="col-md-6"> 
+									<div class="input-group">
+										<span class="input-group-addon">适用性别</span>
+										<select name="sex" class="form-control selectpicker store_search_form" id="serSex" aria-describedby="basic-addon1" maxlength='12' required>
+											<option value="">---请选择---</option>
+											<option value="0">男性</option>
+											<option value="1">女性</option>
+											<option value="2">通用</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="col-md-6 col-md-offset-6">
+									<div class="input-group pull-right">
+										<a class="btn btn-primary fa fa-search" id="searDept">搜索</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+				</div>
+				<div class="box-body">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>操作</th>
+								<th>体检项名称</th>
+								<th>体检项名称简称</th>
+								<th>体检项英文名称</th>
+								<th>英文缩写</th>
+								<th>体检项目代码</th>
+								<th>项目类型</th>
+								<th>适用性别</th>
+							</tr>
+							<tr class="warning no-result">
+								<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+							</tr>
+						</thead>
+						<tbody id="examItemTboody">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<th></th>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="modal fade" id="checked_doct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel_see">医生姓名</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-bordered table-striped" id="docRole">
+					<thead>
+						<tr>
+							<th>编辑</th>
+							<th>医生姓名</th>
+						</tr>
+					</thead>
+					<tbody id="docRole_list">
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id='docRole_submit'>提交</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/org_plat/js/plugins/extendPagination.js"></script>
+<script>
+	page_curr = 1;
+	getExamItemType(); //  负责人下拉框回显
+	EitemSearch();
+	init_pager();
+	//体检项跳转医生信息
+	function getUser(docLi) {
+		var getDocId = $(docLi).parent().attr("examItemId");
+		var getUserId = $(docLi).parent().attr("userId");
+		var param = {
+			"id": getDocId
+		};
+		$("#docRole_list").empty();
+		var otype = "get";
+		var osync = false;
+		var recUserId = getUserId;
+		var reqResult = httpRequest(getUserByItemIdUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			var UserDate = reqResult.data;
+			var str = '';
+			for(var i = 0; i < UserDate.length; i++) {
+				str += "<tr id='docRoleTr'><td 'userId'='" + UserDate[i].userId + "' 'examItemId'='" + getDocId + "'>";
+				if(UserDate[i].userId == recUserId) {
+					str += "<input type='radio' checked='true' name='1'>";
+				} else {
+					str += "<input type='radio' name='1'>";
+				}
+				str += "</td>";
+				str += "<td>" + UserDate[i].userName + "</td>";
+				str += "</tr>";
+			}
+			$("#docRole_list").append(str);
+		} else {
+			alert(reqResult.message);
+		}
+	};
+
+	//	点击编辑保存医生信息
+	$('#docRole_submit').on('click', function() {
+			var tdl = $('#docRole_list tr td:first-child').length;
+			var selectUserId = "";
+			for(var i = 0; i < tdl; i++) {
+				var inputa = $('#docRole_list tr td:first-child input')[i].checked;
+				var userid = $($('#docRole_list tr td:first-child input')[i]).parent()[0].attributes[0].value;
+				var itemid = $($('#docRole_list tr td:first-child input')[i]).parent()[0].attributes[1].value;
+				if(inputa == true) {
+					selectUserId += userid + ",";
+				}
+			}
+			if(selectUserId.length > 0) {
+				selectUserId = selectUserId.substring(0, selectUserId.length - 1);
+			}
+			var param = {
+				"itemId": itemid,
+				"userId": selectUserId
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(saveUserUrl, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('分配成功');
+				init_pager();
+			} else {
+				alert(reqResult.message);
+			}
+		})
+		//  搜索
+	function EitemSearch() {
+		var examItemName = $("#serExamItemName").val().trim();
+		var examItemNameEng = $("#serExamItemNameEng").val().trim();
+		var examItemCode = $("#serExamItemCode").val().trim();
+		var examItemTypeId = $("#serExamItemTypeId").val();
+		var sex = $("#serSex").val().trim();
+		$('#examItemTboody').empty();
+		var param = {
+			"page": page_curr,
+			"rows": 10
+		};
+		if(examItemName != null) {
+			param.examItemName = examItemName;
+		}
+		if(examItemNameEng != null) {
+			param.examItemNameEng = examItemNameEng;
+		}
+		if(examItemCode != null) {
+			param.examItemCode = examItemCode;
+		}
+		if(examItemTypeId != null && examItemTypeId != -1) {
+			param.examItemTypeId = examItemTypeId;
+		}
+		if(sex != null) {
+			param.sex = sex;
+		}
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(getOrgExamItemByPageUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			//4.展示数据
+			total_count = reqResult.data.total;
+			createTable(page_curr, limit, total_count, reqResult);
+			return false;
+		}
+	}
+	// 初始化分页信息
+	function init_pager() {
+		$('#callBackPager').extendPagination({
+			totalCount: total_count,
+			showCount: count_curr,
+			limit: limit,
+			callback: function(curr, limit, totalCount) {
+				page_curr = curr;
+				total_count = totalCount;
+				EitemSearch();
+			}
+		});
+	}
+	$('#searDept').on('click', function() {
+		EitemSearch();
+		init_pager();
+		return false;
+	})
+	function createTable(currPage, limit, total, dataBack) {
+		var showNum = limit;
+		if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+		var datal = dataBack.data.list;
+		//获取操作类型
+		var operationList = dataBack.operationList;
+		//			判断添加按钮
+		if(operationList.orgExamItem_insert == true) {
+			$('#addExamItemInfo').show();
+		} else {
+			$('#addExamItemInfo').hide();
+		}
+		var str = '';
+		for(var i = 0; i < showNum; i++) {
+			var oDiv='"' +'#contentWrapper'+'"';
+//			init_param_Id='"' +dataBack.data.list[i].examItemId+'"';
+			var urlView = '"' +'/org_plat/pages/examination/check/checkExamItem.html?id='+dataBack.data.list[i].examItemId+ '"';
+			var urlEidt = '"' +'/org_plat/pages/examination/check/editExamItem.html?id='+dataBack.data.list[i].examItemId+ '"';
+			str += "<tr><td examItemId='" + datal[i].examItemId + "' userId='" + datal[i].userId + "'>";
+//			str += "<a onclick='loadpageLi(" + urlView +"," + init_param_Id+")' class='padding_4px storeManagement_check_info' title='查看门店信息'><i class='fa fa-eye'></i></a> ";
+			if(operationList.orgExamItem_detail==true){
+			    str += "<a onclick='loadpage(" + urlView +")' class='padding_4px storeManagement_check_info' title='查看门店信息'><i class='fa fa-eye'></i></a> ";
+			}
+			if(operationList.orgExamItem_update==true){
+		    	str += "<a onclick='loadpage(" + urlEidt +")' class='padding_4px storeManagement_edit_info' title='编辑门店信息'><i class='fa fa-pencil'></i></a> ";
+			}
+			if(operationList.orgExamItem_delete==true){
+			    str += "<a href='#' title='删除门店信息' style='margin-right:5px' class='padding_4px' onclick='delExamItem(this)'><i class='fa fa-trash-o'></i></a>";
+			}
+			//str += "<a href='#checked_doct' data-toggle='modal' title='分配医生' style='margin-right:5px' class='padding_4px' onclick='getUser(this)'><i class='fa-user-plus'></i></a>";
+			//str += "<a href='signWord.html' title='体征词' style='margin-right:5px' class='padding_4px' onclick='getUser(this)'><i class='fa-share-alt'></i></a>";
+			str += "</td>";
+			if(datal[i].examItemName.length>10){
+				str += "<td>" + datal[i].examItemName.substring(0,9) + "...</td>";
+			}else{
+				str += "<td>" + datal[i].examItemName + "</td>";
+			}
+			if(datal[i].examItemNameAbr.length>20){
+				str += "<td>" + datal[i].examItemNameAbr.substring(0,19) + "...</td>";
+			}else{
+				str += "<td>" + datal[i].examItemNameAbr + "</td>";
+			}
+			str += "<td>" + datal[i].examItemNameEng + "</td>";
+			str += "<td>" + datal[i].examItemNameEngAbr + "</td>";
+			str += "<td>" + datal[i].examItemCode + "</td>";
+			str += "<td>" + datal[i].examItemTypeName + "</td>";
+			if(datal[i].fMale == 0 && datal[i].fFemale == 0) {
+				str += "<td>" + '通用' + "</td>";
+			} else if(datal[i].fMale == 0 && datal[i].fFemale == 1) {
+				str += "<td>" + '男性' + "</td>";
+			} else if(datal[i].fMale == 1 && datal[i].fFemale == 1) {
+				str += "<td>" + '无' + "</td>";
+			} else if((datal[i].fMale == 1 && datal[i].fFemale == 0)) {
+				str += "<td>" + '女性' + "</td>";
+			} 
+			str += '</tr>';
+		}
+		$("#examItemTboody").append(str);
+		return false;
+	}
+	//  删除信息
+	function delExamItem(del_li) {
+		if(confirm("确认删除该体检项信息吗？")) {
+			var del_dept_id = $(del_li).parent().attr("examItemId");
+			var param = {
+				"orgExamItemId": del_dept_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(deleteOrgExamItemUrl, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("删除成功！");
+				loadpage("/org_plat/pages/examination/check/examItem.html"); 
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+</script>

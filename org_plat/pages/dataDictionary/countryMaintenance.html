@@ -1,0 +1,763 @@
+<section class="content-header">
+	<div class="margin-bottom">
+		<h2><small>国家维护</small></h2>
+	</div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">字典维护</a>
+		</li>
+		<li class="active">国家维护</li>
+	</ol>
+</section>
+<!-- /Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<!--box-header -->
+				<div class="box-header">
+					<div class="row">
+						<div class="col-md-8">
+							<h3 class="box-title margin">列表</h3>
+						</div>
+						<div class="col-md-4">
+							<div class="row">
+								<div class="col-md-8">
+									<form class="bs-example" role="form">
+										<div class="input-group">
+											<input type="text" class="form-control" name="condition" id="country_search" placeholder="搜索" value="">
+											<span class="input-group-addon" id="country_search_btn"><a href="" class="fa fa-search"></a></span>
+										</div>
+									</form>
+								</div>
+								<div class="col-md-4">
+									<a href="#add_country" data-toggle="modal" class="btn btn-default margin" id="addConTypeDic">添加</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table class="table formCss">
+						<thead>
+							<tr>
+								<th>编辑</th>
+								<th>键值</th>
+								<th>国家名称</th>
+								<th>国家代码</th>
+								<th>输入码</th>
+								<th>行序</th>
+								<th>创建时间</th>
+								<th>状态</th>
+							</tr>
+							<tr class="warning no-result">
+								<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+							</tr>
+						</thead>
+						<tbody id="country_tbody_main">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /Main content -->
+<!--模态框添加-->
+<div class="modal fade" id="add_country" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">国家信息</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="add_country_formNews">
+					<input type="hidden" name="countryId" id="countryId" />
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_100">键值</span>
+						<input type="text" id="add_country_keys" class="form-control" name="countryKeys" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<span class="check_add_countrykeys"></span>
+					<div class="input-group">
+						<span class="input-group-addon">国家名称</span>
+						<input type="text" id="add_country_name" class="form-control" name="countryName" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<span class='check_add_countryname'></span>
+					<div class="input-group">
+						<span class="input-group-addon">国家代码</span>
+						<input type="text" id="add_country_code" class="form-control check_userloginname_validate" name="countryCode" aria-describedby="basic-addon1" maxlength='10' required>
+					</div>
+					<span class='check_add_countrycode'></span>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">输入码</span>
+						<input type="text" id="add_country_input_code" class="form-control check_userphone_validate" name="countryInputCode" aria-describedby="basic-addon1" required>
+					</div>
+					<span class='check_add_countryinputcode'></span>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_100">行序</span>
+						<input type="text" id="add_country_line_order" class="form-control" name="countryLineOrder" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<span class="check_add_countrylineorder"></span>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="add_country_btn">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框修改-->
+<div class="modal fade" id="edit_country" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">国家信息</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="edit_country_formNews">
+					<input type="hidden" name="countryId" id="edit_countryId_hidden" />
+					<div class="input-group">
+						<span class="input-group-addon">键值</span>
+						<input type="text" id="edit_country_keys" class="form-control" name="countryKeys" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<span class="check_edit_countrykeys"></span>
+					<div class="input-group">
+						<span class="input-group-addon">国家名称</span>
+						<input type="text" id="edit_country_name" class="form-control" name="countryName" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<span class='check_edit_countryname'></span>
+					<div class="input-group">
+						<span class="input-group-addon">国家代码</span>
+						<input type="text" id="edit_country_code" class="form-control check_userloginname_validate" name="countryCode" aria-describedby="basic-addon1" maxlength='10' required>
+					</div>
+					<span class='check_edit_countrycode'></span>
+					<div class="input-group">
+						<span class="input-group-addon">输入码</span>
+						<input type="text" id="edit_country_input_code" class="form-control check_userphone_validate" name="countryInputCode" aria-describedby="basic-addon1" required>
+					</div>
+					<span class='check_edit_countryinputcode'></span>
+					<div class="input-group">
+						<span class="input-group-addon">行序</span>
+						<input type="text" id="edit_country_line_order" class="form-control" name="countryLineOrder" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<span class="check_edit_countrylineorder"></span>
+					<div class="input-group" id='edit_country_status'>
+						<span class="input-group-addon userlist_status_right_border">状 态</span>
+						<input type="radio" name='countryStatus' value="0" class="userlist_statusinput_vertical" />启用
+						<input type="radio" name='countryStatus' value="1" class="userlist_statusinput_vertical" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id='edit_country_save'>保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框查看-->
+<div class="modal fade" id="check_country" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">国家信息</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="check_country_formNews">
+					<div class="input-group">
+						<span class="input-group-addon">键值</span>
+						<input type="text" id="check_country_keys" class="form-control" name="countryKeys" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">国家名称</span>
+						<input type="text" id="check_country_name" class="form-control" name="countryName" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">国家代码</span>
+						<input type="text" id="check_country_code" class="form-control check_userloginname_validate" name="countryCode" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">输入码</span>
+						<input type="text" id="check_country_input_code" class="form-control check_userphone_validate" name="countryInputCode" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">行序</span>
+						<input type="text" id="check_country_line_order" class="form-control" name="countryLineOrder" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">创建时间</span>
+						<input type="text" id="check_country_create_time" class="form-control" name="countryCreateTime" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group" id='check_country_status'>
+						<span class="input-group-addon userlist_status_right_border">状 态</span>
+						<input type="radio" name='countryStatus' value="0" class="userlist_statusinput_vertical" disabled="disabled" />启用
+						<input type="radio" name='countryStatus' value="1" class="userlist_statusinput_vertical" disabled="disabled" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/org_plat/js/plugins/extendPagination.js"></script>
+<script src="/org_plat/js/create/Ajax.js"></script>
+<script>
+	//  分页
+	init_page();
+
+	function init_page() {
+		$('#country_tbody_main').empty();
+		//1.请求后端信息并展示
+		countrySearch();
+		init_pager();
+	}
+	//  初始化分页信息
+	function init_pager() {
+		$('#callBackPager').extendPagination({
+			totalCount: total_count,
+			showCount: count_curr,
+			limit: limit,
+			callback: function(curr, limit, totalCount) {
+				page_curr = curr;
+				total_count = totalCount;
+				countrySearch();
+			}
+		});
+	}
+	//	搜索国家
+	function countrySearch() {
+		var countrySearchValue = $('#country_search').val().trim();
+		$('#country_tbody_main').empty();
+		var param = {
+			"page": 1,
+			"rows": 10,
+			"condition": countrySearchValue
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(countryMaintenance_countryManage_getList_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			//4.展示数据
+			total_count = reqResult.data.total;
+			createTable(page_curr, limit, total_count, reqResult);
+		}
+		return false;
+	}
+	$('#country_search_btn').on('click', function() {
+		init_page();
+		return false;
+	})
+	$('#country_search').on('keydown', function(e) {
+			if(e && e.keyCode == 13) {
+				init_page();
+				return false;
+			}
+		})
+		//  显示列表信息
+	function createTable(currPage, limit, total, dataBack) {
+		var showNum = limit;
+		if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+		for(var i = 0; i < showNum; i++) {
+			var Tbody = document.getElementById('country_tbody_main');
+			var lRow = Tbody.insertRow(); //创建行
+			var countryStatus = (dataBack.data.list[i].countryStatus === 0) ? "启用" : "禁用";
+			//				var operationByRole=dataBack.operationList;//获取操作类型
+			//				var operationByRoleAdd=document.getElementById('addConTypeDic');//获取添加按钮
+			//				判断操作类型
+			//				(operationByRole.countryManage_insert===false)? operationByRoleAdd.style.display='none':operationByRoleAdd.style.display='';//1为添加
+			//创建列
+			var firstColumn = lRow.insertCell();
+			var secondColumn = lRow.insertCell();
+			var thirdColumn = lRow.insertCell();
+			var forthColumn = lRow.insertCell();
+			var fifthColumn = lRow.insertCell();
+			var sixthColumn = lRow.insertCell();
+			var seventhColumn = lRow.insertCell();
+			var eighthColumn = lRow.insertCell();
+			firstColumn.setAttribute('countryid', dataBack.data.list[i].countryId); //给td添加属性
+			//添加第一列内容
+			//创建查看标签
+			var aCheck = document.createElement("a");
+			var iElement = document.createElement("i");
+			//				(operationByRole.countryManage_detail===true)?iElement.className = "fa fa-eye":'';//4为查看
+			iElement.className = "fa fa-eye";
+			aCheck.appendChild(iElement);
+			aCheck.setAttribute("href", "#check_country");
+			aCheck.setAttribute("data-toggle", "modal");
+			aCheck.style.marginLeft = "5px";
+			aCheck.onclick = function() {
+				check_Country(this)
+			};
+			firstColumn.appendChild(aCheck);
+			//创建编辑标签
+			var aEdit = document.createElement("a");
+			var iElement = document.createElement("i");
+			//				(operationByRole.countryManage_update===true)?iElement.className = "fa fa-pencil":'';//3为更新
+			iElement.className = "fa fa-pencil"
+			aEdit.appendChild(iElement);
+			aEdit.setAttribute("href", "#edit_country");
+			aEdit.setAttribute("data-toggle", "modal");
+			aEdit.style.marginLeft = "5px";
+			aEdit.onclick = function() {
+				edit_Country(this)
+			};
+			firstColumn.appendChild(aEdit);
+			//创建删除标签
+			var aDelete = document.createElement("a");
+			var iElement = document.createElement("i");
+			//				(operationByRole.countryManage_delete===true)?iElement.className = "fa fa-trash-o":'';//2为删除
+			iElement.className = "fa fa-trash-o";
+			aDelete.appendChild(iElement);
+			aDelete.style.marginLeft = "5px";
+			aDelete.onclick = function() {
+				del_country(this)
+			};
+			firstColumn.appendChild(aDelete);
+			//添加第二列内容	
+			secondColumn.innerText = dataBack.data.list[i].countryKeys;
+			//添加第三列内容	
+			thirdColumn.innerText = dataBack.data.list[i].countryName;
+			//添加第四列内容	
+			forthColumn.innerText = dataBack.data.list[i].countryCode;
+			//添加第五列内容	
+			fifthColumn.innerText = dataBack.data.list[i].countryInputCode;
+			//添加第六列内容	
+			sixthColumn.innerText = dataBack.data.list[i].countryLineOrder;
+			//添加第七列内容	
+			seventhColumn.innerText = getLocalTime(dataBack.data.list[i].countryCreateTime);
+			//添加第八列内容	
+			eighthColumn.innerText = countryStatus;
+		}
+		return false;
+	}
+	//  添加信息		
+	$('#add_country_btn').on('click', function() {
+		var country_keys = $('#add_country_keys').val();
+		var country_name = $('#add_country_name').val();
+		var country_code = $('#add_country_code').val();
+		var country_inputcode = $('#add_country_input_code').val();
+		var country_lineorder = $('#add_country_line_order').val();
+		if(country_name == '' || country_code == '' || country_inputcode == '' || country_lineorder == '' || country_keys == '') {
+			check_countrykeys();
+			check_countryname();
+			check_countrycode();
+			check_countryinputcode();
+			check_countrylineorder();
+			return false;
+		} else {
+			var param = $('#add_country_formNews').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(countryMaintenance_addCountry_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("添加成功");
+				window.location.reload();
+				return false;
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	});
+	//	添加时验证国家键值
+	function check_countrykeys() {
+		var flag = false;
+		var countrykeys = $('#add_country_keys').val().trim();
+		if(countrykeys == '') {
+			$(".check_add_countrykeys").html("键值不能为空!");
+			flag = false;
+			return;
+		} else {
+			$(".check_add_countrykeys").html("");
+		}
+		flag = true;
+	}
+	//  编辑时验证键值
+	function check_edit_countrykeys() {
+		var flag = false;
+		var editcountrykeys = $('#edit_country_keys').val().trim();
+		if(editcountrykeys == '') {
+			$(".check_edit_countrykeys").html("键值不能为空!");
+			flag = false;
+			return;
+		} else {
+			$(".check_edit_countrykeys").html("");
+		}
+		flag = true;
+	}
+	//  添加时验证国家名称
+	function check_countryname() {
+		var flag = false;
+		var username = $('#add_country_name').val().trim();
+		if(username == '') {
+			$(".check_add_countryname").html("国家名不能为空!");
+			flag = false;
+			return;
+		} else if(username.length < 2 || username.length > 10) {
+			$(".check_add_countryname").html("注册名长度2~10");
+			flag = false;
+			return;
+		} else {
+			$(".check_add_countryname").html("");
+		}
+		var param = {
+			'countryName': username
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(countryMaintenance_checkCountryName_url, param, otype, osync);
+		if(reqResult.data == 0) {
+			$(".check_add_countryname").html("");
+		} else {
+			$(".check_add_countryname").html("国家名已存在");
+			flag = false;
+			return;
+		}
+		flag = true;
+	}
+	//	编辑时验证国家名称是否存在
+	function check_editcountryname() {
+		var flag = false;
+		var edit_country_name = $('#edit_country_name').val().trim();
+		if(edit_country_name == '') {
+			$(".check_edit_countryname").html("国家名不能为空!");
+			flag = false;
+			return;
+		} else if(edit_country_name.length < 2 || edit_country_name.length > 10) {
+			$(".check_edit_countryname").html("注册名长度2~10");
+			flag = false;
+			return;
+		} else {
+			$(".check_edit_countryname").html("");
+		}
+		var param = {
+			'countryName': edit_country_name
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(countryMaintenance_checkCountryName_url, param, otype, osync);
+		if(reqResult.data == 0) {
+			$(".check_edit_countryname").html("");
+		} else {
+			$(".check_edit_countryname").html("国家名已存在");
+			flag = false;
+			return;
+		}
+		flag = true;
+	}
+	//  添加时验证国家代码
+	function check_countrycode() {
+		var flag = false;
+		var countryCode = $('#add_country_code').val().trim();
+		if($('#add_country_code') == '') {
+			$(".check_add_countrycode").html("国家代码不能为空!");
+			flag = false;
+			return;
+		} else {
+			$(".check_add_countrycode").html("");
+		}
+		var param = {
+			'countryCode': countryCode
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(countryMaintenance_checkCountryCode_url, param, otype, osync);
+		if(reqResult.data == 0) {
+			$(".check_add_countrycode").html("");
+		} else {
+			$(".check_add_countrycode").html("国家代码已存在");
+			flag = false;
+			return;
+		}
+		flag = true;
+	}
+	//  编辑时验证国家代码
+	function check_editcountrycode() {
+		var flag = false;
+		var editcountryCode = $('#edit_country_code').val().trim();
+		if($('#edit_country_code') == '') {
+			$(".check_edit_countrycode").html("国家代码不能为空!");
+			flag = false;
+			return;
+		} else {
+			$(".check_edit_countrycode").html("");
+		}
+		var param = {
+			'countryCode': editcountryCode
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(countryMaintenance_checkCountryCode_url, param, otype, osync);
+		if(reqResult.data == 0) {
+			$(".check_edit_countrycode").html("");
+		} else {
+			$(".check_edit_countrycode").html("国家代码已存在");
+			flag = false;
+			return;
+		}
+		flag = true;
+	}
+	//  添加时验证国家输入码
+	function check_countryinputcode() {
+		var flag = false;
+		var countryinputCode = $('#add_country_input_code').val().trim();
+		if($('#add_country_input_code').val() == '') {
+			$(".check_add_countryinputcode").html("输入码不能为空!");
+			flag = false;
+			return;
+		} else {
+			$(".check_add_countryinputcode").html("");
+		}
+		var param = {
+			'countryInputCode': countryinputCode
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(countryMaintenance_checkCountryInputCode_url, param, otype, osync);
+		if(reqResult.data == 0) {
+			$(".check_add_countryinputcode").html("");
+		} else {
+			$(".check_add_countryinputcode").html("输入码已存在");
+			flag = false;
+			return;
+		}
+		flag = true;
+	}
+	//  编辑时验证国家输入码
+	function check_editcountryinputcode() {
+		var flag = false;
+		var editcountryinputCode = $('#edit_country_input_code').val().trim();
+		if($('#edit_country_input_code').val() == '') {
+			$(".check_edit_countryinputcode").html("输入码不能为空!");
+			flag = false;
+			return;
+		} else {
+			$(".check_edit_countryinputcode").html("");
+		}
+		var param = {
+			'countryInputCode': editcountryinputCode
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(countryMaintenance_checkCountryInputCode_url, param, otype, osync);
+		if(reqResult.data == 0) {
+			$(".check_edit_countryinputcode").html("");
+		} else {
+			$(".check_edit_countryinputcode").html("输入码已存在");
+			flag = false;
+			return;
+		}
+		flag = true;
+	}
+	//  添加时验证行序
+	function check_countrylineorder() {
+		var flag = false;
+		var countryinputCode = $('#add_country_line_order').val().trim();
+		if($('#add_country_line_order').val() == '') {
+			$(".check_add_countrylineorder").html("行序不能为空!");
+			flag = false;
+			return;
+		} else {
+			$(".check_add_countrylineorder").html("");
+		}
+		var param = {
+			'countryLineOrder': countryinputCode
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(countryMaintenance_checkCountryLineOrder_url, param, otype, osync);
+		if(reqResult.data == 0) {
+			$(".check_add_countrylineorder").html("");
+		} else {
+			$(".check_add_countrylineorder").html("行序已存在");
+			flag = false;
+			return;
+		}
+		flag = true;
+	}
+	//  编辑时验证行序
+	function check_editcountrylineorder() {
+		var flag = false;
+		var editcountryinputCode = $('#edit_country_line_order').val().trim();
+		if($('#edit_country_line_order').val() == '') {
+			$(".check_edit_countrylineorder").html("输入码不能为空!");
+			flag = false;
+			return;
+		} else {
+			$(".check_edit_countrylineorder").html("");
+		}
+		var param = {
+			'countryLineOrder': editcountryinputCode
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(countryMaintenance_checkCountryLineOrder_url, param, otype, osync);
+		if(reqResult.data == 0) {
+			$(".check_edit_countrylineorder").html("");
+		} else {
+			$(".check_edit_countrylineorder").html("输入码已存在");
+			flag = false;
+			return;
+		}
+		flag = true;
+	}
+	//	查看用户信息
+	function check_Country(check) {
+		var edit_country_id = $(check).parent().attr("countryid");
+		var param = {
+			"country_id": edit_country_id
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(countryMaintenance_getCountryById_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			var countryKeys = $('#check_country_keys');
+			var countryName = $('#check_country_name');
+			var countryCode = $('#check_country_code');
+			var countryInputcode = $('#check_country_input_code');
+			var countryLineorder = $('#check_country_line_order');
+			var countryCreatetime = $('#check_country_create_time');
+			var countryStatus = $('#check_country_status input');
+			countryKeys.val(reqResult.data.countryKeys);
+			countryName.val(reqResult.data.countryName);
+			countryCode.val(reqResult.data.countryCode);
+			countryInputcode.val(reqResult.data.countryInputCode);
+			countryLineorder.val(reqResult.data.countryLineOrder);
+			countryCreatetime.val(getLocalTime(reqResult.data.countryCreateTime));
+			if(reqResult.data.countryStatus == 0) {
+				countryStatus[0].checked = "checked";
+			} else {
+				countryStatus[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//  删除信息
+	function del_country(del_li) {
+		if(confirm("确认禁用该国家吗？")) {
+			var del_country_id = $(del_li).parent().attr("countryid");
+			var param = {
+				"countryId": del_country_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(countryMaintenance_deleteCountry_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("禁用成功！");
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+	//	編輯回显信息
+	function edit_Country(edit_li) {
+		var edit_country_id = $(edit_li).parent().attr("countryid");
+		var param = {
+			"country_id": edit_country_id
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(countryMaintenance_getCountryById_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#edit_countryId_hidden').val(reqResult.data.countryId);
+			var countryKeys = $('#edit_country_keys');
+			var countryName = $('#edit_country_name');
+			var countryCode = $('#edit_country_code');
+			var countryInputcode = $('#edit_country_input_code');
+			var countryLineorder = $('#edit_country_line_order');
+			var countryStatus = $('#edit_country_status input');
+			countryKeys.val(reqResult.data.countryKeys);
+			countryName.val(reqResult.data.countryName);
+			countryCode.val(reqResult.data.countryCode);
+			countryInputcode.val(reqResult.data.countryInputCode);
+			countryLineorder.val(reqResult.data.countryLineOrder);
+			if(reqResult.data.countryStatus == 0) {
+				countryStatus[0].checked = "checked";
+			} else {
+				countryStatus[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//  编辑保存信息
+	$('#edit_country_save').on('click', function() {
+			var eidtcountry_keys = $('#edit_country_keys').val();
+			var editcountry_name = $('#edit_country_name').val();
+			var editcountry_code = $('#edit_country_code').val();
+			var editcountry_inputcode = $('#edit_country_input_code').val();
+			var editcountry_lineorder = $('#edit_country_line_order').val();
+			if(eidtcountry_keys == '' || editcountry_name == '' || editcountry_code == '' || editcountry_inputcode == '' || editcountry_lineorder == '') {
+				check_edit_countrykeys();
+				check_editcountryname();
+				check_editcountrycode();
+				check_editcountryinputcode();
+				check_editcountrylineorder();
+				return false;
+			} else {
+				var param = $('#edit_country_formNews').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(countryMaintenance_updateCountry_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功!');
+					window.location.reload();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		})
+		//	表单验证
+	$('#add_country_keys').blur(function() {
+		check_countrykeys();
+	})
+	$('#add_country_name').blur(function() {
+		check_countryname();
+	})
+	$('#add_country_code').blur(function() {
+		check_countrycode();
+	})
+	$('#add_country_input_code').blur(function() {
+		check_countryinputcode();
+	})
+	$('#add_country_line_order').blur(function() {
+		check_countrylineorder();
+	})
+	$('#edit_country_keys').blur(function() {
+		check_edit_countrykeys();
+	})
+	$('#edit_country_name').blur(function() {
+		check_editcountryname();
+	})
+	$('#edit_country_code').blur(function() {
+		check_editcountrycode();
+	})
+	$('#edit_country_input_code').blur(function() {
+		check_editcountryinputcode();
+	})
+	$('#edit_country_line_order').blur(function() {
+		check_editcountrylineorder();
+	})
+</script>

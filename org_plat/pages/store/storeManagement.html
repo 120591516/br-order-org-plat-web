@@ -1,0 +1,400 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+	<h2>
+		<small>门店信息</small>
+	</h2>
+	</div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#"><i class="fa fa-dashboard"></i> 首页</a>
+		</li>
+		<li>
+			<a href="#">门店</a>
+		</li>
+		<li class="active">门店信息</li>
+	</ol>
+	<div class="box container-fluid no-margin">
+		<!--box-header -->
+		<div class="box-header">
+			<div class="row margin-bottom">
+				<div class="col-xs-10 col-md-10">
+					<h3 class="box-title">搜索</h3>
+				</div>
+				<div class="col-xs-2 col-md-2">
+					<div class="input-group pull-right">
+						<a onclick='loadpage("/org_plat/pages/store/AddstoreManagementInfo.html")' id="add_store" class="btn btn-default">添加</a>
+					</div>
+				</div>
+			</div>
+			<div class="row margin-bottom">
+				<form class="container-fluid">
+					<div class="row margin-bottom">
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">名称</span> <input type="text" class="form-control store_search_form" name="branchName" id="store_branchName" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">代码</span> <input type="text" class="form-control store_search_form" name="branchCode" id="store_branchCode" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">地址</span> <input type="text" class="form-control selectpicker store_search_form" name="branchArea" id="store_branchArea" aria-describedby="basic-addon1" maxlength='10' required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">拆分套餐</span>
+									<select name="splitSuite" class="form-control selectpicker store_search_form" id="store_splitSuite" aria-describedby="basic-addon1" maxlength='12' required>
+										<option value="-1">全部</option>
+										<option value="0">是</option>
+										<option value="1">否</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-md-offset-6">
+							<div class="col-md-6 col-md-offset-6">
+								<div class="input-group pull-right">
+									<a class="btn btn-primary fa fa-search" id="search_store_btn" value="搜索">搜索</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- /.box-header -->
+	</div>
+</section>
+<!-- /Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<!--box-header -->
+				<div class="box-header">
+					<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>编辑</th>
+								<th>门店名称</th>
+								<th>门店代码</th>
+								<th>门店地址</th>
+								<th>拆分套餐</th>
+								<th>日检查量</th>
+								<th>日警告量</th>
+								<th>体检时间段</th>
+								<th>门店状态</th>
+							</tr>
+						</thead>
+						<tbody id="storeManagement_tbody"></tbody>
+					</table>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--设置阀值模态框-->
+<div class="modal fade" id="limitPeopleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<input type="hidden" id="type" />
+				<input type="hidden" id="id" />
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title margin-bottom">阀值设置</h4>
+				<div class="input-group margin-bottom">
+					<span class="input-group-addon">门店名称</span>
+					<input type="text" id="title" class="form-control check_userloginname_validate" aria-describedby="basic-addon1">
+				</div>
+				<div class="input-group margin-bottom">
+					<span class="input-group-addon">日检查量</span>
+					<input type="text" id="limitPeople" class="form-control check_userloginname_validate" aria-describedby="basic-addon1">
+				</div>
+				<div class="input-group margin-bottom">
+					<span class="input-group-addon">日警告量</span>
+					<input type="text" id="warnPeople" class="form-control check_userloginname_validate" aria-describedby="basic-addon1">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="setLimitPeople">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--<div class="modal fade" id="limitPeopleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<input type="hidden" id="type" />
+				<input type="hidden" id="id" />
+				<span class="title"></span>
+				<div>
+					<span>日检查量</span><input type="text" class="form-control" id="limitPeople" placeholder="请输入日检查量">
+				</div>
+				<div>
+					<span>日警告量</span><input type="text" class="form-control" id="warnPeople" placeholder="请输入日警告量">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="setLimitPeople">提交</button>
+			</div>
+		</div>
+	</div>
+</div>-->
+<script src="/org_plat/js/plugins/extendPagination.js"></script>
+<script>
+	init_page();
+	// 初始化分页信息
+	function init_page() {
+		$('#storeManagement_tbody').empty();
+		//1.请求后端信息并展示
+		storeSearch();
+		//2.初始化分页信息
+		init_pager();
+	}
+
+	function init_pager() {
+		$('#callBackPager').extendPagination({
+			totalCount: total_count,
+			showCount: count_curr,
+			limit: limit,
+			callback: function(curr, limit, totalCount) {
+				page_curr = curr;
+				total_count = totalCount;
+				storeSearch();
+			}
+		});
+	}
+
+	function storeSearch() {
+		$('#storeManagement_tbody').empty();
+		var branchCode = jQuery.trim($("#store_branchCode").val());
+		var branchName = jQuery.trim($("#store_branchName").val());
+		var branchArea = jQuery.trim($("#store_branchArea").val());
+		var splitSuite = jQuery.trim($("#store_splitSuite").val());
+		var param = {
+			"page": 1,
+			"rows": 10,
+			"branchCode": branchCode,
+			"branchName": branchName,
+			"branchAddress": branchArea,
+			"splitSuite": splitSuite
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(storeManagement_searchOrgBranch_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			total_count = reqResult.data.total;
+			createTable(page_curr, limit, total_count, reqResult);
+			return false;
+		} else {
+			alert("error");
+		}
+		return false;
+	}
+
+	$('#search_store_btn').on('click', function() {
+		init_page();
+		return false;
+	})
+	$('.store_search_form').on('keydown', function(e) {
+		if(e && e.keyCode == 13) {
+			init_page();
+			return false;
+		}
+	})
+
+	function del_store(del_li) {
+		if(confirm("确认删除该门店吗？")) {
+			var del_user_id = $(del_li).parent().attr("storeid");
+			var param = {
+				"id": del_user_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(storeManagement_deleteOrgBranch_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("删除成功");
+				storeSearch();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+
+	function createTable(currPage, limit, total, dataBack) {
+		var showNum = limit;
+		if(total - (currPage * limit) < 0)
+			showNum = total - ((currPage - 1) * limit);
+		var datal = dataBack.data.list;
+		//获取操作类型
+//		var operationList = dataBack.operationList;
+//		//			判断添加按钮
+//		if(operationList.add == 1) {
+//			$('#add_store').show();
+//		} else {
+//			$('#add_store').hide();
+//		}
+		var str = '';
+		var str_top = '';
+		for(var i = 0; i < showNum; i++) {
+			var checkInfo = '"/org_plat/pages/store/CheckstoreManagementInfo.html"';
+			var editInfo = '"/org_plat/pages/store/EditstoreManagementInfo.html"';
+			var restInfo = '"/org_plat/pages/store/storeRestManagement.html"';
+			var packageInfo = '"/org_plat/pages/store/StorePackageManagement.html"';
+			//			var branchId = '"' + datal[i].branchId + '"';
+			init_param_Id = '"' + datal[i].branchId + '"';
+			$('#org_id').text(datal[i].orgShortName);
+			str += "<tr><td storeid='" + datal[i].branchId + "' orgid='" + datal[i].orgId + "' name='" + datal[i].branchName + "' people='" + datal[i].limitPeople + "' wPeople='" + datal[i].warnPeople + "'>";
+//			if(operationList.select==1){
+			    str += "<a onclick='loadpageLi(" + checkInfo + "," + init_param_Id + ")' class='padding_4px storeManagement_check_info' title='查看门店信息'><i class='fa fa-eye'></i></a> ";
+//			}
+//          if(operationList.update==1){
+			    str += "<a onclick='loadpageLi(" + editInfo + "," + init_param_Id + ")' class='padding_4px storeManagement_edit_info' title='编辑门店信息'><i class='fa fa-pencil'></i></a> ";
+//          }
+//			if(operationList.delete==1){
+			    str += "<a href='#' title='删除门店信息' style='margin-right:5px' class='padding_4px' onclick='del_store(this)'><i class='fa fa-trash-o'></i></a>";
+//			}
+			str += "<a title='科室信息' style='margin-right:5px' href='#' dept_status='" + datal[i].status + "'onclick='deptMsg(this)'><i class='fa fa-share-alt-square'></i></a>";
+			str += "<a onclick='loadpageLi(" + packageInfo + "," + init_param_Id + ")' title='添加套餐信息' class='padding_4px'><i class='fa fa-plus-square'></i></a>";
+			str += "<a onclick='loadpageLi(" + restInfo + "," + init_param_Id + ")' title='设置休息日' class='padding_4px'><i class='fa fa-coffee'></i></a>";
+			str += "<a  data-toggle='modal' href='#limitPeopleModal'   onclick='openModel(this,1)' title='设置阀值' class='padding_4px'><i class='fa fa-cog'></i></a>";
+			str += "</td>";
+			if(datal[i].branchName.length > 10) {
+				str += "<td>" + datal[i].branchName.substring(0, 9) + "...</td>";
+			} else {
+				str += "<td>" + datal[i].branchName + "</td>";
+			}
+			str += "<td>" + datal[i].branchCode + "</td>";
+			if(datal[i].branchAddress.length > 10) {
+				str += "<td>" + datal[i].branchAddress.substring(0, 9) + "...</td>";
+			} else {
+				str += "<td>" + datal[i].branchAddress + "</td>";
+			}
+			if(datal[i].splitSuite == 0) {
+				str += "<td>" + '是' + "</td>";
+			} else {
+				str += "<td>" + '否' + "</td>";
+			}
+			str += "<td>" + datal[i].limitPeople + "</td>";
+			str += "<td>" + datal[i].warnPeople + "</td>";
+			str += "<td>" + datal[i].examStartTime + '-' + datal[i].examEndTime + "</td>";
+			if(datal[i].status == 0) {
+				str += "<td>" + '启用' + "</td>";
+			} else {
+				str += "<td>" + '禁用' + "</td>";
+			}
+			str += '</tr>';
+		}
+		$("#storeManagement_tbody").append(str);
+		return false;
+	}
+
+	function deptMsg(deptMsg) {
+		var dept_status = $(deptMsg).attr('dept_status');
+		var orgId = $(deptMsg).parent().attr('orgid');
+		var branchId = $(deptMsg).parent().attr('storeid');
+		if(dept_status == 0) {
+			loadpageLi("/org_plat/pages/store/departments.html", branchId);
+		} else {
+			confirm('该门店状态未启用！');
+		}
+	}
+
+	var $type = $('#type'),
+		$id = $('#id'),
+		$limitPeople = $('#limitPeople'),
+		$warnPeople = $('#warnPeople'),
+		$setLimitPeople = $('#setLimitPeople'),
+		$title = $('#title'),
+		postUrl,
+		id,
+		name,
+		limitPeopleOld,
+		warnPeopleOld;
+	//打开选择框
+	function openModel(idthis, type) {
+		id = $(idthis).parent().attr("storeid");
+		limitPeopleOld = $(idthis).parent().attr("people");
+		warnPeopleOld = $(idthis).parent().attr("wPeople");
+		name = $(idthis).parent().attr("name");
+		$type.val(type);
+		$id.val(id);
+		$title.val(name);
+		$limitPeople.val(limitPeopleOld);
+		$warnPeople.val(warnPeopleOld);
+	}
+	//设置门店限制 保存 
+	$setLimitPeople.on('click', function() {
+		var param = {
+			limitPeople: $limitPeople.val(),
+			warnPeople: $warnPeople.val()
+		};
+		if($type.val() == 1) {
+			param.branchId = $id.val();
+			postUrl = liminal_value_branch_setting;
+		}
+		if($type.val() == 2) {
+			param.suiteId = $id.val();
+			postUrl = liminal_value_suite_setting;
+		}
+
+		var otype = "POST";
+		var osync = false;
+		if(validationParam(param, type)) {
+			return;
+		}
+		$type.val('');
+		$id.val('');
+		$limitPeople.val('');
+		$warnPeople.val('');
+		$title.html('')
+		var reqResult = httpRequest(postUrl, param, otype, osync);
+		if(reqResult.result == 0 && reqResult.data > 0) {
+			alert("设置成功");
+			storeSearch();
+		}
+	});
+	//验证
+	function validationParam(param, type) {
+		if(type == 1 && (param.branchId == null || param.branchId == '' || param.branchId == "")) {
+			alert("请选择门店");
+			return true;
+		}
+		if(type == 2 && (param.suiteId == null || param.suiteId == '' || param.suiteId == "")) {
+			alert("请选择套餐");
+			return true;
+		}
+		if(param.limitPeople == null || param.limitPeople == '' || param.limitPeople == "") {
+			alert("请输入限制人数");
+			return true;
+		}
+		if(param.warnPeople == null || param.warnPeople == '' || param.warnPeople == "") {
+			alert("请输入警告人数");
+			return true;
+		}
+		return false;
+
+	}
+</script>

@@ -1,0 +1,333 @@
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<!--box-header -->
+				<div class="box-header">
+					<div class="row">
+						<div class="col-md-11">
+							<h3 class="box-title">查看门店</h3>
+						</div>
+						<div class="col-md-1 text-right">
+							<div class="input-group">
+								<a class="btn btn-default" id='storeCheck_backbtn' onclick="loadpage('/org_plat/pages/store/storeManagement.html')">返回</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<form class="bs-example-form" role="form" method="post" novalidate="novalidate" id='check_form'>
+						<div class="row margin-bottom">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">门店代码</span>
+									<input type="text" id="check_branchCode" class="form-control" disabled="disabled" name="branchCode" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">门店名称</span>
+									<input type="text" id="check_branchName" class="form-control" disabled="disabled" name="branchName" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">门店地区</span>
+									<select class="form-control selectpicker prov" id="check_prov" name="branchProvinceId" disabled="disabled">
+									</select>
+									<span class="input-group-addon">市</span>
+									<select class="form-control selectpicker city" id="check_city" name="branchCityId" disabled="disabled">
+									</select>
+									<span class="input-group-addon">区</span>
+									<select class="form-control selectpicker dist" id="check_dist" name="branchAreaId" disabled="disabled">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">详细地址</span>
+									<input type="text" id="check_branchArea" class="form-control" disabled="disabled" name="branchArea" aria-describedby="basic-addon1" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">警告人数</span>
+									<input type="text" id="check_warnPeople" class="form-control" disabled="disabled" name="warnPeople" aria-describedby="basic-addon1" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">警告金额</span>
+									<input type="text" id="check_warnAmount" class="form-control" disabled="disabled" name="warnAmount" aria-describedby="basic-addon1" required>
+									<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+								</div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">限制人数</span>
+									<input type="text" id="check_limitPeople" class="form-control" disabled="disabled" name="limitPeople" aria-describedby="basic-addon1" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">限制金额</span>
+									<input type="text" id="check_limitAmount" class="form-control" disabled="disabled" name="limitAmount" aria-describedby="basic-addon1" required>
+									<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group" id='check_splitSuite'>
+									<span class="input-group-addon userlist_status_right_border">拆分套餐</span>
+									<input type="radio" id="check_splitSuite_0" name="splitSuite" disabled="disabled" value="0" aria-describedby="basic-addon1" required>是
+									<input type="radio" id="check_splitSuite_1" name="splitSuite" disabled="disabled" value="1" aria-describedby="basic-addon1" required>否
+								</div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-4">
+								<div class="input-group">
+									<!--<span class="input-group-addon">体检时间段</span>-->
+									<input type="hidden" name="examStartTime" disabled="disabled" id='check_examStartTime_hid' />
+									<input type="hidden" name="examEndTime" disabled="disabled" id='check_exameEndTime_hid' />
+									<span class="input-group-addon">体检开始时间</span>
+									<span class="input-group-addon">时</span>
+									<select class="form-control selectpicker" id="check_examStartTime_h" disabled="disabled">
+										<option value="00">00</option>
+										<option value="01">01</option>
+										<option value="02">02</option>
+										<option value="03">03</option>
+										<option value="04">04</option>
+										<option value="05">05</option>
+										<option value="06">06</option>
+										<option value="07">07</option>
+										<option value="08">08</option>
+										<option value="09">09</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+									</select>
+									<span class="input-group-addon">分</span>
+									<select class="form-control selectpicker" id="check_examStartTime_m" disabled="disabled">
+										<option value="00">00</option>
+										<option value="05">05</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="25">25</option>
+										<option value="30">30</option>
+										<option value="35">35</option>
+										<option value="40">40</option>
+										<option value="45">45</option>
+										<option value="50">50</option>
+										<option value="55">55</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">体检结束时间</span>
+									<span class="input-group-addon">时</span>
+									<select class="form-control selectpicker" id="check_examEndTime_h" disabled="disabled">
+										<option value="00">00</option>
+										<option value="01">01</option>
+										<option value="02">02</option>
+										<option value="03">03</option>
+										<option value="04">04</option>
+										<option value="05">05</option>
+										<option value="06">06</option>
+										<option value="07">07</option>
+										<option value="08">08</option>
+										<option value="09">09</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+									</select>
+									<span class="input-group-addon">分</span>
+									<select class="form-control selectpicker" id="check_examEndTime_m" disabled="disabled">
+										<option value="00">00</option>
+										<option value="05">05</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="25">25</option>
+										<option value="30">30</option>
+										<option value="35">35</option>
+										<option value="40">40</option>
+										<option value="45">45</option>
+										<option value="50">50</option>
+										<option value="55">55</option>
+									</select>
+								</div> 
+							</div>
+							<div class="col-md-4">
+								<div class="input-group" id="check_status">
+									<span class="input-group-addon userlist_status_right_border">状 态</span>
+									<input type="radio" name='status' value="0" aria-describedby="basic-addon1" disabled="disabled" />启用
+									<input type="radio" name='status' value="1" aria-describedby="basic-addon1" disabled="disabled" />禁用
+								</div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-11">
+								<div class="input-group">
+									<span class="input-group-addon">门店说明</span>
+									<textarea name="note" id="check_note" class="form-control" rows="" cols="" disabled="disabled"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-11">
+								<div class="input-group">
+									<span class="input-group-addon">门店介绍</span>
+									<textarea name="summary" id="check_summary" class="form-control" rows="" disabled="disabled" cols=""></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-12">
+								<div class="input-group" disabled="true">
+									<span class="input-group-addon">门店照片</span>
+									<div class="file-preview">
+										<div class=" file-drop-zone">
+											<div id="check_storeimg">
+											</div>
+											<div class="clear"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+					<!--<div class="row">
+						<div class="col-xs-12 col-md-8" id=""></div>
+					</div>-->
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<script src="/org_plat/js/create/Ajax.js"></script>
+<script>
+	$(document).ready(function() {
+		check_store();
+		$("#check_storeimg >.float_left>.position_absolute").each(function() {
+			$(this).hover(function() {
+				$(this).stop().animate({
+					width: 300,
+					height: 300,
+					top: -10,
+					left: 100
+				}, 1000);
+				$(this).css("z-index", 999);
+				$(this).parent().removeClass("store_img_borderdiv ");
+			}, function() {
+				$(this).stop().animate({
+					width: 250,
+					height: 250,
+					top: 0,
+					left: 125
+				}, 1000);
+				$(this).css("z-index", 0);
+				$(this).parent().addClass("store_img_borderdiv ");
+			});
+		});
+	})
+
+	//	查看用户信息
+	function check_store() {
+		var param = {
+			"id": getParamValue()
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(storeManagement_getOrgBranchById_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			var check_branchCode = $('#check_branchCode').val(reqResult.data.branchCode);
+			var check_branchName = $('#check_branchName').val(reqResult.data.branchName);
+			var check_branchArea = $('#check_branchArea').val(reqResult.data.branchAddress);
+			var check_warnPeople = $('#check_warnPeople').val(reqResult.data.warnPeople);
+			var check_limitPeople = $('#check_limitPeople').val(reqResult.data.limitPeople);
+			var check_warnAmount = $('#check_warnAmount').val(reqResult.data.warnAmount);
+			var check_limitAmount = $('#check_limitAmount').val(reqResult.data.limitAmount);
+			var check_note = $('#check_note').val(reqResult.data.note);
+			var check_summary = $('#check_summary').val(reqResult.data.summary);
+			var check_splitSuite = $('#check_splitSuite input');
+			var data_examStartTime = reqResult.data.examStartTime.split(':');
+			var data_examEndTime = reqResult.data.examEndTime.split(':');
+			var check_examStartTime_h = $('#check_examStartTime_h').val(data_examStartTime[0]);
+			var check_examStartTime_m = $('#check_examStartTime_m').val(data_examStartTime[1]);
+			var check_examEndTime_h = $('#check_examEndTime_h').val(data_examEndTime[0]);
+			var check_examEndTime_m = $('#check_examEndTime_m').val(data_examEndTime[1]);
+			var check_status = $('#check_status input');
+			//初始化省份
+			prov_init();
+			//定义省份
+			$('#check_prov').val(reqResult.data.branchProvinceId);
+			//初始化城市
+			prov_city(reqResult.data.branchProvinceId);
+			//定义城市
+			$('#check_city').val(reqResult.data.branchCityId);
+			//初始化区县
+			city_town(reqResult.data.branchCityId);
+			//定义区县
+			$('#check_dist').val(reqResult.data.branchAreaId);
+			if(reqResult.data.splitSuite == 0) {
+				check_splitSuite[0].checked = "checked";
+			} else {
+				check_splitSuite[1].checked = "checked";
+			}
+			if(reqResult.data.status == 0) {
+				check_status[0].checked = "checked";
+			} else {
+				check_status[1].checked = "checked";
+			}
+			if(reqResult.data.img != '') {
+				$('#check_storeimg').empty();
+				var datal = reqResult.data.img;
+				var str = '';
+				for(var i = 0; i < reqResult.data.img.length; i++) {
+					str += '<div id="' + datal[i].imgId + '" class="float_left store_img_borderdiv position_relative"><div class="position_absolute" style="background-image:url(' + oplatIp + datal[i].imgLocation + ');"></div></div>';
+				}
+			} else {
+				str = "<span>" + '无图片上传，可在编辑里上传图片！' + "</span>";
+			}
+			$("#check_storeimg").append(str);
+		} else {
+			alert(reqResult.message);
+		}
+		return false;
+	}
+	$('#storeCheck_backbtn').on('click', function() {
+		storeManagementBack();
+	})
+</script>
+<script src="/org_plat/js/plugins/fileinput.js"></script>
+<script src="/org_plat/js/plugins/fileinput_locale_zh.js"></script>

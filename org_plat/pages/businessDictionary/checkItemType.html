@@ -1,0 +1,340 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h2>
+		<small>检查项类型</small>
+	</h2>
+	</div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">数据字典</a>
+		</li>
+		<li class="active">检查项类型</li>
+	</ol>
+</section>
+<!-- /Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<!--box-header -->
+				<div class="box-header">
+					<h3 class="box-title col-lg-9 col-md-8 col-sm-8 col-xs-8">列表</h3>
+					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pull-right">
+						<a href="#addItemType" id="addCheckType" data-toggle="modal" class="btn btn-default">添加</a>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>编辑</th>
+								<th>检查项类型名称</th>
+								<th>检查项类型英文名称</th>
+								<th>检查项类型代码</th>
+								<th>检查项类型部门名称</th>
+								<th>检查项类型备注</th>
+								<th>检查项创建时间</th>
+								<th>检查项状态</th>
+							</tr>
+						</thead>
+						<tbody id="increaseTbody">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--模态框添加-->
+<div class="modal fade" id="addItemType" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">添加检查项目类型</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="addCheckItemType">
+					<div class="input-group">
+						<span class="input-group-addon">检查项类型名称</span>
+						<input type="text" id="addExamItemTypeName" class="form-control" name="examItemTypeName" aria-describedby="basic-addon1" required>
+					</div>
+					<div id="addExamItemTypeNameTip"></div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">检查项类型英文名称</span>
+						<input type="text" id="addExamItemTypeNameEng" class="form-control" name="examItemTypeNameEng" aria-describedby="basic-addon1" required>
+					</div>
+					<div id="addExamItemTypeNameEngTip"></div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">检查项类型代码</span>
+						<input type="text" id="addExamItemTypeCode" class="form-control" name="examItemTypeCode" aria-describedby="basic-addon1" required>
+					</div>
+					<div id="addExamItemTypeCodeTip"></div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">检查项类型部门名称</span>
+						<input type="text" id="addDeptName" class="form-control" name="deptName" aria-describedby="basic-addon1" required>
+					</div>
+					<div id="addDeptNameTip"></div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">检查项类型备注</span>
+						<input type="text" id="addExamItemTypeNote" class="form-control" name="examItemTypeNote" aria-describedby="basic-addon1" required>
+					</div>
+					<div id="addExamItemTypeNoteTip"></div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="addItemTypeInfo">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框查看-->
+<div class="modal fade" id="checkItemType" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">查看检查项目类型</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="checkItemType">
+					<div class="input-group">
+						<span class="input-group-addon">检查项类型名称</span>
+						<input type="text" id="checkExamItemTypeName" class="form-control" name="examItemTypeName" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">检查项类型英文名称</span>
+						<input type="text" id="checkExamItemTypeNameEng" class="form-control" name="examItemTypeNameEng" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">检查项类型代码</span>
+						<input type="text" id="checkExamItemTypeCode" class="form-control" name="examItemTypeCode" aria-describedby="basic-addon1" disabled="disabled">
+
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">检查项类型部门名称</span>
+						<input type="text" id="checkDeptName" class="form-control" name="deptName" aria-describedby="basic-addon1" disabled="disabled">
+
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">检查项类型备注</span>
+						<input type="text" id="checkExamItemTypeNote" class="form-control" name="examItemTypeNote" aria-describedby="basic-addon1" disabled="disabled">
+
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">检查项类型创建时间</span>
+						<input type="text" id="checkExamItemTypeCreateTime" class="form-control" name="examItemTypeNote" aria-describedby="basic-addon1" disabled="disabled">
+
+					</div>
+					<div class="input-group" id="checkExamItemTypeStatus">
+						<span class="input-group-addon letter_spacing_30">检查项类型状态</span>
+						<input type="radio" name="examItemTypeStatus" value="0" disabled="disabled" />启用
+						<input type="radio" name="examItemTypeStatus" value="1" disabled="disabled" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/org_plat/js/plugins/jquery.ztree.core.js"></script>
+<script src="/org_plat/js/plugins/formValidator-4.0.1.js"></script>
+<script src="/org_plat/js/plugins/formValidatorRegex.js"></script>
+<script>
+    //添加检查行类型校验
+    $('#addCheckType').on('click', function() {
+		$.formValidator.initConfig({
+			submitButtonID: "addItemTypeInfo",
+			debug: true,
+			onSuccess: function() {
+				addItemType();
+			},
+			onError: function() {
+				alert("添加失败，请根据页面提示重新添加!")
+			},
+		});
+		//检查项类型名称
+		$("#addExamItemTypeName").formValidator({
+			onShow: "请输入检查项类型名称!",
+			onFocus: "检查项类型名称在十个字以内!",
+			onCorrect: "输入正确!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "内容长度错误，请重新输入!"
+		}).regexValidator({
+			regExp: '^[\u0391-\uFFE5]+$',
+			onError: "只能输入汉字,请重新输入!"
+		});
+		//检查项类型英文名称
+		$("#addExamItemTypeNameEng").formValidator({
+			onShow: "请输入检查项类型英文名称",
+			onFocus: "检查项类型英文名称由26个大小写字母组成!",
+			onCorrect: "输入正确"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: '^[ A-Za-z]*$',
+			onError: "只能输入大小写字母,请重新输入!"
+		});
+		//检查项类型代码
+		$("#addExamItemTypeCode").formValidator({
+			onShow: "请输入检查项类型代码",
+			onFocus: "只能输入数字!",
+			onCorrect: "输入正确"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "只能输入数字，请重新输入!"
+		});
+		//检查项类型部门名称
+		$("#addDeptName").formValidator({
+			onShow: "请输入检查项类型部门名称!",
+			onFocus: "检查项类型部门名称在十个字以内!",
+			onCorrect: "输入正确!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "内容长度错误，请重新输入!"
+		}).regexValidator({
+			regExp: '^[\u0391-\uFFE5]+$',
+			onError: "只能输入汉字,请重新输入!"
+		});
+		//检查项类型备注
+		$("#addExamItemTypeNote").formValidator({
+			onShow: "请输入检查项类型备注!",
+			onFocus: "检查项类型备注在十个字以内!",
+			onCorrect: "输入正确!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "内容长度错误，请重新输入!"
+		}).regexValidator({
+			regExp: '^[\u0391-\uFFE5]+$',
+			onError: "只能输入汉字,请重新输入!"
+		});
+		
+		
+	});
+	
+	$(document).ready(function() {
+		initUserPagination();
+	})
+
+	function initUserPagination() {
+		$('#increaseTbody').empty();
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(checkItemType_getAllOrgExamItemType_url, null, otype, osync);
+		if(reqResult.result == 0) {
+			callBackPagination(reqResult);
+		}
+	}
+	//检查项列表
+	function createTable(curr, limit, totalCount, dataBack) {
+		var datal = dataBack.data;
+		//获取操作类型
+		var operationList = dataBack.operationList;
+		//			判断添加按钮
+		if(operationList.orgExamItemType_insert == true) {
+			$('#addCheckType').show();
+		} else {
+			$('#addCheckType').hide();
+		}
+		var str = '';
+		for(var i = 0; i < datal.length; i++) {
+			str += "<tr><td examItemTypeId='" + datal[i].examItemTypeId + "'>";
+			if(operationList.orgExamItemType_detail == true) {
+				str += "<a href='#checkItemType' title='查看检查项' class='padding_4px' data-toggle='modal' onclick='checkItemType(this)'><i class='fa fa-eye'></i></a> ";
+			}
+			str += "</td>";
+			str += "<td>" + nullformat(datal[i].examItemTypeName) + "</td>";
+			str += "<td>" + nullformat(datal[i].examItemTypeNameEng) + "</td>";
+			str += "<td>" + nullformat(datal[i].examItemTypeCode) + "</td>";
+			str += "<td>" + nullformat(datal[i].deptName) + "</td>";
+			if(datal[i].examItemTypeNote!=''&&datal[i].examItemTypeNote.length>10){
+				str += "<td>" + nullformat(datal[i].examItemTypeNote.substring(0,9)) + "...</td>";
+			}else{
+				str += "<td>" + nullformat(datal[i].examItemTypeNote) + "</td>";
+			}
+			str += "<td>" + getLocalTime(nullformat(datal[i].examItemTypeCreateTime)) + "</td>";
+			if(nullformat(datal[i].examItemTypeStatus) == 0) {
+				str += "<td>" + '启用' + "</td>";
+			} else {
+				str += "<td>" + '禁用' + "</td>";
+			}
+			str += '</tr>';
+		}
+		$('#increaseTbody').append(str);
+		return false;
+	}
+	//	添加检查项类型
+		function addItemType(){
+			var otype = "post";
+			var osync = false;
+			var param = $('#addCheckItemType').serialize();
+			var reqResult = httpRequest(checkItemType_insertOrgExamItemType_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('添加成功！');
+				$('#addItemType').modal("toggle");
+				$(".modal-backdrop").remove(); //删除class值为modal-backdrop的标签，可去除阴影
+				loadpage("/org_plat/pages/dictionaryMaintenance/checkItemType.html");
+			} else {
+				alert(reqResult.message);
+			}
+		}
+		//	查看检查项类型
+	function checkItemType(id) {
+		var orgExamItemTypeId = $(id).parent().attr('examItemTypeId');
+		var otype = "post";
+		var osync = false;
+		var param = {
+			'orgExamItemTypeId': orgExamItemTypeId
+		};
+		var reqResult = httpRequest(checkItemType_getOrgExamItemTypeById_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#checkExamItemTypeName').val(reqResult.data.examItemTypeName);
+			$('#checkExamItemTypeNameEng').val(reqResult.data.examItemTypeName);
+			$('#checkExamItemTypeCode').val(reqResult.data.examItemTypeCode);
+			$('#checkDeptName').val(reqResult.data.deptName);
+			$('#checkExamItemTypeNote').val(reqResult.data.examItemTypeNote);
+			$('#checkExamItemTypeCreateTime').val(nullformat(getLocalTime(reqResult.data.examItemTypeCreateTime)));
+			if(reqResult.data.examItemTypeStatus == 0) {
+				$('#checkExamItemTypeStatus input')[0].checked = 'checked';
+			} else {
+				$('#checkExamItemTypeStatus input')[1].checked = 'checked';
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+</script>

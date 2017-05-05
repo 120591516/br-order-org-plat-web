@@ -1,0 +1,313 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<div class="margin-bottom">
+		<h2><small>收费项</small></h2></div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">套餐</a>
+		</li>
+		<li class="active">收费项</li>
+	</ol>
+	<div class="box container-fluid no-margin">
+		<!--box-header -->
+		<div class="box-header">
+			<div class="row margin-bottom">
+				<div class="col-xs-12 col-md-10">
+					<h3 class="box-title">搜索</h3>
+				</div>
+				<div class="col-xs-6 col-md-2">
+					<div class="input-group pull-right">
+						<a class="btn btn-default" id="addFeeItemDeptInfo" onclick='loadpage("/org_plat/pages/examination/charges/addFeeItem.html")'>添 加</a>
+					</div>
+				</div>
+			</div>
+			<div class="row margin-bottom">
+				<form class="form-group container-fluid">
+					<div class="row margin-bottom">
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">收费项名称</span>
+									<input type="text" class="form-control" name="examFeeItemName" id="serExamFeeItemName" placeholder="收费项名称">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">收费项英文名称</span>
+									<input type="text" class="form-control" name="examFeeItemNameEng" id="serExamFeeItemNameEng" placeholder="收费项英文名称">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">价格区间</span>
+									<input type="text" class="form-control" id="priceStart" placeholder="￥">
+									<span class="input-group-btn">
+									        <span class="btn" type="button">-</span>
+									</span>
+									<input type="text" class="form-control" id="priceEnd" placeholder="￥">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">性别</span>
+									<select class="form-control selectpicker" id="serSex">
+										<option value="please">请选择</option>
+										<option value="0">男</option>
+										<option value="1">女</option>
+										<option value="2">通用</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-md-offset-6">
+							<div class="col-md-6 col-md-offset-6">
+								<div class="input-group pull-right">
+									<a class="btn btn-primary fa fa-search" id="searchAll">搜 索</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+				</div>
+				<div class="box-body">
+					<table class="table table-bordered table-striped" id="example3">
+						<thead>
+							<tr>
+								<th>操作</th>
+								<th>收费项名称</th>
+								<th>收费项名称简称</th>
+								<th>收费项英文名称</th>
+								<th>英文名称缩写</th>
+								<!-- <th>所属科室</th> -->
+								<th>套餐内价格</th>
+								<th>单价</th>
+								<th>成本价</th>
+								<th>耗材价</th>
+								<th>外送价</th>
+								<th>适用性别</th>
+							</tr>
+						</thead>
+						<tbody id="mainContent">
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<script src="/org_plat/js/plugins/extendPagination.js"></script>
+<script>
+	page_curr = 1;
+	suiteSearch();
+	init_pager();
+	feeItemDept();
+	$('#searchAll').on('click', function() {
+			suiteSearch();
+			init_pager();
+			return false;
+		})
+		//初始化参数信息
+	function suiteSearch() {
+		$('#mainContent').empty();
+		var examFeeItemName = $('#serExamFeeItemName').val().trim();
+		var examFeeItemNameEng = $('#serExamFeeItemNameEng').val().trim();
+		var sex = $('#serSex').val();
+		var priceStart = $('#priceStart').val();
+		var priceEnd = $('#priceEnd').val();
+		var param = {
+			"page": page_curr,
+			"rows": 10
+		};
+		if(examFeeItemName != null) {
+			param.examFeeItemName = examFeeItemName;
+		}
+		if(examFeeItemNameEng) {
+			param.examFeeItemNameEng = examFeeItemNameEng;
+		}
+		if(priceStart) {
+			param.examFeeItemUnitPriceStart = priceStart;
+		}
+		if(priceEnd) {
+			param.examFeeItemUnitPriceEnd = priceEnd;
+		}
+		if(sex != 'please' && sex != null) {
+			param.sex = sex;
+		}
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(getOrgExamFeeItemByPageUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			total_count = reqResult.data.total;
+			createTable(page_curr, limit, total_count, reqResult);
+			return false;
+		}
+	}
+	// 初始化分页信息
+	function init_pager() {
+		$('#callBackPager').extendPagination({
+			totalCount: total_count,
+			showCount: count_curr,
+			limit: limit,
+			callback: function(curr, limit, totalCount) {
+				page_curr = curr;
+				total_count = totalCount;
+				suiteSearch();
+			}
+		});
+	}
+	//展示数据
+	function createTable(currPage, limit, total, dataBack) {
+		var showNum = limit;
+		if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+		for(var i = 0; i < showNum; i++) {
+			var statuWord = "";
+			//获取操作类型
+			var operationList = dataBack.operationList;
+			//			判断添加按钮
+			if(operationList.orgFeeItem_insert == true) {
+				$('#addFeeItemDeptInfo').show();
+			} else {
+				$('#addFeeItemDeptInfo').hide();
+			}
+			var Tbody = document.getElementById('mainContent');
+			var lRow = Tbody.insertRow(); //创建行	
+			if(dataBack.data.list[i].fMale === 0 && dataBack.data.list[i].fFemale === 0) {
+				var showSex = '通用';
+			} else if(dataBack.data.list[i].fMale === 0 && dataBack.data.list[i].fFemale === 1) {
+				var showSex = '男性';
+			} else if(dataBack.data.list[i].fMale === 1 && dataBack.data.list[i].fFemale === 1) {
+				var showSex = '无';
+			} else if(dataBack.data.list[i].fMale === 1 && dataBack.data.list[i].fFemale === 0) {
+				var showSex = '女性';
+			}
+			//创建列
+			var firstColumn = lRow.insertCell();
+			var secondColumn = lRow.insertCell();
+			var thirdColumn = lRow.insertCell();
+			var forthColumn = lRow.insertCell();
+			var fifthColumn = lRow.insertCell();
+			var twelveColumn = lRow.insertCell();
+			var seventhColumn = lRow.insertCell();
+			var eighthColumn = lRow.insertCell();
+			var ninethColumn = lRow.insertCell();
+			var tenthColumn = lRow.insertCell();
+			var eleventhColumn = lRow.insertCell();
+			var oDiv = "#contentWrapper";
+			var urlView = "/org_plat/pages/examination/charges/checkFeeItem.html";
+			var urlEidt = "/org_plat/pages/examination/charges/editFeeItem.html";
+			var urlExam = "/org_plat/pages/examination/charges/examItemByFeeItem.html";
+			firstColumn.setAttribute('id', dataBack.data.list[i].id); //给td添加属性
+			//添加第一列内容
+			//创建查看标签
+			var aCheck = document.createElement("a");
+			var iElement = document.createElement("i");
+			(operationList.orgFeeItem_detail==true)?iElement.className = "fa fa-eye":'';
+			aCheck.appendChild(iElement);
+			aCheck.setAttribute("title", "查看信息");
+			aCheck.className = "suite-check";
+			aCheck.style.marginLeft = "5px";
+			aCheck.onclick = function() {
+				loadpageLi(urlView,$(this).parent().attr('id'));
+			};
+			firstColumn.appendChild(aCheck);
+
+			//创建编辑标签
+			var aEdit = document.createElement("a");
+			var iElement = document.createElement("i");
+			(operationList.orgFeeItem_update==true)?iElement.className = "fa fa-pencil":'';//3为更新
+			aEdit.appendChild(iElement);
+			aEdit.setAttribute("title", "编辑信息");
+			aEdit.style.marginLeft = "5px";
+			aEdit.onclick = function() {
+				loadpageLi(urlEidt,$(this).parent().attr('id'));
+			};
+			firstColumn.appendChild(aEdit);
+
+			//创建删除标签
+			var aDelete = document.createElement("a");
+			var iElement = document.createElement("i");
+			(operationList.orgFeeItem_delect==true)?iElement.className = "fa fa-trash-o":'';//2为删除
+			aDelete.appendChild(iElement);
+			aDelete.setAttribute("title", "删除信息");
+			aDelete.style.marginLeft = "5px";
+			aDelete.onclick = function() {
+				delTeeItem(this)
+			};
+			firstColumn.appendChild(aDelete);
+
+			//分配检查项信息
+			var aExam = document.createElement("a");
+			var iElement = document.createElement("i");
+			(operationList.orgFeeItem_to_orgExamItem==true)?iElement.className = "fa fa-stethoscope":'';
+			aExam.appendChild(iElement);
+			aExam.setAttribute("title", "检查项信息");
+			aExam.className = "suite-check";
+			aExam.onclick = function() {
+				loadpageLi(urlExam,$(this).parent().attr('id'));
+			};
+			aExam.style.marginLeft = "5px";
+			firstColumn.appendChild(aExam);
+			//添加第二列内容	
+			secondColumn.innerText = dataBack.data.list[i].examFeeItemName;
+			//添加第三列内容	
+			thirdColumn.innerText = dataBack.data.list[i].examFeeItemNameAbr;
+			//添加第四列内容	
+			forthColumn.innerText = dataBack.data.list[i].examFeeItemNameEng;
+			//添加第五列内容	
+			fifthColumn.innerText = dataBack.data.list[i].examFeeItemNameEngAbr;
+
+			twelveColumn.innerText = dataBack.data.list[i].examFeeItemSuitePrice;
+			//添加第七列内容	
+			seventhColumn.innerText = dataBack.data.list[i].examFeeItemUnitPrice;
+			//添加第八列内容	
+			eighthColumn.innerText = dataBack.data.list[i].examFeeItemCostPrice;
+			//添加第九列内容	
+			ninethColumn.innerText = dataBack.data.list[i].examFeeItemMaterialPrice;
+			//添加第十列内容	
+			tenthColumn.innerText = dataBack.data.list[i].examFeeItemCoopPrice;
+			//添加第十一列内容	
+			eleventhColumn.innerText = showSex;
+		}
+		return false;
+	}
+	//删除收费项信息
+	function delTeeItem(del_li) {
+		if(confirm("确认删除该收费项吗？")) {
+			var del_li = $(del_li).parent().attr("id");
+			var param = {
+				"id": del_li
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(deleteOrgExamFeeItemByIdUrl, param, otype, osync);
+			if(reqResult.result == 0 && reqResult.data > 0) {
+				alert("删除信息成功");
+				loadpage("/org_plat/pages/examination/charges/feeItem.html");
+			} else {
+				if(reqResult.data != undefined) {
+					alert(reqResult.data);
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		}
+	}
+</script>

@@ -1,0 +1,820 @@
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box width_70">
+				<div class="box-header">
+					<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">编辑体检项</h3>
+					<a onclick='loadpage("/org_plat/pages/examination/check/examItem.html")' class="btn btn-default">返回</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="box width_70">
+		<div class="box-body">
+			<div class="row user_power_btn">
+				<form class="form-group container-fluid" id="editExamItemForm">
+					<input type="hidden" name="examItemId" id="editExamItemHid" value="" />
+					<div class="row margin-bottom">
+						<div class="col-md-2 col-md-offset-5">
+							<h4 class="box-title">基本信息</h4>
+						</div>
+					</div>
+					<div class="col-md-5 col-md-push-1">
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">体检项名称</span>
+							<input type="text" class="form-control" name="examItemName" id="editExamItemName">
+						</div>
+						<div id="editExamItemNameTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">体检项名称简称</span>
+							<input type="text" class="form-control" name="examItemNameAbr" id="editExamItemNameAbr">
+						</div>
+						<div id="editExamItemNameAbrTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">体检项英文名称</span>
+							<input type="text" class="form-control" name="examItemNameEng" id="editExamItemNameEng">
+						</div>
+						<div id="editExamItemNameEngTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">体检项打印名称</span>
+							<input type="text" class="form-control" name="examItemNamePrn" id="editExamItemNamePrn">
+						</div>
+						<div id="editExamItemNamePrnTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">英文名称缩写</span>
+							<input type="text" class="form-control" name="examItemNameEngAbr" id="editExamItemNameEngAbr">
+						</div>
+						<div id="editExamItemNameEngAbrTip"></div>
+					</div>
+					<div class="col-md-5 col-md-push-1">
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">体检项目代码</span>
+							<input type="text" class="form-control" name="examItemCode" id="editExamItemCode">
+						</div>
+						<div id="editExamItemCodeTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">项目类型</span>
+							<select class="form-control getEitemId" id="editExamItemTypeId" name="examItemTypeId">
+							</select>
+						</div>
+						<div id="editExamItemTypeIdTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">值类型</span>
+							<input type="text" class="form-control" name="examItemValueType" id="editExamItemValueType">
+						</div>
+						<div id="editExamItemValueTypeTip"></div>
+						<div class="input-group margin-bottom" id="editSex">
+							<span class="input-group-addon userlist_status_right_border">适用性别</span>
+							<label class="radio-inline">
+								<input type="checkbox" name="sex" value="1" id="editfMale"> 适用男
+								<input type="hidden" name='fMale' id="editfMaleHidden" value="1">
+							</label>
+							<label class="radio-inline">
+								<input type="checkbox" name="sex" value="1"  id="editfFemale"> 适用女
+								<input type="hidden" name='fFemale' id="editfFemaleHidden" value="1">
+							</label>
+						</div>
+						<div id="sexTip"></div>
+					</div>
+					<div class="row margin-bottom">
+						<div class="col-md-2 col-md-offset-5">
+							<h4 class="box-title">详细信息</h4>
+						</div>
+					</div>
+					<div class="col-md-5 col-md-push-1">
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">小结标题</span>
+							<input type="text" class="form-control" name="examItemConclusionTitle" id="editExamItemConclusionTitle">
+						</div>
+						<div id="editExamItemConclusionTitleTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">小结级别</span>
+							<input type="text" class="form-control" name="examItemConclusionLevel" id="editExamItemConclusionLevel">
+						</div>
+						<div id="editExamItemConclusionLevelTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">值单位</span>
+							<input type="text" class="form-control" name="examItemValueUnit" id="editExamItemValueUnit">
+						</div>
+						<div id="editExamItemValueUnitTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">数值型增量</span>
+							<input type="text" class="form-control" name="examItemIncrement" id="editExamItemIncrement">
+						</div>
+						<div id="editExamItemIncrementTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">应用范围</span>
+							<input type="text" class="form-control" name="fUseAppMaxMin" id="editfUseAppMaxMin">
+						</div>
+						<div id="editfUseAppMaxMinTip"></div>
+
+					</div>
+					<div class="col-md-5 col-md-push-1">
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">精度</span>
+							<input type="text" class="form-control" name="examItemNumPrecision" id="editExamItemNumPrecision">
+						</div>
+						<div id="editExamItemNumPrecisionTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">含低值</span>
+							<input type="text" class="form-control" name="fIncludeMin" id="editfIncludeMin">
+						</div>
+						<div id="editfIncludeMinTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">含高值</span>
+							<input type="text" class="form-control" name="fIncludeMax" id="editfIncludeMax">
+						</div>
+						<div id="editfIncludeMaxTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">表达式</span>
+							<input type="text" class="form-control" name="examItemExpression" id="editExamItemExpression">
+						</div>
+						<div id="editExamItemExpressionTip"></div>
+					</div>
+					<div class="row margin-bottom">
+						<div class="col-md-2 col-md-offset-5">
+							<h4 class="box-title">男性信息</h4>
+						</div>
+					</div>
+					<div class="col-md-5 col-md-push-1">
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">男性缺省值</span>
+							<input type="text" class="form-control" name="maleValueDef" id="editMaleValueDef">
+						</div>
+						<div id="editMaleValueDefTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">男性上限</span>
+							<input type="text" class="form-control" name="maleValueMax" id="editMaleValueMax">
+						</div>
+						<div id="editMaleValueMaxTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">男性下限</span>
+							<input type="text" class="form-control" name="maleValueMin" id="editMaleValueMin">
+						</div>
+						<div id="editMaleValueMinTip"></div>
+					</div>
+					<div class="col-md-5 col-md-push-1">
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">男性生命值上限</span>
+							<input type="text" class="form-control" name="maleValueSeverUp" id="editMaleValueSeverUp">
+						</div>
+						<div id="editMaleValueSeverUpTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">男性生命值下限</span>
+							<input type="text" class="form-control" name="maleValueServerDown" id="editMaleValueServerDown">
+						</div>
+						<div id="editMaleValueServerDownTip"></div>
+
+					</div>
+					<div class="row margin-bottom">
+						<div class="col-md-2 col-md-offset-5">
+							<h4 class="box-title">女性信息</h4>
+						</div>
+					</div>
+					<div class="col-md-5 col-md-push-1">
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">女性缺省值</span>
+							<input type="text" class="form-control" name="femaleValueDef" id="editfemaleValueDef">
+						</div>
+						<div id="editfemaleValueDefTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">女性上限</span>
+							<input type="text" class="form-control" id="editfemaleValueMax" name="femaleValueMax">
+						</div>
+						<div id="editfemaleValueMaxTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">女性下限</span>
+							<input type="text" class="form-control" name="femaleValueMin" id="editfemaleValueMin">
+						</div>
+						<div id="editfemaleValueMinTip"></div>
+					</div>
+					<div class="col-md-5 col-md-push-1">
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">女性生命值上限</span>
+							<input type="text" class="form-control" name="femaleValueServerUp" id="editfemaleValueServerUp">
+						</div>
+						<div id="editfemaleValueServerUpTip"></div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">女性生命值下限</span>
+							<input type="text" class="form-control" name="femaleValueServerDown" id="editfemaleValueServerDown">
+						</div>
+						<div id="editfemaleValueServerDownTip"></div>
+					</div>
+					<div class="col-md-10 col-md-push-1">
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">备注</span>
+							<input type="text" class="form-control" name="examItemNote" id="editExamItemNote">
+						</div>
+						<div id="editExamItemNoteTip"></div>
+					</div>
+					<div class="row margin-bottom">
+						<div class="col-md-2 col-md-offset-6">
+							<div class="row">
+								<div class="input-group">
+									<button type="submit" class="btn btn-primary" data-dismiss="modal" id="editExamItemSave">提交</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</section>
+<script src="/org_plat/js/plugins/jQuery-2.2.0.min.js"></script>
+<script src="/org_plat/js/plugins/bootstrap.min.js"></script>
+<script src="/org_plat/js/plugins/formValidator-4.0.1.js"></script>
+<script src="/org_plat/js/plugins/formValidatorRegex.js"></script>
+<script>
+	//表单验证
+	$(document).ready(function() {
+			$.formValidator.initConfig({
+				submitButtonID: "editExamItemSave",
+				debug: true,
+				onSuccess: function() {
+					saveEditExamItem();
+				},
+				onError: function() {
+					alert("添加失败，具体错误，请看网页上的提示！")
+				}
+			});
+		})
+		//提交表单
+	$('#editExamItemSave').on('click', function() {
+		checkEditExamItemName();
+		checkEditExamItemNameAbr();
+		checkEditExamItemNameEng();
+		checkEditExamItemNamePrn();
+		checkEditExamItemNameEngAbr();
+		checkEditExamItemCode();
+		checkEditExamItemTypeId();
+		checkEditExamItemValueType();
+		checkEditSex();
+		checkEditExamItemConclusionTitle();
+		checkEditExamItemConclusionLevel();
+		checkEditExamItemValueUnit();
+		checkEditExamItemIncrement();
+		checkEditfUseAppMaxMin();
+		checkEditExamItemNumPrecision();
+		checkEditfIncludeMin();
+		checkEditfIncludeMax();
+		checkEditExamItemExpression();
+		checkEditMaleValueDef();
+		checkEditMaleValueMin();
+		checkEditMaleValueMax();
+		checkEditMaleValueServerDown();
+		checkEditMaleValueSeverUp();
+		checkEditfemaleValueDef();
+		checkEditfemaleValueMin();
+		checkEditfemaleValueMax();
+		checkEditfemaleValueServerUp();
+		checkEditExamItemNote();
+	})
+
+	//体检项名称
+	function checkEditExamItemName() {
+		$("#editExamItemName").formValidator({
+			onShow: "请输入2-10字符的体检项名称!",
+			onFocus: "请输入2-10字符的体检项名称!"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "你输入的体检项名称格式错误,请确认!"
+		})
+	}
+	//体检项简称
+	function checkEditExamItemNameAbr() {
+		$("#editExamItemNameAbr").formValidator({
+			onShow: "请输入2-10字符的体检项简称!",
+			onFocus: "请输入2-10字符的体检项简称!"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "你输入的体检项简称格式错误,请确认!"
+		})
+	}
+	//英文名称
+	function checkEditExamItemNameEng() {
+		$("#editExamItemNameEng").formValidator({
+			onShow: "请输入50字符以内的英文字母!",
+			onFocus: "请输入50字符以内的英文字母!"
+		}).inputValidator({
+			min: 1,
+			max:20,
+			onError: "体检项英文名格式不正确!"
+		}).regexValidator({
+			regExp: "letter",
+			dataType: "enum",
+			onError: "体检项英文名格式不正确!"
+		})
+	}
+	//打印名称
+	function checkEditExamItemNamePrn() {
+		$("#editExamItemNamePrn").formValidator({
+			onShow: "请输入2-10字符的体检项打印名称!",
+			onFocus: "请输入2-10字符的体检项打印名称!"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "你输入的体检项打印名称格式错误,请确认!"
+		})
+	}
+	//英文名称缩写	
+	function checkEditExamItemNameEngAbr() {
+		$("#editExamItemNameEngAbr").formValidator({
+			onShow: "请输入2-8字符的体检项英文名称缩写!",
+			onFocus: "请输入2-8字符的体检项英文名称缩写!"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "你输入的体检项英文名称缩写格式错误,请确认!"
+		}).regexValidator({
+			regExp: "letter",
+			dataType: "enum",
+			onError: "你输入的体检项英文名称缩写格式错误,请确认!"
+		})
+	}
+	//项目代码
+	function checkEditExamItemCode() {
+		$("#editExamItemCode").formValidator({
+			onShow: "请输入2-8位的体检项代码!",
+			onFocus: "请输入2-8位的体检项代码!"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "你输入的体检项代码格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的体检项代码格式错误,请确认!"
+		})
+	}
+	//项目类型
+	function checkEditExamItemTypeId() {
+		$('#editExamItemTypeId').formValidator({
+			onShow: "请选择项目类型!",
+			onFocus: "请选择项目类型!",
+			onCorrect: "输入正确!"
+		}).inputValidator({
+			min: 1,
+			onError: "你还没有选择项目类型!"
+		})
+//		if($('#editExamItemTypeId option:selected').val() == '-1') {
+//			$('#editExamItemTypeIdError').html('').removeClass('onError');
+//		} else {
+//			$('#editExamItemTypeIdError').html('请选择套餐类型!').addClass('onError');
+//			return true;
+//		}
+	}
+	//值类型
+	function checkEditExamItemValueType() {
+		$("#editExamItemValueType").formValidator({
+			onShow: "请输入1-8字符的值类型!",
+			onFocus: "请输入1-8字符的值类型!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的值类型格式错误,请确认!"
+		})
+	}
+	//性别
+	function checkEditSex() {
+		$(":checkbox[name='sex']").formValidator({
+			tipID: "sexTip",
+			onShow: "请至少选择一个性别!",
+			onFocus: "请至少选择一个性别!",
+			onCorrect: "已选择"
+		}).inputValidator({
+			min: 1,
+			onError: "请至少选择一个性别!"
+		});
+		
+//		if($('#editfMale').is(':checked') == false && $('#editfFemale').is(':checked') == false) {
+//			$('#sexError').html('请选择适用性别！').addClass('onError');
+//			return true;
+//		} else {
+//			$('#sexError').html('').removeClass('onError');
+//		}
+	}
+	//小结标题
+	function checkEditExamItemConclusionTitle() {
+		$("#editExamItemConclusionTitle").formValidator({
+			onShow: "请输入2-10字符小结标题!",
+			onFocus: "请输入2-10字符小结标题!"
+		}).inputValidator({
+			min: 2,
+			max: 10,
+			onError: "你输入的小结标题格式错误,请确认!"
+		})
+	}
+	//小结级别
+	function checkEditExamItemConclusionLevel() {
+		$("#editExamItemConclusionLevel").formValidator({
+			onShow: "请输入1-8位小结级别!",
+			onFocus: "请输入1-8位小结级别!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的小结级别格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的小结级别格式错误,请确认!"
+		})
+	}
+	//值单位
+	function checkEditExamItemValueUnit() {
+		$("#editExamItemValueUnit").formValidator({
+			onShow: "请输入1-8字符的值单位!",
+			onFocus: "请输入1-8字符的值单位!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的值单位格式错误,请确认!"
+		})
+	}
+	//数值型增量
+	function checkEditExamItemIncrement() {
+		$("#editExamItemIncrement").formValidator({
+			onShow: "请输入1-8位数值型增量!",
+			onFocus: "请输入1-8位数值型增量!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的数值型增量格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的数值型增量格式错误,请确认!"
+		})
+	}
+	//应用范围
+	function checkEditfUseAppMaxMin() {
+		$("#editfUseAppMaxMin").formValidator({
+			onShow: "请输入2-8字符应用范围!",
+			onFocus: "请输入2-8字符应用范围!"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "你输入的应用范围格式错误,请确认!"
+		})
+	}
+	//精度
+	function checkEditExamItemNumPrecision() {
+		$("#editExamItemNumPrecision").formValidator({
+			onShow: "请输入1-8位精度值!",
+			onFocus: "请输入1-8位精度值!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的精度格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的精度格式错误,请确认!"
+		})
+	}
+	//含低值
+	function checkEditfIncludeMin() {
+		$("#editfIncludeMin").formValidator({
+			onShow: "请输入1-8位含低值!",
+			onFocus: "请输入1-8位含低值!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的含低值格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的含低值格式错误,请确认!"
+		})
+	}
+	//含高值
+	function checkEditfIncludeMax() {
+		$("#editfIncludeMax").formValidator({
+			onShow: "请输入1-8位含高值!",
+			onFocus: "请输入1-8位含高值!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的含高值格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的含高值格式错误,请确认!"
+		})
+	}
+	//表达式
+	function checkEditExamItemExpression() {
+		$("#editExamItemExpression").formValidator({
+			onShow: "请输入表达式!",
+			onFocus: "请输入表达式!"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "你输入的表达式格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的表达式格式错误,请确认!"
+		})
+	}
+	//男性缺省值
+	function checkEditMaleValueDef() {
+		$("#editMaleValueDef").formValidator({
+			onShow: "请输入1-8位男性缺省值!",
+			onFocus: "请输入1-8位男性缺省值!"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "你输入的男性缺省值格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的男性缺省值格式错误,请确认!"
+		})
+	}
+	//男性下限
+	function checkEditMaleValueMin() {
+		$("#editMaleValueMin").formValidator({
+			onShow: "请输入1-8位男性下限值!",
+			onFocus: "请输入1-8位男性下限值!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的男性下限值格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的男性下限值格式错误,请确认!"
+		})
+	}
+	//男性上限
+	function checkEditMaleValueMax() {
+		$("#editMaleValueMax").formValidator({
+			onShow: "请输入1-8位男性上限值!",
+			onFocus: "请输入1-8位男性上限值!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的男性上限值格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的男性上限值格式错误,请确认!"
+		})
+	}
+	//男性生命值下限
+	function checkEditMaleValueServerDown() {
+		$("#editMaleValueServerDown").formValidator({
+			onShow: "请输入1-8位男性生命值下限值!",
+			onFocus: "请输入1-8位男性生命值下限值!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的男性生命值下限值格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的男性生命值下限值格式错误,请确认!"
+		})
+	}
+	//男性生命值上限
+	function checkEditMaleValueSeverUp() {
+		$("#editMaleValueSeverUp").formValidator({
+			onShow: "请输入1-8位男性生命值上限值!",
+			onFocus: "请输入1-8位男性生命值上限值!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的男性生命值上限值错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的男性生命值上限值错误,请确认!"
+		})
+	}
+	//女性缺省值
+	function checkEditfemaleValueDef() {
+		$("#editfemaleValueDef").formValidator({
+			onShow: "请输入1-8位女性缺省值!",
+			onFocus: "请输入1-8位女性缺省值!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的女性缺省值格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的女性缺省值格式错误,请确认!"
+		})
+	}
+	//女性下限
+	function checkEditfemaleValueMin() {
+		$("#editfemaleValueMin").formValidator({
+			onShow: "请输入1-8位女性下限值!",
+			onFocus: "请输入1-8位女性下限值!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的女性下限值格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的女性下限值格式错误,请确认!"
+		})
+	}
+	//女性上限
+	function checkEditfemaleValueMax() {
+		$("#editfemaleValueMax").formValidator({
+			onShow: "请输入1-8位女性上限值!",
+			onFocus: "请输入1-8位女性上限值!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的女性上限值格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的女性上限值格式错误,请确认!"
+		})
+	}
+	//女性生命值下限
+	function checkEditfemaleValueServerDown() {
+		$("#editfemaleValueServerDown").formValidator({
+			onShow: "请输入1-8位女性生命值下限值!",
+			onFocus: "请输入1-8位女性生命值下限值!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的女性生命值下限值格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的女性生命值下限值格式错误,请确认!"
+		})
+	}
+	//女性生命值上限
+	function checkEditfemaleValueServerUp() {
+		$("#editfemaleValueServerUp").formValidator({
+			onShow: "请输入1-8位女性生命值上限值!",
+			onFocus: "请输入1-8位女性生命值上限值!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "你输入的女性生命值上限值格式错误,请确认!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "你输入的女性生命值上限值格式错误,请确认!"
+		})
+	}
+	//备注
+	function checkEditExamItemNote() {
+		$("#editExamItemNote").formValidator({
+			onShow: "请输入50字以内备注!",
+			onFocus: "请输入50字以内备注!"
+		}).inputValidator({
+			min: 1,
+			max: 50,
+			onError: "你输入的备注超出长度,请确认!"
+		})
+	}
+
+	var examItemId = window.location.href.split('=')[1];
+	$('#editExamItemHid').val(examItemId);
+	var param = {
+		"orgExamItemId": examItemId
+	};
+	var otype = "get";
+	var osync = false;
+	var reqResult = httpRequest(getOrgExamItemByIdUrl, param, otype, osync);
+	if(reqResult.result == 0) {
+//		var editExamItemName = $('#editExamItemName').val(reqResult.data.examItemName);
+//		var editExamItemNameAbr = $('#editExamItemNameAbr').val(reqResult.data.examItemNameAbr);
+//		var editExamItemNamePrn = $('#editExamItemNamePrn').val(reqResult.data.examItemNamePrn);
+//		var editExamItemNameEng = $('#editExamItemNameEng').val(reqResult.data.examItemNameEng);
+//		var editExamItemNameEngAbr = $('#editExamItemNameEngAbr').val(reqResult.data.examItemNameEngAbr);
+//		var editExamItemCode = $('#editExamItemCode').val(reqResult.data.examItemCode);
+//		var editExamItemTypeName = $('#editExamItemTypeName').val(reqResult.data.examItemTypeName);
+//		var editExamItemValueType = $('#editExamItemValueType').val(reqResult.data.examItemValueType);
+//		var editExamItemValueUnit = $('#editExamItemValueUnit').val(reqResult.data.examItemValueUnit);
+//		var editExamItemConclusionLevel = $('#editExamItemConclusionLevel').val(reqResult.data.examItemConclusionLevel);
+//		var editExamItemConclusionTitle = $('#editExamItemConclusionTitle').val(reqResult.data.examItemConclusionTitle);
+//		var editExamItemIncrement = $('#editExamItemIncrement').val(reqResult.data.examItemIncrement);
+//		var editExamItemNumPrecision = $('#editExamItemNumPrecision').val(reqResult.data.examItemNumPrecision);
+//		var editfUseAppMaxMin = $('#editfUseAppMaxMin').val(reqResult.data.fUseAppMaxMin);
+//		var editfIncludeMin = $('#editfIncludeMin').val(reqResult.data.fIncludeMin);
+//		var editfIncludeMax = $('#editfIncludeMax').val(reqResult.data.fIncludeMax);
+//		var editExamItemExpression = $('#editExamItemExpression').val(reqResult.data.examItemExpression);
+//		var editMaleValueDef = $('#editMaleValueDef').val(reqResult.data.maleValueDef);
+//		var editMaleValueMin = $('#editMaleValueMin').val(reqResult.data.maleValueMin);
+//		var editMaleValueMax = $('#editMaleValueMax').val(reqResult.data.maleValueMax);
+//		var editMaleValueServerDown = $('#editMaleValueServerDown').val(reqResult.data.maleValueServerDown);
+//		var editMaleValueSeverUp = $('#editMaleValueSeverUp').val(reqResult.data.maleValueSeverUp);
+//		var editfemaleValueDef = $('#editfemaleValueDef').val(reqResult.data.femaleValueDef);
+//		var editfemaleValueMin = $('#editfemaleValueMin').val(reqResult.data.femaleValueMin);
+//		var femaleValueMax = $('#editfemaleValueMax').val(reqResult.data.femaleValueMax);
+//		var editfemaleValueServerDown = $('#editfemaleValueServerDown').val(reqResult.data.femaleValueServerDown);
+//		var editfemaleValueServerUp = $('#editfemaleValueServerUp').val(reqResult.data.femaleValueServerUp);
+//		var editExamItemNote = $('#editExamItemNote').val(reqResult.data.examItemNote);
+		//			var editSex = $('#editSex input');
+		//初始化体检机构
+		getExamItemType();
+		$('#editExamItemTypeId').val(reqResult.data.examItemTypeId);
+		$('#editExamItemNameAbr').val(reqResult.data.examItemNameAbr);
+		$('#editExamItemNamePrn').val(reqResult.data.examItemNamePrn);
+		$('#editExamItemNameEng').val(reqResult.data.examItemNameEng);
+		$('#editExamItemNameEngAbr').val(reqResult.data.examItemNameEngAbr);
+		$('#editExamItemCode').val(reqResult.data.examItemCode);
+		$('#editExamItemValueType').val(reqResult.data.examItemValueType);
+		$('#editExamItemValueUnit').val(reqResult.data.examItemValueUnit);
+		$('#editExamItemConclusionLevel').val(reqResult.data.examItemConclusionLevel);
+		$('#editExamItemConclusionTitle').val(reqResult.data.examItemConclusionTitle);
+		$('#editExamItemIncrement').val(reqResult.data.examItemIncrement);
+		$('#editExamItemNumPrecision').val(reqResult.data.examItemNumPrecision);
+		$('#editfUseAppMaxMin').val(reqResult.data.fUseAppMaxMin);
+		$('#editfIncludeMin').val(reqResult.data.fIncludeMin);
+		$('#editfIncludeMax').val(reqResult.data.fIncludeMax);
+		$('#editExamItemExpression').val(reqResult.data.examItemExpression);
+		$('#editMaleValueDef').val(reqResult.data.maleValueDef);
+		$('#editMaleValueMin').val(reqResult.data.maleValueMin);
+		$('#editMaleValueMax').val(reqResult.data.maleValueMax);
+		$('#editMaleValueServerDown').val(reqResult.data.maleValueServerDown);
+		$('#editMaleValueSeverUp').val(reqResult.data.maleValueSeverUp);
+		$('#editfemaleValueDef').val(reqResult.data.femaleValueDef);
+		$('#editfemaleValueMin').val(reqResult.data.femaleValueMin);
+		$('#editfemaleValueMax').val(reqResult.data.femaleValueMax);
+		$('#editfemaleValueServerDown').val(reqResult.data.femaleValueServerDown);
+		$('#editfemaleValueServerUp').val(reqResult.data.femaleValueServerUp);
+		$('#editExamItemNote').val(reqResult.data.examItemNote);
+		(reqResult.data.fMale === 0) ? $("#editfMale").attr('checked', 'checked'): null;
+		(reqResult.data.fFemale === 0) ? $("#editfFemale").attr('checked', 'checked'): null;
+
+	} else {
+		alert(reqResult.message);
+	}
+	//		return false;
+	//  })
+	//  编辑保存信息
+	//	$('#editExamItemSave').on('click', function() {
+	function saveEditExamItem() {
+		//		var editExamItemName = $('#editExamItemName').val();
+		//		var editExamItemNameAbr = $('#editExamItemNameAbr').val();
+		//		var editExamItemNamePrn = $('#editExamItemNamePrn').val();
+		//		var editExamItemNameEng = $('#editExamItemNameEng').val();
+		//		var editExamItemNameEngAbr = $('#editExamItemNameEngAbr').val();
+		//		var editExamItemCode = $('#editExamItemCode').val();
+		//		var editExamItemTypeId = $('#editExamItemTypeId').val();
+		//		var editExamItemValueType = $('#editExamItemValueType').val();
+		//		var editExamItemValueUnit = $('#editExamItemValueUnit').val();
+		//		var editExamItemConclusionLevel = $('#editExamItemConclusionLevel').val();
+		//		var editExamItemConclusionTitle = $('#editExamItemConclusionTitle').val();
+		//		var editExamItemIncrement = $('#editExamItemIncrement').val();
+		//		var editExamItemNumPrecision = $('#editExamItemNumPrecision').val();
+		//		var editfUseAppMaxMin = $('#editfUseAppMaxMin').val();
+		//		var editfIncludeMin = $('#editfIncludeMin').val();
+		//		var editfIncludeMax = $('#editfIncludeMax').val();
+		//		var editExamItemExpression = $('#editExamItemExpression').val();
+		//		var editMaleValueDef = $('#editMaleValueDef').val();
+		//		var editMaleValueMin = $('#editMaleValueMin').val();
+		//		var editMaleValueMax = $('#editMaleValueMax').val();
+		//		var editMaleValueServerDown = $('#editMaleValueServerDown').val();
+		//		var editMaleValueSeverUp = $('#editMaleValueSeverUp').val();
+		//		var editfemaleValueDef = $('#editfemaleValueDef').val();
+		//		var editfemaleValueMin = $('#editfemaleValueMin').val();
+		//		var femaleValueMax = $('#editfemaleValueMax').val();
+		//		var editfemaleValueServerDown = $('#editfemaleValueServerDown').val();
+		//		var editfemaleValueServerUp = $('#editfemaleValueServerUp').val();
+		//		var editExamItemNote = $('#editExamItemNote').val();
+		if($('#editfMale').is(':checked')) {
+			$("#editfMaleHidden").val("0");
+		}
+		if($('#editfFemale').is(':checked')) {
+			$("#editfFemaleHidden").val("0");
+		}
+		//		if(editExamItemName == '' || editExamItemNameAbr == '' || editExamItemNamePrn == '' || editExamItemNameEng == '' || editExamItemNameEngAbr == '' ||
+		//			editExamItemCode == '' || editExamItemTypeId == '' || editExamItemValueType == '' || editExamItemValueUnit == '' ||
+		//			editExamItemConclusionLevel == '' || editExamItemConclusionTitle == '' || editExamItemIncrement == '' || editExamItemNumPrecision == '' ||
+		//			editfUseAppMaxMin == '' || editfIncludeMin == '' || editfIncludeMax == '' || editExamItemExpression == '' ||
+		//			editMaleValueDef == '' || editMaleValueMin == '' || editMaleValueMax == '' || editMaleValueServerDown == '' || editMaleValueSeverUp == '' ||
+		//			editfemaleValueDef == '' || editfemaleValueMin == '' || femaleValueMax == '' || editfemaleValueServerDown == '' || editfemaleValueServerUp == '' ||
+		//			editExamItemNote == '' || editSex == '') {
+		//			alert('请输入完整信息！');
+		//			return false;
+		//		} else {
+		var param = $('#editExamItemForm').serialize();
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(updateOrgExamItemUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			alert('编辑成功!');
+			loadpage("/org_plat/pages/examination/check/examItem.html");
+			return false;
+		} else {
+			alert(reqResult.message);
+		}
+		//		}
+	}
+</script>

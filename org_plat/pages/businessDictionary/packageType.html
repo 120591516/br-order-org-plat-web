@@ -1,0 +1,570 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<div class="margin-bottom">
+		<h2><small>套餐类型</small></h2>
+	</div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">字典维护</a>
+		</li>
+		<li class="active">套餐类型</li>
+	</ol>
+</section>
+<!-- /Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+					<div class="row">
+						<div class="col-md-8">
+							<h3 class="box-title col-md-11 margin">套餐类型列表</h3>
+						</div>
+						<div class="col-md-4">
+							<div class="row">
+								<div class="col-md-4 pull-right">
+									<a href="#add_packageType_modal" data-toggle="modal" class="btn btn-default margin" id="addPackageBut">添加</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>编辑</th>
+								<th>套餐名称</th>
+								<th>套餐英文名称</th>
+								<th>套餐编码</th>
+								<th>套餐备注</th>
+								<th>创建时间</th>
+								<th>套餐状态</th>
+							</tr>
+							<tr class="warning no-result">
+								<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+							</tr>
+						</thead>
+						<tbody id="packageType_tbody_main">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /Main content -->
+<!--模态框-->
+<div class="modal fade" id="add_packageType_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">添加套餐类型</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" method="post" novalidate="novalidate" id='add_packageTypeInfo'>
+					<div class="input-group">
+						<span class="input-group-addon">套餐名称</span>
+						<input type="text" id="add_examTypeName" class="form-control" name="examTypeName" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<div id="add_examTypeNameTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon">套餐英文名称</span>
+						<input type="text" id="add_examTypeNameEng" class="form-control" name="examTypeNameEng" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<div id="add_examTypeNameEngTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon">套餐编码</span>
+						<input type="text" id="add_examTypeCode" class="form-control" name="examTypeCode" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<div id="add_examTypeCodeTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon">套餐备注</span>
+						<input type="text" id="add_examTypeNote" class="form-control" name="examTypeNote" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<div id="add_examTypeNoteTip"></div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="add_packageType_btn">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框查看-->
+<div class="modal fade" id="check_packageType_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">查看套餐类型</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="check_packageTypeInfo">
+					<div class="input-group">
+						<span class="input-group-addon">套餐名称</span>
+						<input type="text" id="check_examTypeName" class="form-control" name="examTypeName" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">套餐英文名称</span>
+						<input type="text" id="check_examTypeNameEng" class="form-control" name="examTypeNameEng" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">套餐编码</span>
+						<input type="text" id="check_examTypeCode" class="form-control" name="examTypeCode" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">套餐备注</span>
+						<input type="text" id="check_examTypeNote" class="form-control" name="examTypeNote" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">创建时间</span>
+						<input type="text" id="check_examTypeCreateTime" class="form-control" name="examTypeCreateTime" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group" id='check_examTypeStatus'>
+						<span class="input-group-addon">套餐状 态</span>
+						<input type="radio" name='examTypeStatus' value="0" class="userlist_statusinput_vertical" disabled="disabled" />启用
+						<input type="radio" name='examTypeStatus' value="1" class="userlist_statusinput_vertical" disabled="disabled" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框修改-->
+<div class="modal fade" id="edit_packageType_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel_edit">编辑套餐类型</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="edit_packageTypeInfo">
+					<input type="hidden" name="examTypeId" id="edit_examTypeId" value="" />
+					<div class="input-group">
+						<span class="input-group-addon">套餐名称</span>
+						<input type="text" id="edit_examTypeName" class="form-control" name="examTypeName" aria-describedby="basic-addon1">
+					</div>
+					<div id="edit_examTypeNameTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon">套餐英文名称</span>
+						<input type="text" id="edit_examTypeNameEng" class="form-control" name="examTypeNameEng" aria-describedby="basic-addon1">
+					</div>
+					<div id="edit_examTypeNameEngTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon">套餐编码</span>
+						<input type="text" id="edit_examTypeCode" class="form-control" name="examTypeCode" aria-describedby="basic-addon1">
+					</div>
+					<div id="edit_examTypeCodeTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon">套餐备注</span>
+						<input type="text" id="edit_examTypeNote" class="form-control" name="examTypeNote" aria-describedby="basic-addon1">
+					</div>
+					<div id="edit_examTypeNoteTip"></div>
+					<div class="input-group" id='edit_examTypeStatus'>
+						<span class="input-group-addon">等级状 态</span>
+						<input type="radio" name='examTypeStatus' value="0" class="userlist_statusinput_vertical" />启用
+						<input type="radio" name='examTypeStatus' value="1" class="userlist_statusinput_vertical" />禁用
+					</div>
+					<div id="edit_examTypeStatusTip"></div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id='edit_packageType_btn'>保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/org_plat/js/plugins/extendPagination.js"></script>
+<script src="/org_plat/js/plugins/formValidator-4.0.1.js"></script>
+<script src="/org_plat/js/plugins/formValidatorRegex.js"></script>
+<script>
+	//添加套餐校验
+	$('#addPackageBut').on('click', function() {
+		$.formValidator.initConfig({
+			submitButtonID: "add_packageType_btn",
+			debug: true,
+			onSuccess: function() {
+				add_packageTypeInfo();
+			},
+			onError: function() {
+				alert("添加失败，请根据页面提示重新添加!")
+			},
+		});
+		//套餐名称
+		$("#add_examTypeName").formValidator({
+			onShow: "请输入套餐名称!",
+			onFocus: "套餐名称在十个字以内!",
+			onCorrect: "输入正确!"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: '^[\u0391-\uFFE5]+$',
+			onError: "只能输入文字,请重新输入!"
+		});
+		//英文名称
+		$("#add_examTypeNameEng").formValidator({
+			onShow: "请输入套餐英文名称",
+			onFocus: "英文名称由26个大小写字母组成!",
+			onCorrect: "输入正确"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: '^[ A-Za-z]*$',
+			onError: "只能输入字母,请重新输入!"
+		});
+		//套餐编码
+		$("#add_examTypeCode").formValidator({
+			onShow: "请输入套餐编码",
+			onFocus: "只能输入数字!",
+			onCorrect: "输入正确"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "只能输入数字，请重新输入!"
+		});
+		//备注
+		$("#add_examTypeNote").formValidator({
+			onShow: "请输入备注!",
+			onFocus: "备注在五个字以内!",
+			onCorrect: "输入正确!"
+		}).inputValidator({
+			min: 2,
+			max: 100,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: '^[\u0391-\uFFE5]+$',
+			onError: "只能输入文字,请重新输入!"
+		});
+	})
+
+	//编辑套餐校验
+	function checkEditPackage() {
+		$.formValidator.initConfig({
+			submitButtonID: "edit_packageType_btn",
+			debug: true,
+			onSuccess: function() {
+				editSave();
+			},
+			onError: function() {
+				alert("编辑失败，请根据页面提示重新编辑啊!")
+			},
+		});
+		//套餐名称
+		$('#edit_examTypeName').on('change', function() {
+				$("#edit_examTypeName").formValidator({
+					onShow: "请输入套餐名称!",
+					onFocus: "套餐名称在十个字以内!",
+					onCorrect: "输入正确!"
+				}).inputValidator({
+					min: 2,
+					max: 20,
+					onError: "内容长度错误,请重新输入!"
+				}).regexValidator({
+					regExp: '^[\u0391-\uFFE5]+$',
+					onError: "只能输入文字,请重新输入!"
+				});
+			})
+			//套餐英文名称
+		$('#edit_examTypeNameEng').on('change', function() {
+				$("#edit_examTypeNameEng").formValidator({
+					onShow: "请输入套餐英文名称",
+					onFocus: "英文名称由26个大小写字母组成!",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 2,
+					max: 20,
+					onError: "内容长度错误,请重新输入!"
+				}).regexValidator({
+					regExp: '^[ A-Za-z]*$',
+					onError: "只能输入字母,请重新输入!"
+				});
+			})
+			//套餐编码
+		$('#edit_examTypeCode').on('change', function() {
+				$("#edit_examTypeCode").formValidator({
+					onShow: "请输入套餐编码",
+					onFocus: "只能输入数字!",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 2,
+					max: 20,
+					onError: "内容长度错误,请重新输入!"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "只能输入数字，请重新输入!"
+				});
+			})
+			//备注
+		$('#edit_examTypeNote').on('change', function() {
+			$("#edit_examTypeNote").formValidator({
+				onShow: "请输入备注!",
+				onFocus: "备注在五个字以内!",
+				onCorrect: "输入正确!"
+			}).inputValidator({
+				min: 2,
+				max: 100,
+				onError: "内容长度错误,请重新输入!"
+			}).regexValidator({
+				regExp: '^[\u0391-\uFFE5]+$',
+				onError: "只能输入文字,请重新输入!"
+			});
+		})
+	}
+
+	//  分页
+	init_page();
+
+	function init_page() {
+		page_curr = 1;
+		$('#packageType_tbody_main').empty();
+		//1.请求后端信息并展示
+		packageType();
+	}
+	//  初始化分页信息
+	$('#callBackPager').extendPagination({
+		totalCount: total_count,
+		showCount: count_curr,
+		limit: limit,
+		callback: function(curr, limit, totalCount) {
+			page_curr = curr;
+			total_count = totalCount;
+			packageType();
+		}
+	});
+
+	function packageType() {
+		var otype = "get";
+		var osync = false;
+		var param = {
+			"page": page_curr,
+			"rows": count_curr
+		}
+		var reqResult = httpRequest(packageType_getOrgExamSuiteTypeList_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			total_count = reqResult.data.total;
+			createTable(page_curr, limit, total_count, reqResult);
+		}
+		return false;
+	}
+	//		套餐列表展示
+	function createTable(currPage, limit, total, dataBack) {
+		$('#packageType_tbody_main').empty();
+		var showNum = limit;
+		if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+		for(var i = 0; i < showNum; i++) {
+			var datal = dataBack.data.list;
+			for(var i = 0; i < showNum; i++) {
+				var Tbody = document.getElementById('packageType_tbody_main');
+				var lRow = Tbody.insertRow(); //创建行
+				var operationList = dataBack.operationList; //获取操作类型
+				var operationListAdd = document.getElementById('addPackageBut'); //获取添加按钮
+				//				判断操作类型
+				(operationList.organizationUser_insert === false) ? operationListAdd.style.display = 'none': operationListAdd.style.display = ''; //1为添加
+				var examTypeStatus = (datal[i].examTypeStatus === 0) ? "启用" : "禁用";
+				//创建列
+				var firstColumn = lRow.insertCell();
+				var secondColumn = lRow.insertCell();
+				var thirdColumn = lRow.insertCell();
+				var forthColumn = lRow.insertCell();
+				var fifthColumn = lRow.insertCell();
+				var sixColumn = lRow.insertCell();
+				var sevenColumn = lRow.insertCell();
+				firstColumn.setAttribute('examTypeId', datal[i].examTypeId); //给td添加属性
+				//添加第一列内容
+				//创建查看标签
+				var aCheck = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationList.organizationUser_detail === true) ? iElement.className = "fa fa-eye": ''; //4为查看
+				aCheck.appendChild(iElement);
+				aCheck.setAttribute("href", "#check_packageType_modal");
+				aCheck.setAttribute("data-toggle", "modal");
+				aCheck.style.marginLeft = "5px";
+				aCheck.onclick = function() {
+					check_packageTypeInfo(this)
+				};
+				firstColumn.appendChild(aCheck);
+				//创建编辑标签
+				var aEdit = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationList.organizationUser_update === true) ? iElement.className = "fa fa-pencil": ''; //3为更新
+				aEdit.appendChild(iElement);
+				aEdit.setAttribute("href", "#edit_packageType_modal");
+				aEdit.setAttribute("data-toggle", "modal");
+				aEdit.style.marginLeft = "5px";
+				aEdit.onclick = function() {
+					edit_packageTypeInfo(this)
+				};
+				firstColumn.appendChild(aEdit);
+				//创建删除标签
+				var aDelete = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationList.organizationUser_delect === true) ? iElement.className = "fa fa-trash-o": ''; //2为删除
+				iElement.className = "fa fa-trash-o";
+				aDelete.appendChild(iElement);
+				aDelete.style.marginLeft = "5px";
+				aDelete.onclick = function() {
+					del_packageTypeInfo(this)
+				};
+				firstColumn.appendChild(aDelete);
+				//添加第二列内容	
+				secondColumn.innerText = datal[i].examTypeName;
+				//添加第三列内容	
+				thirdColumn.innerText = datal[i].examTypeNameEng;
+				//添加第四列内容	
+				forthColumn.innerText = datal[i].examTypeCode;
+				//添加第二列内容	
+				if(datal[i].examTypeNote.length>10&&datal[i].examTypeNote!=''){
+					fifthColumn.innerText = datal[i].examTypeNote.substring(0,9)+'...';
+				}else{
+					fifthColumn.innerText = datal[i].examTypeNote;
+				}
+				//添加第三列内容	
+				sixColumn.innerText = getLocalTime(datal[i].examTypeCreateTime);
+				//添加第四列内容	
+				sevenColumn.innerText = examTypeStatus;
+			}
+			return false;
+		}
+	}
+
+	function add_packageTypeInfo() {
+		var add_examTypeName = $('#add_examTypeName').val();
+		var add_examTypeNameEng = $('#add_examTypeNameEng').val();
+		var add_examTypeCode = $('#add_examTypeCode').val();
+		var add_examTypeNote = $('#add_examTypeNote').val();
+		if(add_examTypeName == '' || add_examTypeNameEng == '' || add_examTypeCode == '' || add_examTypeNote == '') {
+			alert('请输入完整信息后添加！');
+			return false;
+		} else {
+			var param = $('#add_packageTypeInfo').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(packageType_addOrgExamSuiteType_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('添加成功！');
+				window.location.reload();
+			} else {
+				alert("error");
+			}
+		}
+	}
+	//	删除套餐信息
+	function del_packageTypeInfo(del_li) {
+		if(confirm("确认删除该套餐吗？")) {
+			var del_blood_id = $(del_li).parent().attr("examTypeId");
+			var param = {
+				"examSuiteTypeId": del_blood_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(packageType_deleteExamSuiteType_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("删除成功");
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+	//	查看套餐信息
+	function check_packageTypeInfo(check) {
+		var check_bloodid = $(check).parent().attr("examTypeId");
+		var param = {
+			"idExamSuiteType": check_bloodid
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(packageType_getExamSuiteTypeById_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#check_examTypeName').val(reqResult.data.examTypeName);
+			$('#check_examTypeNameEng').val(reqResult.data.examTypeNameEng);
+			$('#check_examTypeCode').val(reqResult.data.examTypeCode);
+			$('#check_examTypeNote').val(reqResult.data.examTypeNote);
+			$('#check_examTypeCreateTime').val(getLocalTime(reqResult.data.examTypeCreateTime));
+			if(reqResult.data.examTypeStatus == 0) {
+				$('#check_examTypeStatus input')[0].checked = "checked";
+			} else {
+				$('#check_examTypeStatus input')[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//	编辑回显套餐信息
+	function edit_packageTypeInfo(edit) {
+		checkEditPackage();
+		var edit_blood_id = $(edit).parent().attr("examTypeId");
+		var param = {
+			"idExamSuiteType": edit_blood_id
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(packageType_getExamSuiteTypeById_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#edit_examTypeId').val(reqResult.data.examTypeId);
+			$('#edit_examTypeName').val(reqResult.data.examTypeName);
+			$('#edit_examTypeNameEng').val(reqResult.data.examTypeNameEng);
+			$('#edit_examTypeCode').val(reqResult.data.examTypeCode);
+			$('#edit_examTypeNote').val(reqResult.data.examTypeNote);
+			if(reqResult.data.examTypeStatus == 0) {
+				$('#edit_examTypeStatus input')[0].checked = "checked";
+			} else {
+				$('#edit_examTypeStatus input')[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//  编辑保存信息
+	function editSave() {
+		var edit_examTypeName = $('#edit_examTypeName').val();
+		var edit_examTypeNameEng = $('#edit_examTypeNameEng').val();
+		var edit_examTypeCode = $('#edit_examTypeCode').val();
+		var edit_examTypeNote = $('#edit_examTypeNote').val();
+		if(edit_examTypeName == '' || edit_examTypeNameEng == '' || edit_examTypeNameEng == '' || edit_examTypeCode == '' || edit_examTypeNote == '') {
+			alert('请输入完整信息！');
+			return false;
+		} else {
+			var param = $('#edit_packageTypeInfo').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(packageType_updateExamSuiteType_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('编辑成功');
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+</script>

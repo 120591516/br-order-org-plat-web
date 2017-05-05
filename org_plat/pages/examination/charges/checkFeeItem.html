@@ -1,0 +1,221 @@
+<section class="content">
+	<div class="box container-fluid no-margin">
+		<div class="box-header">
+			<div class="row margin-bottom">
+				<div class="col-md-11">
+					<h3 class="box-title">查看收费项</h3>
+				</div>
+				<div class="col-md-1 text-right">
+					<div class="input-group">
+						<a onclick='loadpage("/org_plat/pages/examination/charges/feeItem.html")' class="btn btn-default">返回</a>
+					</div>
+				</div>
+			</div>
+			<div class="row margin-bottom">
+				<form class="form-group container-fluid">
+					<div class="row margin-bottom">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group">
+										<span class="input-group-addon">收费项名称</span>
+										<input type="text" class="form-control" name="examFeeItemName" id="checkExamFeeItemName" disabled="disabled">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group">
+										<span class="input-group-addon">收费项名称简称</span>
+										<input type="text" class="form-control" name="examFeeItemNameAbr" id="checkExamFeeItemNameAbr" disabled="true">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row margin-bottom">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group">
+										<span class="input-group-addon">收费项英文名称</span>
+										<input type="text" class="form-control" name="examFeeItemNameEng" id="checkExamFeeItemNameEng" disabled="true">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group">
+										<span class="input-group-addon">英文名称缩写</span>
+										<input type="text" class="form-control" name="examFeeItemNameEngAbr" id="checkExamFeeItemNameEngAbr" disabled="true">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row margin-bottom">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group">
+										<span class="input-group-addon">收费项目代码</span>
+										<input type="text" class="form-control" name="examFeeItemCode" id="checkExamFeeItemCode" disabled="true">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group">
+										<span class="input-group-addon">收费项目收费代码</span>
+										<input type="text" class="form-control" name="examFeeItemFeeCode" id="checkExamFeeItemFeeCode" disabled="true">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row margin-bottom">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group">
+										<span class="input-group-addon">门店</span>
+										<select class="form-control selectpicker" id="branch" name="organizationBranchId" disabled="disabled">
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group">
+										<span class="input-group-addon">收费项目HIS名称</span>
+										<input type="text" class="form-control" name="examFeeItemHisName" id="checkExamFeeItemHisName" disabled="true">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row margin-bottom">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group">
+										<span class="input-group-addon">上级科室</span>
+										<select class="form-control selectpicker SuperiorDepartment" id="dept" name="departmentId" disabled="disabled">
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group">
+										<span class="input-group-addon">单价</span>
+										<input type="text" class="form-control" name="examFeeItemUnitPrice" id="checkExamFeeItemUnitPrice" disabled="true">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row margin-bottom">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group">
+										<span class="input-group-addon">成本价</span>
+										<input type="text" class="form-control" name="examFeeItemCostPrice" id="checkExamFeeItemCostPrice" disabled="true">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group">
+										<span class="input-group-addon">耗材价</span>
+										<input type="text" class="form-control" name="examFeeItemMaterialPrice" id="checkExamFeeItemMaterialPrice" disabled="true">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row margin-bottom">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group">
+										<span class="input-group-addon">外送价</span>
+										<input type="text" class="form-control" name="examFeeItemCoopPrice" id="checkExamFeeItemCoopPrice" disabled="true">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group" id="checkSex">
+										<span class="input-group-addon userlist_status_right_border">适用性别</span>
+										<label class="radio-inline">
+									            <input type="checkbox" value="1" name='fMale' id="checkfMale" disabled="disabled"> 适用男
+									            <input type="hidden" name='fMale' id="editfMaleHidden" value="1">
+								            </label>
+										<label class="radio-inline">
+									            <input type="checkbox" value="1" name='fFemale' id="checkfFemale" disabled="disabled"> 适用女
+									            <input type="hidden" name='fFemale' id="editfFemaleHidden" value="1">
+								            </label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row margin-bottom">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group">
+										<span class="input-group-addon">套餐内价格</span>
+										<input type="text" class="form-control" name="examFeeItemSuitePrice" id="examFeeItemSuitePrice" disabled="true">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="input-group">
+										<span class="input-group-addon">说明</span>
+										<input type="text" class="form-control" name="note" id="checkNote" disabled="true">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<script>
+	var param = {
+		"id": getParamValue()
+	};
+	var otype = "get";
+	var osync = false;
+	var reqResult = httpRequest(getOrgExamFeeItemByIdUrl, param, otype, osync);
+	if(reqResult.result == 0) {
+		$('#checkExamFeeItemName').val(reqResult.data.examFeeItemName);
+		$('#checkExamFeeItemNameAbr').val(reqResult.data.examFeeItemNameAbr);
+		$('#checkExamFeeItemNameEng').val(reqResult.data.examFeeItemNameEng);
+		$('#checkExamFeeItemNameEngAbr').val(reqResult.data.examFeeItemNameEngAbr);
+		$('#checkExamFeeItemCode').val(reqResult.data.examFeeItemCode);
+		$('#checkExamFeeItemFeeCode').val(reqResult.data.examFeeItemFeeCode);
+		$('#checkExamFeeItemHisName').val(reqResult.data.examFeeItemHisName);
+		$('#checkExamFeeItemUnitPrice').val(reqResult.data.examFeeItemUnitPrice);
+		$('#checkExamFeeItemCostPrice').val(reqResult.data.examFeeItemCostPrice);
+		$('#checkExamFeeItemMaterialPrice').val(reqResult.data.examFeeItemMaterialPrice);
+		$('#checkExamFeeItemCoopPrice').val(reqResult.data.examFeeItemCoopPrice);
+		getBranchName("#branch");
+		$('#branch').val(reqResult.data.organizationBranchId);
+		SuperiorDepartment($('#branch').val(), '#dept');
+		$('#dept').val(reqResult.data.departmentId);
+		$('#checkNote').val(reqResult.data.note);
+		$('#examFeeItemSuitePrice').val(reqResult.data.examFeeItemSuitePrice);
+		(reqResult.data.fMale === 0) ? $("#checkfMale").attr('checked', 'checked'): null;
+		(reqResult.data.fFemale === 0) ? $("#checkfFemale").attr('checked', 'checked'): null;
+
+	} else {
+		alert(reqResult.message);
+	}
+</script>

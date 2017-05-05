@@ -1,0 +1,921 @@
+<section class="content">
+	<div class="box container-fluid no-margin">
+		<div class="box-header">
+			<div class="row margin-bottom">
+				<div class="col-md-11">
+					<h3 class="box-title">套餐编辑/添加</h3>
+				</div>
+				<div class="col-md-1 text-right">
+					<div class="input-group">
+						<a class="btn btn-default" onclick="loadpage('/org_plat/pages/package/packAge.html')">返回</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row margin-bottom">
+			<form class="form-horizontal" id="addPackInfor">
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<input id="examSuiteId" name="examSuiteId" type="text" hidden="hidden" />
+									<span class="input-group-addon">套餐名称</span>
+									<input type="text" class="form-control" id="examSuiteName" placeholder="套餐名称" name="examSuiteName" required>
+								</div>
+								<div id="examSuiteNameTip"></div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">套餐英文名称</span>
+									<input type="text" class="form-control" id="examSuiteNameEng" placeholder="套餐英文名称" name="examSuiteNameEng" required>
+								</div>
+								<div id="examSuiteNameEngTip"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">套餐输入码</span>
+									<input type="text" class="form-control" id="examSuiteInputCode" placeholder="套餐输入码" name="examSuiteInputCode" required>
+								</div>
+								<div id="examSuiteInputCodeTip"></div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">套餐代码</span>
+									<input type="text" class="form-control" id="examSuiteCode" placeholder="套餐代码" name="examSuiteCode" required>
+								</div>
+								<div id="examSuiteCodeTip"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">套餐价格</span>
+									<input type="text" class="form-control" id="examSuitePrice" placeholder="套餐价格" name="examSuitePrice" required>
+								</div>
+								<div id="examSuitePriceTip"></div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">优惠价</span>
+									<input type="text" class="form-control" id="examSuiteDiscountPrice" placeholder="优惠价" name="examSuiteDiscountPrice" required>
+								</div>
+								<div id="examSuiteDiscountPriceTip"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">套餐内价格</span>
+									<input type="text" class="form-control" id="examSuiteInPrice" placeholder="套餐内价格" name="examSuiteInPrice" required>
+								</div>
+								<div id="examSuiteInPriceTip"></div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group" id="sexs">
+									<span class="userlist_status_right_border input-group-addon">适用性别</span>
+									<label class="radio-inline">
+							         	<input type="checkbox" name="sex" value="1" id="examSuiteMale">男
+							        	<input type="hidden" name='examSuiteMale' id="male" value="1">
+						        	</label>
+									<label class="radio-inline">
+								        <input type="checkbox" name="sex" value="1"  id="examSuiteFemale">女
+								        <input type="hidden" name='examSuiteFemale' id="female" value="1">
+							        </label>
+								</div>
+								<div id="sexTip"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="form-group">
+							<span class="span-self-style col-md-1">套餐类型</span>
+							<div class="col-md-9" id="selectTypes"></div>
+							<input type="hidden" id="typeList" name="typeList" />
+							<a class="btn btn-primary pull-left" data-toggle="modal" href="#typesModal">选 择</a>
+						</div>
+						<div id="suiteError"></div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="form-group">
+							<span class="span-self-style col-md-2">高发疾病</span>
+							<div class="col-md-9" id="selectHids"></div>
+							<input type="hidden" id="highIncidenceDiseaseList" name="highIncidenceDiseaseList" />
+							<a class="btn btn-primary pull-left" data-toggle="modal" href="#HidsModal">选 择</a>
+						</div>
+						<div id="diseaseError"></div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">警告人数</span>
+									<input type="text" class="form-control" id="examSuiteWarnPeople" placeholder="警告人数" name="examSuiteWarnPeople" required>
+								</div>
+								<div id="examSuiteWarnPeopleTip"></div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">限制人数</span>
+									<input type="text" class="form-control" id="examSuiteLimitPeople" placeholder="限制人数" name="examSuiteLimitPeople" required>
+								</div>
+								<div id="examSuiteLimitPeopleTip"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">警告金额</span>
+									<input type="text" class="form-control" id="examSuiteWarnAmount" placeholder="警告金额" name="examSuiteWarnAmount" required>
+								</div>
+								<div id="examSuiteWarnAmountTip"></div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">限制金额</span>
+									<input type="text" class="form-control" id="examSuiteLimitAmount" placeholder="限制金额" name="examSuiteLimitAmount" required>
+								</div>
+								<div id="examSuiteLimitAmountTip"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-11">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="imgsError" style="color: rgb(60, 141, 188); font-family: initial; font-size: 0.2em;"></span>
+									<span class="input-group-addon">上传图片</span>
+									<div class="col-md-11">
+										<div class="file-preview img_border">
+											<div id="edit_storeimg"></div>
+											<div class="clear"></div>
+										</div>
+										<input id="add_suite_picture" class="file" type="file" name="file" multiple data-min-file-count="1">
+										<input name="orgSuiteImgs" id="imgs" hidden="hidden" />
+									</div>
+								</div>
+								<div id="imgError"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-11">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">简介</span>
+									<textarea class="form-control" name="examSuiteNote" id="examSuiteNote" rows="3" id="textarea"></textarea>
+								</div>
+								<div id="examSuiteNoteTip"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-11">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">备注</span>
+									<textarea class="form-control" name="examSuiteSummary" id="examSuiteSummary" rows="3" id="textarea"></textarea>
+								</div>
+								<div id="examSuiteSummaryTip"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="box-footer">
+			<button type="submit" class="btn btn-default"><a href="#" onclick="loadpageLi('/org_plat/pages/package/packAge.html',init_param_Id)">返 回</a></button>
+			<button type="submit" class="btn btn-primary pull-right" id="AddPackage">提 交</button>
+		</div>
+		<!--<span class="suiteError" style="color: #ff0808;font-family: initial;font-size: 1.em;float: right;"></span>-->
+	</div>
+</section>
+<!--模态框修改-->
+<!--高发疾病选择模态框-->
+<div class="modal fade" id="HidsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">高发疾病</h4>
+			</div>
+			<div class="modal-body" id="hids">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="choiceHids">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框-->
+<!--套餐选择模态框-->
+<div class="modal fade" id="typesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">餐套类型</h4>
+			</div>
+			<div class="modal-body" id="types">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="choiceTypes">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/org_plat/js/plugins/jQuery-2.2.0.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="/org_plat/js/plugins/bootstrap.min.js"></script>
+<script src="/org_plat/js/create/Ajax.js"></script>
+<!--表单验证-->
+<script src="/org_plat/js/plugins/formValidator-4.0.1.js"></script>
+<script src="/org_plat/js/plugins/formValidatorRegex.js"></script>
+<!--图片上传-->
+<script src="/org_plat/js/plugins/fileinput.js"></script>
+<script src="/org_plat/js/plugins/fileinput_locale_zh.js"></script>
+<script>
+	$(document).ready(function() {
+		// 清空列表数据并添加套餐类型数据 
+		$('#typeList').val('');
+		$('#selectTypes').html('');
+
+		var reqResultTypes = httpRequest(dict_suite_type_view_all, null, "GET", false);
+		if(reqResultTypes.result == 0) {
+			if(reqResultTypes.data.length > 0) {
+				for(var i = 0; i < reqResultTypes.data.length; i++) {
+					$("#types").append("<label class='radio-inline margin-bottom' style='margin-left: 0;'><input type='checkbox' name='viewTypes' value='" + reqResultTypes.data[i].examTypeId + "'id='viewTypes'>" +
+						"<span id='viewTypeNames' name='viewTypeNames'}>" + reqResultTypes.data[i].examTypeName + "</span></label>");
+				}
+			}
+		}
+
+		$('#highIncidenceDiseaseList').val('');
+		$('#selectHids').html('');
+
+		var reqResultHids = httpRequest(dict_hid_view_all, null, "GET", false);
+		if(reqResultHids.result == 0) {
+			if(reqResultHids.data.length > 0) {
+				for(var i = 0; i < reqResultHids.data.length; i++) {
+					$("#hids").append("<label class='radio-inline margin-bottom' style='margin-left: 0;'><input type='checkbox' name='viewHids' value='" + reqResultHids.data[i].highIncidenceDiseaseId + "'id='viewHids'>" +
+						"<span id='viewHidNames' name='viewHidNames'>" + reqResultHids.data[i].highIncidenceDiseaseName + "</span></label>");
+				}
+			}
+		}
+		//		表单校验
+
+		$.formValidator.initConfig({
+			submitButtonID: "AddPackage",
+			debug: true,
+			onSuccess: function() {
+				suitPackAgeInfo();
+			},
+			onError: function() {
+				alert("添加失败，具体错误，请看网页上的提示！")
+			},
+			submitAfterAjaxPrompt: '有数据正在异步验证，请稍等...'
+		});
+		//数据回显
+		if(getParamValue() != 'packAdd') {
+			//套餐名称
+			$("#examSuiteName").on('change', function() {
+				$("#examSuiteName").formValidator({
+					onShow: "请输入套餐名称",
+					onFocus: "套餐名称不少于3个字符",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 3,
+					onError: "输入错误"
+				});
+			})
+
+			//套餐英文名称
+			$("#examSuiteNameEng").on('change', function() {
+				$("#examSuiteNameEng").formValidator({
+					onShow: "请输入套餐英文名称",
+					onFocus: "套餐英文名称仅可用英文表示",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "username",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+			})
+
+			//套餐输入码
+			$("#examSuiteInputCode").on('change', function() {
+				$("#examSuiteInputCode").formValidator({
+					onShow: "请输入套餐输入码",
+					onFocus: "输入码为数字格式",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+			})
+
+			//套餐代码
+			$("#examSuiteCode").on('change', function() {
+				$("#examSuiteCode").formValidator({
+					onShow: "请输入套餐代码",
+					onFocus: "请输入套餐代码",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "username",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+			})
+
+			//套餐价格
+			$("#examSuitePrice").on('change', function() {
+				$("#examSuitePrice").formValidator({
+					onShow: "请输入套餐价格",
+					onFocus: "请输入套餐价格",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+			})
+
+			//优惠价
+			$("#examSuiteDiscountPrice").on('change', function() {
+				$("#examSuiteDiscountPrice").formValidator({
+					onShow: "请输入优惠价",
+					onFocus: "请输入优惠价",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+			})
+
+			//套餐内价格
+			$("#examSuiteInPrice").on('change', function() {
+				$("#examSuiteInPrice").formValidator({
+					onShow: "请输入套餐内价格",
+					onFocus: "请输入套餐内价格",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+			})
+
+			//警告人数
+			$("#examSuiteWarnPeople").on('change', function() {
+				$("#examSuiteWarnPeople").formValidator({
+					onShow: "请输入警告人数",
+					onFocus: "请输入警告人数",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+			})
+
+			//限制人数
+			$("#examSuiteLimitPeople").on('change', function() {
+				$("#examSuiteLimitPeople").formValidator({
+					onShow: "请输入限制人数",
+					onFocus: "请输入限制人数",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+			})
+
+			//警告金额
+			$("#examSuiteWarnAmount").on('change', function() {
+				$("#examSuiteWarnAmount").formValidator({
+					onShow: "请输入警告金额",
+					onFocus: "请输入警告金额",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+			})
+
+			//限制金额
+			$("#examSuiteLimitAmount").on('change', function() {
+				$("#examSuiteLimitAmount").formValidator({
+					onShow: "请输入限制金额",
+					onFocus: "请输入限制金额",
+					onCorrect: "输入正确"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "输入错误"
+				});
+			})
+
+			//备注
+			$("#examSuiteNote").on('change', function() {
+				$("#examSuiteNote").formValidator({
+					onShow: "请输入套餐备注",
+					onFocus: "请输入套餐备注",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 2,
+					onError: "套餐备注不低于2个字符"
+				});
+			})
+
+			//简介
+			$("#examSuiteSummary").on('change', function() {
+				$("#examSuiteSummary").formValidator({
+					onShow: "请输入套餐简介",
+					onFocus: "请输入套餐简介",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 2,
+					onError: "套餐简介不低于2个字符"
+				});
+			})
+
+			//					适用性别
+			$(":checkbox[name='sex']").on('change', function() {
+				$(":checkbox[name='sex']").formValidator({
+					tipID: "sexTip",
+					onShow: "请选择适用性别（至少选一个）",
+					onFocus: "你至少选择1个",
+					onCorrect: "已选择"
+				}).inputValidator({
+					min: 1,
+					onError: "请至少选择一项"
+				});
+			})
+
+			//编辑回显
+			var param = {
+				"idOrgExamSuite": getParamValue()
+			};
+			var reqResult = httpRequest(packAge_show, param, "GET", false);
+			if(reqResult.result == 0) {
+				var examSuiteMale = (reqResult.data.examSuiteMale === true) ? 1 : 0,
+					orgExamSuiteTypeVo = reqResult.data.orgExamSuiteTypeVo,
+					orgExamSuiteHidVo = reqResult.data.orgExamSuiteHidVo,
+					orgExamSuiteImgVo = reqResult.data.orgExamSuiteImgVo,
+					str = '';
+				$("#examSuiteName").val(reqResult.data.examSuiteName);
+				$("#examSuiteNameEng").val(reqResult.data.examSuiteNameEng);
+				$("#examSuiteInputCode").val(reqResult.data.examSuiteInputCode);
+				$("#examSuiteCode").val(reqResult.data.examSuiteCode);
+				$("#examSuitePrice").val(reqResult.data.examSuitePrice);
+				$("#examSuiteDiscountPrice").val(reqResult.data.examSuiteDiscountPrice);
+				(reqResult.data.examSuiteFemale === 0) ? $("#examSuiteFemale").attr('checked', 'checked'): null;
+				(reqResult.data.examSuiteMale === 0) ? $("#examSuiteMale").attr('checked', 'checked'): null;
+				$("#typeList").val(reqResult.data.typeList);
+				$("#examSuiteWarnPeople").val(reqResult.data.examSuiteWarnPeople);
+				$("#examSuiteWarnAmount").val(reqResult.data.examSuiteWarnAmount);
+				$("#examSuiteLimitPeople").val(reqResult.data.examSuiteLimitPeople);
+				$("#examSuiteLimitAmount").val(reqResult.data.examSuiteLimitAmount);
+				$("#examSuiteNote").val(reqResult.data.examSuiteNote);
+				$("#examSuiteSummary").val(reqResult.data.examSuiteSummary);
+				$("#examSuiteInPrice").val(reqResult.data.examSuiteInPrice);
+				$("#examSuiteId").val(reqResult.data.examSuiteId)
+				if(orgExamSuiteHidVo != null && orgExamSuiteHidVo.length > 0) {
+					var isFrist = true,
+						hids;
+					for(var i = 0; i < orgExamSuiteHidVo.length; i++) {
+						if(!isFrist) {
+							hids = hids + "," + orgExamSuiteHidVo[i].highIncidenceDiseaseId;
+						} else {
+							hids = orgExamSuiteHidVo[i].highIncidenceDiseaseId;
+						}
+						$("#highIncidenceDiseaseList").val(hids);
+						isFrist = false;
+						var obj = document.getElementsByName("viewHids");
+						for(k in obj) {
+							if(orgExamSuiteHidVo[i].highIncidenceDiseaseId == obj[k].value) {
+								obj[k].checked = "checked";
+							}
+						}
+						//回显到高发疾病列表中
+						$('#selectHids').append("<label class='radio-inline no-padding'><input type='checkbox' checked>" +
+							orgExamSuiteHidVo[i].highIncidenceDiseaseName + "</label>");
+					}
+				}
+				//添加体检套餐类型
+				if(orgExamSuiteTypeVo != null && orgExamSuiteTypeVo.length > 0) {
+					var isFrist = true,
+						types;
+					for(var i = 0; i < orgExamSuiteTypeVo.length; i++) {
+						if(!isFrist) {
+							types = types + "," + orgExamSuiteTypeVo[i].examTypeId;
+						} else {
+							types = orgExamSuiteTypeVo[i].examTypeId;
+						}
+						$("#typeList").val(types);
+						isFrist = false;
+						$('#selectTypes').append("<label class='radio-inline no-padding'><input type='checkbox' checked>" +
+							orgExamSuiteTypeVo[i].examTypeName + "</label>");
+						var obj = document.getElementsByName("viewTypes");
+						for(k in obj) {
+							if(orgExamSuiteTypeVo[i].examTypeId == obj[k].value) {
+								obj[k].checked = "checked";
+							}
+						}
+					}
+				}
+				//添加图片到列表
+				if(orgExamSuiteImgVo != null && orgExamSuiteImgVo.length > 0) {
+					for(var i = 0; i < orgExamSuiteImgVo.length; i++) {
+						if(imgOlds == '') {
+							imgOlds = orgExamSuiteImgVo[i].dictImgId;
+						} else {
+							imgOlds = imgOlds + "," + $imgs.val() + orgExamSuiteImgVo[i].dictImgId;
+						}
+						str += '<div id="' + orgExamSuiteImgVo[i].dictImgId + '" class="float_left store_img_borderdiv position_relative"><div class="position_absolute" style="background-image:url(' + oplatIp + orgExamSuiteImgVo[i].imgLocation + ');"><a href="javascript:removeUploadImg(' + orgExamSuiteImgVo[i].dictImgId + ')" class="fa fa-close fa_red pull-right"></a></div></div>';
+					}
+				}
+				$("#edit_storeimg").append(str);
+			} else {
+				alert(reqResult.message);
+			}
+		} else {
+			//套餐名称
+			$("#examSuiteName").formValidator({
+				onShow: "请输入套餐名称",
+				onFocus: "套餐名称不少于3个字符",
+				onCorrect: "输入正确"
+			}).inputValidator({
+				min: 3,
+				onError: "输入错误"
+			});
+			//套餐英文名称
+			$("#examSuiteNameEng").formValidator({
+				onShow: "请输入套餐英文名称",
+				onFocus: "套餐英文名称仅可用英文表示",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "username",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//套餐输入码
+			$("#examSuiteInputCode").formValidator({
+				onShow: "请输入套餐输入码",
+				onFocus: "输入码为数字格式",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//套餐代码
+			$("#examSuiteCode").formValidator({
+				onShow: "请输入套餐代码",
+				onFocus: "请输入套餐代码",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "username",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//套餐价格
+			$("#examSuitePrice").formValidator({
+				onShow: "请输入套餐价格",
+				onFocus: "请输入套餐价格",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//优惠价
+			$("#examSuiteDiscountPrice").formValidator({
+				onShow: "请输入优惠价",
+				onFocus: "请输入优惠价",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//套餐内价格
+			$("#examSuiteInPrice").formValidator({
+				onShow: "请输入套餐内价格",
+				onFocus: "请输入套餐内价格",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+
+			//警告人数
+			$("#examSuiteWarnPeople").formValidator({
+				onShow: "请输入警告人数",
+				onFocus: "请输入警告人数",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//限制人数
+			$("#examSuiteLimitPeople").formValidator({
+				onShow: "请输入限制人数",
+				onFocus: "请输入限制人数",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//警告金额
+			$("#examSuiteWarnAmount").formValidator({
+				onShow: "请输入警告金额",
+				onFocus: "请输入警告金额",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//限制金额
+			$("#examSuiteLimitAmount").formValidator({
+				onShow: "请输入限制金额",
+				onFocus: "请输入限制金额",
+				onCorrect: "输入正确"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "输入错误"
+			});
+			//备注
+			$("#examSuiteNote").formValidator({
+				defaultValue: "套餐备注"
+			}).inputValidator({
+				min: 2,
+				onError: "套餐备注不低于2个字符"
+			});
+			//简介
+			$("#examSuiteSummary").formValidator({
+				defaultValue: "套餐简介"
+			}).inputValidator({
+				min: 2,
+				onError: "套餐简介不低于2个字符"
+			});
+			//					适用性别
+			$(":checkbox[name='sex']").formValidator({
+				tipID: "sexTip",
+				onShow: "请选择适用性别（至少选一个）",
+				onFocus: "你至少选择1个",
+				onCorrect: "已选择"
+			}).inputValidator({
+				min: 1,
+				onError: "请至少选择一项"
+			});
+		}
+	})
+
+	//		//验证体检类型
+	//		function suiteType() {
+	//			//		if($('#selectTypes').children().length > 0) {//			$('#suiteError').html('').removeClass('onError');//		} else {
+	//			//			$('#suiteError').html('请选择套餐类型').addClass('onError');
+	//			//			return true;
+	//			//		}
+	//		}
+	//		//验证高发疾病
+	//		function hiDisease() {
+	//			//		if($('#selectHids').children().length > 0) {
+	//			//			$('#diseaseError').html('').removeClass('onError');
+	//			//		} else {
+	//			//			$('#diseaseError').html('请选择一种高发疾病').addClass('onError');
+	//			//			return true;
+	//			//		}
+	//		}
+	//		//验证图片
+	//		function checkImg() {
+	//			if($('#imgs').val() == null || $('#imgs').val() == '') {
+	//				$('#imgError').html('请上传一张图片！').addClass('onError');
+	//				return true;
+	//			} else {
+	//				$('#imgError').html('').removeClass('onError');
+	//			}
+	//		}
+
+	//图片显示
+	$(".img_border > #edit_storeimg >.float_left>.position_absolute").each(function() {
+		$(this).hover(function() {
+			$(this).animate({
+				width: 300,
+				height: 300,
+				top: -10,
+				left: 100
+			}, 500);
+			$(this).css("z-index", 999);
+			$(this).parent().removeClass("store_img_borderdiv ");
+		}, function() {
+			$(this).animate({
+				width: 250,
+				height: 250,
+				top: 0,
+				left: 125
+			}, 500);
+			$(this).css("z-index", 0);
+			$(this).parent().addClass("store_img_borderdiv");
+		});
+	});
+	//图片上传
+	var uploadImagesUrl = oplatIp + '/br-order-org-controller/uploadImg/uploadImg'; //上传图片路径
+	$("#add_suite_picture").fileinput({
+		uploadUrl: uploadImagesUrl,
+		allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg', 'bmp'],
+		overwriteInitial: false,
+		maxFileSize: 100000,
+		maxFilesNum: 10,
+		slugCallback: function(filename) {
+			return filename.replace('(', '_').replace(']', '_');
+		}
+	})
+
+	//
+	var $imgs = $('#imgs');
+	imgs;
+	imgOlds = '';
+	$("#add_suite_picture").on("fileuploaded", function(event, data, previewId, index) {
+		if($imgs.val() != undefined) {
+			if($imgs.val().split(",") == '') {
+				$imgs.val(data.response.imgId);
+			} else {
+				$imgs.val($imgs.val() + "," + data.response.imgId);
+			}
+		}
+	});
+
+	function suitPackAgeInfo() {
+		//			var url = packAge_edit;
+		var param,
+			reqResult;
+		if($('#examSuiteMale').is(':checked') == true) {
+			$('#male').val(0);
+		}
+		if($('#examSuiteFemale').is(':checked') == true) {
+			$('#female').val(0);
+		}
+		if($('#store_orgName').val() == -1) {
+			$('#store_orgName').val('');
+		}
+		if(imgOlds != '') {
+			$imgs.val(imgOlds + ',' + $imgs.val());
+		}
+		param = $('#addPackInfor').serialize();
+		if(getParamValue() == "packAdd") {
+			reqResult = httpRequest(packAge_Add, param, "POST", false);
+			if(reqResult.result == 0) {
+				alert('添加成功');
+				loadpage("/org_plat/pages/package/packAge.html");
+			} else {
+				alert(reqResult.message);
+			}
+		} else {
+			reqResult = httpRequest(packAge_edit, param, "POST", false);
+			if(reqResult.result == 0) {
+				alert('保存成功');
+				loadpage("/org_plat/pages/package/packAge.html");
+			} else {
+				alert(reqResult.message);
+			}
+		}
+
+	}
+	//选择高发疾病提交
+	$('#choiceHids').on('click', function() {
+		$('#highIncidenceDiseaseList').val('');
+		$('#selectHids').html("");
+
+		var obj = document.getElementsByName("viewHids"),
+			obj1 = document.getElementsByName("viewHidNames"),
+			selectHidIds,
+			isFrist = true;
+		for(var h = 0; h < obj.length; h++) {
+			if(obj[h].checked) {
+				$('#selectHids').append("<label class='radio-inline'><input type='checkbox' checked>" +
+					obj1[h].innerHTML + "</label>");
+				if(isFrist) {
+					selectHidIds = obj[h].value;
+				} else {
+					selectHidIds = selectHidIds + "," + obj[h].value;
+				}
+				$('#highIncidenceDiseaseList').val(selectHidIds);
+				isFrist = false;
+			}
+		}
+		//验证高发疾病
+		if($('#selectHids').children().length > 0) {
+			$('#diseaseError').html('').removeClass('onError');
+		} else {
+			$('#diseaseError').html('请选择一种高发疾病').addClass('onError');
+			return true;
+		}
+	});
+	//体检类型提交
+	$('#choiceTypes').on('click', function() {
+		$('#typeList').val("");
+		$('#selectTypes').html("");
+		var obj = document.getElementsByName("viewTypes"),
+			obj1 = document.getElementsByName("viewTypeNames"),
+			selectTypeIds,
+			isFrist = true;
+		for(var t = 0; t < obj.length; t++) {
+			if(obj[t].checked) {
+				$('#selectTypes').append("<label class='radio-inline'><input type='checkbox' checked>" +
+					obj1[t].innerHTML + "</label>");
+				if(isFrist) {
+					selectTypeIds = obj[t].value;
+				} else {
+					selectTypeIds = selectTypeIds + "," + obj[t].value;
+				}
+				$('#typeList').val(selectTypeIds);
+				isFrist = false;
+			}
+		}
+		//验证是否有选中的体检机构
+		if($('#selectTypes').children().length > 0) {
+			$('#suiteError').html('').removeClass('onError');
+		} else {
+			$('#suiteError').html('请选择套餐类型').addClass('onError');
+			return true;
+		}
+	});
+	//删除图片
+	function removeUploadImg(imgId) {
+		var imgs = $imgs.val(),
+			imgStr = '';
+		if((imgOlds + "").indexOf(',') > -1) {
+			imgIds = imgOlds.split(",");
+		} else {
+			imgIds = imgOlds;
+		}
+		for(var i = 0; i < imgIds.length; i++) {
+			if(imgIds[i] != imgId) {
+				if(imgStr == '') {
+					imgStr = imgIds[i]
+				} else {
+					imgStr = imgStr + ',' + imgIds[i]
+				}
+			}
+		}
+		imgOlds = imgStr;
+		var imgIdDel = '#' + imgId.toString();
+		$(imgIdDel).remove();
+
+	}
+</script>

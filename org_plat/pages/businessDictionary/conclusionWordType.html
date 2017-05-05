@@ -1,0 +1,565 @@
+<section class="content-header">
+	<div class="margin-bottom">
+		<h2><small>结论词类型</small></h2>
+	</div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">字典维护</a>
+		</li>
+		<li class="active">结论词类型</li>
+	</ol>
+</section>
+<!-- /Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<!--box-header -->
+				<div class="box-header">
+					<div class="row">
+						<div class="col-md-8">
+							<h3 class="box-title margin">列表</h3>
+						</div>
+						<div class="col-md-4">
+							<div class="row">
+								<div class="pull-right">
+									<a href="#add_conclusionTypeInfo" id="addConTypeDic" data-toggle="modal" class="btn btn-default margin">添加</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table class="table formCss">
+						<thead>
+							<tr>
+								<th>编辑</th>
+								<th>名称</th>
+								<th>英文名称</th>
+								<th>输入码</th>
+								<th>行序</th>
+								<th>创建时间</th>
+								<th>状态</th>
+							</tr>
+							<tr class="warning no-result">
+								<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+							</tr>
+						</thead>
+						<tbody id="tobody_conclusionType"></tbody>
+					</table>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /Main content -->
+<!--模态框添加-->
+<div class="modal fade" id="add_conclusionTypeInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">结论词类型--添加</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="add_conclusionTypeForm">
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_100">名称</span>
+						<input type="text" id="add_conclusionTypeName" class="form-control" name="conclusionTypeName" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<div id="add_conclusionTypeNameTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon">英文名称</span>
+						<input type="text" id="add_conclusionTypeNameEng" class="form-control" name="conclusionTypeNameEng" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<div id="add_conclusionTypeNameEngTip"></div>
+					<span class='check_add_countrycode'></span>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">输入码</span>
+						<input type="text" id="add_inputCode" class="form-control" name="inputCode" aria-describedby="basic-addon1" required>
+					</div>
+					<div id="add_inputCodeTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_100">行序</span>
+						<input type="text" id="add_disporder" class="form-control" name="disporder" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<div id="add_disporderTip"></div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="addBtn">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框修改-->
+<div class="modal fade" id="edit_conclusionTypeInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">结论词类型--编辑</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="edit_conclusionTypeForm">
+					<input type="hidden" name="idConclusionType" id="edit_idConclusionType" />
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_100">名称</span>
+						<input type="text" id="edit_conclusionTypeName" class="form-control" name="conclusionTypeName" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<div id="edit_conclusionTypeNameTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon">英文名称</span>
+						<input type="text" id="edit_conclusionTypeNameEng" class="form-control" name="conclusionTypeNameEng" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<div id="edit_conclusionTypeNameEngTip"></div>
+					<span class='check_add_countrycode'></span>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">输入码</span>
+						<input type="text" id="edit_inputCode" class="form-control" name="inputCode" aria-describedby="basic-addon1" required>
+					</div>
+					<div id="edit_inputCodeTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_100">行序</span>
+						<input type="text" id="edit_disporder" class="form-control" name="disporder" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<div id="edit_disporderTip"></div>
+					<div class="input-group" id='edit_status'>
+						<span class="input-group-addon userlist_status_right_border">状 态</span>
+						<input type="radio" name='status' value="0" />启用
+						<input type="radio" name='status' value="1" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id='editBtn'>保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框查看-->
+<div class="modal fade" id="check_conclusionTypeInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">结论词科室类型--查看</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="check_country_formNews">
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_100">名称</span>
+						<input type="text" id="check_conclusionTypeName" class="form-control" name="conclusionTypeName" aria-describedby="basic-addon1" maxlength='12' disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">英文名称</span>
+						<input type="text" id="check_conclusionTypeNameEng" class="form-control" name="conclusionTypeNameEng" aria-describedby="basic-addon1" maxlength='12' disabled="disabled">
+					</div>
+					<span class='check_add_countrycode'></span>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">输入码</span>
+						<input type="text" id="check_inputCode" class="form-control" name="inputCode" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_100">行序</span>
+						<input type="text" id="check_disporder" class="form-control" name="disporder" aria-describedby="basic-addon1" maxlength='12' disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_100">创建时间</span>
+						<input type="text" id="check_createtime" class="form-control" name="createtime" aria-describedby="basic-addon1" maxlength='12' disabled="disabled">
+					</div>
+					<div class="input-group" id='check_status'>
+						<span class="input-group-addon userlist_status_right_border">状 态</span>
+						<input type="radio" name='status' value="0" disabled="disabled" />启用
+						<input type="radio" name='status' value="1" disabled="disabled" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/org_plat/js/plugins/extendPagination.js"></script>
+<script src="/org_plat/js/plugins/formValidator-4.0.1.js"></script>
+<script src="/org_plat/js/plugins/formValidatorRegex.js"></script>
+<script>
+	//添加校验
+	$('#addConTypeDic').on('click', function() {
+		$.formValidator.initConfig({
+			submitButtonID: "addBtn",
+			debug: true,
+			onSuccess: function() {
+				addConclusionInfo();
+			},
+			onError: function() {
+				alert("添加失败，请根据页面提示重新添加!")
+			},
+		});
+		//名称
+		$("#add_conclusionTypeName").formValidator({
+			onShow: "请输入名称!",
+			onFocus: "名称在十个字以内!",
+			onCorrect: "输入正确!"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: '^[\u0391-\uFFE5]+$',
+			onError: "只能输入文字,请重新输入!"
+		});
+		//英文名称
+		$("#add_conclusionTypeNameEng").formValidator({
+			onShow: "请输入英文名称",
+			onFocus: "英文名称由26个大小写字母组成!",
+			onCorrect: "输入正确"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: '^[ A-Za-z]*$',
+			onError: "只能输入字母,请重新输入!"
+		});
+		//输入码
+		$("#add_inputCode").formValidator({
+			onShow: "请输入输入码",
+			onFocus: "只能输入数字!",
+			onCorrect: "输入正确"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "只能输入数字，请重新输入!"
+		});
+		//行序
+		$("#add_disporder").formValidator({
+			onShow: "请输入行序",
+			onFocus: "只能输入数字!",
+			onCorrect: "输入正确"
+		}).inputValidator({
+			min: 1,
+			max: 10,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "只能输入数字，请重新输入!"
+		});
+	});
+	//编辑校验
+	function checkEditCon() {
+		$.formValidator.initConfig({
+			submitButtonID: "editBtn",
+			debug: true,
+			onSuccess: function() {
+				editFormInfo();
+			},
+			onError: function() {
+				alert("编辑失败，请根据页面提示重新编辑啊!")
+			}
+		});
+		//名称
+		$('#edit_conclusionTypeName').on('change', function() {
+				$("#edit_conclusionTypeName").formValidator({
+					onShow: "请输入名称!",
+					onFocus: "名称在十个字以内!",
+					onCorrect: "输入正确!"
+				}).inputValidator({
+					min: 2,
+					max: 20,
+					onError: "内容长度错误,请重新输入!"
+				}).regexValidator({
+					regExp: '^[\u0391-\uFFE5]+$',
+					onError: "只能输入文字,请重新输入!"
+				});
+			})
+			//英文名称
+		$('#edit_conclusionTypeNameEng').on('change', function() {
+				$("#edit_conclusionTypeNameEng").formValidator({
+					onShow: "请输入英文名称",
+					onFocus: "英文名称由26个大小写字母组成!",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 2,
+					max: 20,
+					onError: "内容长度错误,请重新输入!"
+				}).regexValidator({
+					regExp: '^[ A-Za-z]*$',
+					onError: "只能输入字母,请重新输入!"
+				});
+			})
+			//输入码
+		$('#edit_inputCode').on('change', function() {
+				$("#edit_inputCode").formValidator({
+					onShow: "请输入输入码",
+					onFocus: "只能输入数字!",
+					onCorrect: "输入正确"
+				}).inputValidator({
+					min: 2,
+					max: 20,
+					onError: "内容长度错误,请重新输入!"
+				}).regexValidator({
+					regExp: "num",
+					dataType: "enum",
+					onError: "只能输入数字，请重新输入!"
+				});
+			})
+			//行序
+		$('#edit_disporder').on('change', function() {
+			$("#edit_disporder").formValidator({
+				onShow: "请输入行序",
+				onFocus: "只能输入数字!",
+				onCorrect: "输入正确"
+			}).inputValidator({
+				min: 1,
+				max: 10,
+				onError: "内容长度错误,请重新输入!"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "只能输入数字，请重新输入!"
+			});
+		})
+	}
+
+	//  分页
+	init_page();
+
+	function init_page() {
+		page_curr = 1;
+		$('#tobody_conclusionType').empty();
+		//1.请求后端信息并展示
+		conclusionTypeSearch();
+		init_pager();
+	}
+	//  初始化分页信息
+	function init_pager() {
+		$('#callBackPager').extendPagination({
+			totalCount: total_count,
+			showCount: count_curr,
+			limit: limit,
+			callback: function(curr, limit, totalCount) {
+				page_curr = curr;
+				total_count = totalCount;
+				conclusionTypeSearch();
+			}
+		});
+	}
+	//	搜索
+	function conclusionTypeSearch() {
+		$('#tobody_conclusionType').empty();
+		var param = {
+			"page": page_curr,
+			"rows": count_curr
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(conclusionWordType_getConclusionTypeList_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			//4.展示数据
+			total_count = reqResult.data.total;
+			createTable(page_curr, limit, total_count, reqResult);
+		}
+		return false;
+	}
+	//  显示列表信息
+	function createTable(currPage, limit, total, dataBack) {
+		var showNum = limit;
+		if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+		for(var i = 0; i < showNum; i++) {
+			var Tbody = document.getElementById('tobody_conclusionType');
+			var lRow = Tbody.insertRow(); //创建行
+			var status = (dataBack.data.list[i].status === 0) ? "启用" : "禁用";
+			var operationByRole = dataBack.operationList; //获取操作类型
+			var operationByRoleAdd = document.getElementById('addConTypeDic'); //获取添加按钮
+			//				判断操作类型
+			(operationByRole.dictConclusionType_insert === false) ? operationByRoleAdd.style.display = 'none': operationByRoleAdd.style.display = ''; //1为添加
+			//创建列
+			var firstColumn = lRow.insertCell();
+			var secondColumn = lRow.insertCell();
+			var thirdColumn = lRow.insertCell();
+			var forthColumn = lRow.insertCell();
+			var fifthColumn = lRow.insertCell();
+			var seventhColumn = lRow.insertCell();
+			var eighthColumn = lRow.insertCell();
+			firstColumn.setAttribute('idConclusionType', dataBack.data.list[i].idConclusionType); //给td添加属性
+			//添加第一列内容
+			//创建查看标签
+			var aCheck = document.createElement("a");
+			var iElement = document.createElement("i");
+			(operationByRole.dictConclusionType_detail === true) ? iElement.className = "fa fa-eye": ''; //4为查看
+			aCheck.appendChild(iElement);
+			aCheck.setAttribute("href", "#check_conclusionTypeInfo");
+			aCheck.setAttribute("data-toggle", "modal");
+			aCheck.style.marginLeft = "5px";
+			aCheck.onclick = function() {
+				checkInfo(this)
+			};
+			firstColumn.appendChild(aCheck);
+			//创建编辑标签
+			var aEdit = document.createElement("a");
+			var iElement = document.createElement("i");
+			(operationByRole.dictConclusionType_update === true) ? iElement.className = "fa fa-pencil": ''; //3为更新
+			aEdit.appendChild(iElement);
+			aEdit.setAttribute("href", "#edit_conclusionTypeInfo");
+			aEdit.setAttribute("data-toggle", "modal");
+			aEdit.style.marginLeft = "5px";
+			aEdit.onclick = function() {
+				editInfo(this)
+			};
+			firstColumn.appendChild(aEdit);
+			//创建删除标签
+			var aDelete = document.createElement("a");
+			var iElement = document.createElement("i");
+			(operationByRole.dictConclusionType_delete === true) ? iElement.className = "fa fa-trash-o": ''; //2为删除
+			aDelete.appendChild(iElement);
+			aDelete.style.marginLeft = "5px";
+			aDelete.onclick = function() {
+				delInfo(this)
+			};
+			firstColumn.appendChild(aDelete);
+			//添加第二列内容	
+			secondColumn.innerText = dataBack.data.list[i].conclusionTypeName;
+			//添加第三列内容	
+			thirdColumn.innerText = dataBack.data.list[i].conclusionTypeNameEng;
+			//添加第四列内容	
+			forthColumn.innerText = dataBack.data.list[i].inputCode;
+			//添加第五列内容	
+			fifthColumn.innerText = dataBack.data.list[i].disporder;
+			//添加第七列内容	
+			seventhColumn.innerText = getLocalTime(dataBack.data.list[i].createtime);
+			//添加第八列内容	
+			eighthColumn.innerText = status;
+		}
+		return false;
+	}
+	//  添加信息		
+	function addConclusionInfo() {
+		var conclusionTypeName = $('#add_conclusionTypeName').val();
+		var conclusionTypeNameEng = $('#add_conclusionTypeNameEng').val();
+		var inputCode = $('#add_inputCode').val();
+		var disporder = $('#add_disporder').val();
+		var country_lineorder = $('#add_country_line_order').val();
+		if(conclusionTypeName == '' || conclusionTypeNameEng == '' || inputCode == '') {
+			alert('内容不能为空！');
+			return false;
+		} else {
+			var param = $('#add_conclusionTypeForm').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(conclusionWordType_addConclusionType_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("添加成功");
+				window.location.reload();
+				return false;
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+	//	查看用户信息
+	function checkInfo(check) {
+		var idConclusionType = $(check).parent().attr("idConclusionType");
+		var param = {
+			"idConclusionType": idConclusionType
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(conclusionWordType_getConclusionTypeById_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			var countryStatus = $('#check_status input');
+			$('#check_conclusionTypeName').val(reqResult.data.conclusionTypeName);
+			$('#check_conclusionTypeNameEng').val(reqResult.data.conclusionTypeNameEng);
+			$('#check_inputCode').val(reqResult.data.inputCode);
+			$('#check_disporder').val(reqResult.data.disporder);
+			$('#check_createtime').val(getLocalTime(reqResult.data.createtime));
+			if(reqResult.data.status == 0) {
+				countryStatus[0].checked = "checked";
+			} else {
+				countryStatus[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//  删除信息
+	function delInfo(del_li) {
+		if(confirm("确认禁用该结论词类型吗？")) {
+			var idConclusionType = $(del_li).parent().attr("idConclusionType");
+			var param = {
+				"idConclusionType": idConclusionType
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(conclusionWordType_deleteConclusionType_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("禁用成功！");
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+	//	編輯回显信息
+	function editInfo(edit_li) {
+		checkEditCon();
+		var idConclusionType = $(edit_li).parent().attr("idConclusionType");
+		var param = {
+			"idConclusionType": idConclusionType
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(conclusionWordType_getConclusionTypeById_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#edit_idConclusionType').val(reqResult.data.idConclusionType);
+			var countryStatus = $('#edit_status input');
+			$('#edit_conclusionTypeName').val(reqResult.data.conclusionTypeName);
+			$('#edit_conclusionTypeNameEng').val(reqResult.data.conclusionTypeNameEng);
+			$('#edit_inputCode').val(reqResult.data.inputCode);
+			$('#edit_disporder').val(reqResult.data.disporder);
+			if(reqResult.data.status == 0) {
+				countryStatus[0].checked = "checked";
+			} else {
+				countryStatus[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//  编辑保存信息
+	function editFormInfo() {
+		var edit_conclusionTypeName = $('#edit_conclusionTypeName').val();
+		var edit_conclusionTypeNameEng = $('#edit_conclusionTypeNameEng').val();
+		var edit_inputCode = $('#edit_inputCode').val();
+		var edit_disporder = $('#edit_disporder').val();
+		var editcountry_lineorder = $('#edit_country_line_order').val();
+		if(edit_conclusionTypeName == '' || edit_conclusionTypeNameEng == '' || edit_inputCode == '' || edit_disporder == '') {
+			alert('编辑成功！');
+			return false;
+		} else {
+			var param = $('#edit_conclusionTypeForm').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(conclusionWordType_updateConclusionType_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('编辑成功!');
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+</script>

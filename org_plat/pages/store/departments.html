@@ -1,0 +1,731 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<div class="margin-bottom">
+		<h2><small>科室</small></h2></div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">门店</a>
+		</li>
+		<li class="active">科室</li>
+	</ol>
+	<div class="box container-fluid no-margin">
+		<!--box-header -->
+		<div class="box-header">
+			<div class="row margin-bottom">
+				<div class="col-md-10">
+					<h3 class="box-title">搜索</h3>
+				</div>
+				<div class="col-md-2">
+					<div class="input-group pull-right">
+						<a href="#addDept" data-toggle="modal" id="addDepartInfo" class="btn btn-default">添加</a>
+					</div>
+				</div>
+			</div>
+			<div class="row margin-bottom">
+				<form class="form-group container-fluid" id="searchDeptInfo">
+					<div class="row margin-bottom">
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">门店</span>
+									<select class="form-control selectpicker" id="branch" name="branchId">
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">上级科室</span>
+									<select class="form-control selectpicker" id="dept" name="departParentId">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">科室名称</span>
+									<input type="text" class="form-control" id="serdeptName" name="departName" placeholder="科室名称">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group pull-right">
+									<a class="btn btn-primary fa fa-search" id="searDept">搜索</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- /.box-header -->
+		</div>
+</section>
+<!-- /Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<!--box-header -->
+				<div class="box-header">
+					<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>操作</th>
+								<th>科室名称</th>
+								<th>科室类型</th>
+								<th>门店名称</th>
+								<th>上级科室</th>
+								<th>编码</th>
+								<th>创建时间</th>
+								<th>状态</th>
+							</tr>
+							<tr class="warning no-result">
+								<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+							</tr>
+						</thead>
+						<tbody id="DeptTboody">
+							<tr>
+								<td></td>
+								<th></th>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /Main content -->
+
+<!--模态框添加-->
+<div class="modal fade" id="addDept" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加科室</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="addDeptForm">
+					<div class="input-group hide">
+						<span class="input-group-addon"></span>
+						<select class="form-control selectpicker brands" id="addorgId" name="orgId">
+						</select>
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon">门店名称</span>
+						<select class="form-control selectpicker" id="addbranchName" name="branchId"></select>
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">上级科室</span>
+						<select class="form-control selectpicker" id="addpDepartName" name="departParentId"></select>
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室名称</span>
+						<input type="text" id="adddepartName" class="form-control check_userloginname_validate" name="departName" aria-describedby="basic-addon1" required>
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室名称缩写</span>
+						<input type="text" id="addDepartNameAbr" class="form-control check_userloginname_validate" name="departNameAbr" aria-describedby="basic-addon1" required>
+
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室英文名称</span>
+						<input type="text" id="addDepartNameEng" class="form-control check_userloginname_validate" name="departNameEng" aria-describedby="basic-addon1" required>
+
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室英文名称缩写</span>
+						<input type="text" id="addDepartNameEngAbr" class="form-control check_userloginname_validate" name="departNameEngAbr" aria-describedby="basic-addon1" required>
+
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon">科室类型</span>
+						<select name="departType" class="form-control check_userloginname_validate dictDeptTypeId" id="addDepartType" aria-describedby="basic-addon1" required></select>
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon">科室编码</span>
+						<input type="text" id="addDepartCode" class="form-control check_userloginname_validate" name="departCode" aria-describedby="basic-addon1" required>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">科室负责人</span>
+						<select class="form-control" id="addDepartUserName" name="departManagerId">
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室备注</span>
+						<input type="text" id="addNote" class="form-control check_userloginname_validate" name="note" aria-describedby="basic-addon1" required>
+
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="addDeptSubmit">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--模态框编辑-->
+<div class="modal fade" id="editDept" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">编辑科室</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="editDeptForm">
+					<input type="hidden" name="orgDeptId" id="orgDeptId" value="" />
+					<div class="input-group">
+						<span class="input-group-addon">门店名称</span>
+						<select class="form-control selectpicker brands" id="editBranchId" name="branchId">
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">上级科室</span>
+						<select name="departParentId" id="editDepartParentId" class="form-control">
+
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">科室名称</span>
+						<input type="text" id="editDepartName" class="form-control check_userloginname_validate" name="departName" aria-describedby="basic-addon1">
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室名称缩写</span>
+						<input type="text" id="editDepartNameAbr" class="form-control check_userloginname_validate" name="departNameAbr" aria-describedby="basic-addon1">
+
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室英文名称</span>
+						<input type="text" id="editDepartNameEng" class="form-control check_userloginname_validate" name="departNameEng" aria-describedby="basic-addon1">
+
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室英文名称缩写</span>
+						<input type="text" id="editDepartNameEngAbr" class="form-control check_userloginname_validate" name="departNameEngAbr" aria-describedby="basic-addon1">
+
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon">科室类型</span>
+						<select name="departType" class="form-control check_userloginname_validate dictDeptTypeId" id="editDepartType" aria-describedby="basic-addon1"></select>
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon">科室编码</span>
+						<input type="text" id="editDepartCode" class="form-control check_userloginname_validate" name="departCode" aria-describedby="basic-addon1">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">科室负责人</span>
+						<select class="form-control" id="editDepartUserName" name="departManagerId">
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室备注</span>
+						<input type="text" id="editNote" class="form-control check_userloginname_validate" name="note" aria-describedby="basic-addon1" required/>
+					</div>
+					<div class="input-group" id='editStatus'>
+						<span class="input-group-addon userlist_status_right_border">状 态</span>
+						<input type="radio" name='status' value="0" class="userlist_statusinput_vertical" />启用
+						<input type="radio" name='status' value="1" class="userlist_statusinput_vertical" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id='editDeptSave'>保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--模态框查看-->
+<div class="modal fade" id="checkDept" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">查看科室</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="checkDeptForm">
+					<div class="input-group">
+						<span class="input-group-addon">门店名称</span>
+						<select class="form-control selectpicker brands" id="checkBranchId" name="branchId" disabled="disabled">
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">上级科室</span>
+						<select name="departParentId" id="checkDepartParentId" class="form-control" disabled="disabled"></select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">科室名称</span>
+						<input type="text" id="checkDepartName" class="form-control check_userloginname_validate" name="departName" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室名称缩写</span>
+						<input type="text" id="checkDepartNameAbr" class="form-control check_userloginname_validate" name="departNameAbr" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室英文名称</span>
+						<input type="text" id="checkDepartNameEng" class="form-control check_userloginname_validate" name="departNameEng" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室英文名称缩写</span>
+						<input type="text" id="checkDepartNameEngAbr" class="form-control check_userloginname_validate" name="departNameEngAbr" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">科室类型</span>
+						<select name="departType" class="form-control check_userloginname_validate dictDeptTypeId" id="checkDepartType" aria-describedby="basic-addon1" disabled="disabled"></select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">科室编码</span>
+						<input type="text" id="checkDepartCode" class="form-control check_userloginname_validate" name="checkDepartCode" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">科室负责人</span>
+						<select class="form-control" id="checkDepartUserName" disabled="disabled" name="departManagerId">
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室备注</span>
+						<input type="text" id="checkNote" class="form-control check_userloginname_validate" name="note" aria-describedby="basic-addon1" disabled="disabled" />
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">创建时间</span>
+						<input type="text" id="checkCreatetime" class="form-control" name="createtime" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group" id='checkStatus'>
+						<span class="input-group-addon userlist_status_right_border">状 态</span>
+						<input type="radio" name='status' value="0" class="userlist_statusinput_vertical" disabled="disabled" />启用
+						<input type="radio" name='status' value="1" class="userlist_statusinput_vertical" disabled="disabled" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--模态框查看收费项-->
+<div class="modal fade" id="checkCharge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel_see">收费项列表</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-bordered table-striped" id="chargeTb">
+					<thead>
+						<tr>
+							<th>收费项名称</th>
+						</tr>
+					</thead>
+					<tbody id="chargeList">
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/org_plat/js/create/Ajax.js"></script>
+<script src="/org_plat/js/plugins/extendPagination.js"></script>
+<script>
+	//页面跳转根据url判断是带参数跳转还是直接跳转，deptJumpParam是当前页面需要的参数
+	deptPageUrl = window.location.href;
+	judgePageUrlLength = deptPageUrl.split('#')[1].length;
+	if(judgePageUrlLength > 0) {
+		deptJumpParam = '';
+	} else {
+		deptJumpParam = init_param_Id;
+	}
+	page_curr = 1;
+	branchDeptInfo();
+	//选中门店回显上级科室下拉框
+	$('#branch').change(function() {
+			if($('#branch').val() != '') {
+				SuperiorDepartment($('#branch').val(), '#dept', '0');
+			}
+		})
+		//  搜索功能
+	function branchDeptInfo() {
+		getBranchName("#branch", '0');
+		if(deptJumpParam) {
+			$('#branch').val(deptJumpParam);
+		} else {
+			$('#branch').val('');
+		}
+		SuperiorDepartment($('#branch').val(), '#dept', '0');
+		deptSearch();
+		init_pager();
+	}
+
+	function deptSearch() {
+		$('#DeptTboody').empty();
+		var dept = jQuery.trim($("#dept").val());
+		var serdeptName = jQuery.trim($("#serdeptName").val());
+		var branchId = $('#branch').val();
+		var param = {
+			"page": page_curr,
+			"rows": 10,
+			'branchId': branchId,
+			'departParentId': dept,
+			'departName': serdeptName
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(getOrgDeptListUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			total_count = reqResult.data.total;
+			createTable(page_curr, limit, total_count, reqResult);
+			return false;
+		}
+	}
+	// 初始化分页信息
+	function init_pager() {
+		$('#callBackPager').extendPagination({
+			totalCount: total_count,
+			showCount: count_curr,
+			limit: limit,
+			callback: function(curr, limit, totalCount) {
+				page_curr = curr;
+				total_count = totalCount;
+				deptSearch();
+			}
+		});
+	}
+	//  展示列表信息
+	function createTable(currPage, limit, total, dataBack) {
+		var showNum = limit;
+		//获取操作类型
+		//		var operationList = dataBack.operationList;
+		//		//			判断添加按钮
+		//		if(operationList.add == 1) {
+		//			$('#addDepartInfo').show();
+		//		} else {
+		//			$('#addDepartInfo').hide();
+		//		}
+		var str = '';
+		var datal = dataBack.data.list;
+		if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+		for(var i = 0; i < showNum; i++) { //判断数据长度
+			str += "<tr><td deptid='" + datal[i].orgDeptId + "' branchId='" + datal[i].branchId + "' deptId='" + datal[i].deptId + "'>"; //list列表的id名称
+			//			if(operationList.select==1){
+			str += "<a href='#checkDept' title='查看科室信息' data-toggle='modal' onclick='checkDept(this)'><i class='fa fa-eye'></i></a> ";
+			//			}
+			//			if(operationList.update==1){
+			str += "<a href='#editDept' title='编辑科室信息' data-toggle='modal' onclick='editDept(this)'><i class='fa fa-pencil'></i></a> ";
+			//			}
+			//			if(operationList.delete==1){
+			str += "<a href='#' title='禁用科室信息' style='margin-right:5px' onclick='delDept(this)'><i class='fa fa-trash-o'></i></a>";
+			//			}
+			str += "<a title='员工信息' style='margin-right:5px' href='#' dept_status='" + datal[i].status + "'onclick='deptMsg(this)'><i class='fa fa-share-alt-square'></i></a>";
+			str += "<a href='#checkCharge' title='收费项列表' data-toggle='modal' onclick='getCharge(this)'><i class='fa fa-exchange''></i></a> ";
+			str += "</td>";
+			str += "<td>" + datal[i].departName + "</td>";
+			str += "<td>" + datal[i].dictDeptTypeName + "</td>";
+			if(datal[i].branchName.length > 10) {
+				str += "<td>" + datal[i].branchName.substring(0, 9) + "...</td>";
+			} else {
+				str += "<td>" + datal[i].branchName + "</td>";
+			}
+			str += "<td>" + datal[i].departParentName + "</td>";
+			str += "<td>" + datal[i].departCode + "</td>";
+			str += "<td>" + getLocalTime(datal[i].createtime) + "</td>";
+			if(datal[i].status == 0) {
+				str += "<td>" + '启用 ' + "</td>";
+			} else {
+				str += "<td>" + '禁用' + "</td>";
+			}
+			str += '</tr>';
+		}
+		$("#DeptTboody").append(str);
+		return false;
+	}
+	$('#searDept').on('click', function() {
+			deptSearch();
+			init_pager();
+			return false;
+		})
+		//  根据科室ID回显收费项信息
+	function getCharge(check) {
+		var ChargeDeptId = $(check).parent().attr("deptid");
+		var param = {
+			"deptId": ChargeDeptId
+		};
+		$("#chargeList").empty();
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(getItemByDeptidUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			var chargeData = reqResult.data;
+			var str = '';
+			for(var i = 0; i < chargeData.length; i++) {
+				str += "<tr>";
+				str += "<td>" + chargeData[i].examFeeItemName + "</td>";
+				str += "</tr>";
+			}
+			$("#chargeList").append(str);
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//  获取门店和科室信息并传值
+	function deptMsg(deptMsg) {
+		var dept_status = $(deptMsg).attr('dept_status');
+		var branchId = $(deptMsg).parent().attr('branchId');
+		var deptId = $(deptMsg).parent().attr('deptId');
+		var urlOrgUser = "/org_plat/pages/employee/organizationUser.html";
+		if(dept_status == 0) {
+			loadpageTid(urlOrgUser, branchId, deptId);
+		} else {
+			confirm('该门店状态未启用！');
+		}
+	}
+	//  添加信息时回显级联下拉框
+	$('#addDepartInfo').on('click', function() {
+			if(deptJumpParam) {
+				getBranchName("#addbranchName", '1');
+				$('#addbranchName').val($("#branch").val());
+				$('#addbranchName').attr('disabled', true);
+				SuperiorDepartment($('#addbranchName').val(), '#addpDepartName', '1');
+				getOrgUserByBranchId($("#addbranchName").val(), '#addDepartUserName', '1');
+				departmentType();
+			} else {
+				$('#addbranchName').attr('disabled', false);
+				getBranchName("#addbranchName", '1');
+				$("#addbranchName").val('');
+				getOrgUserByBranchId($("#addbranchName").val(), '#addDepartUserName', '1');
+				departmentType();
+			}
+		})
+		//  添加保存信息
+	$('#addDeptSubmit').on('click', function() {
+			var addbranchName = $('#addbranchName').val();
+			var addpDepartName = $('#addpDepartName').val();
+			var adddepartName = $('#adddepartName').val();
+			var addDepartNameAbr = $('#addDepartNameAbr').val();
+			var addDepartNameEng = $('#addDepartNameEng').val();
+			var addDepartNameEngAbr = $('#addDepartNameEngAbr').val();
+			var addDepartType = $('#addDepartType').val();
+			var addDepartCode = $('#addDepartCode').val();
+			var addNote = $('#addNote').val();
+			if(addbranchName == '' || addpDepartName == '' || adddepartName == '' || addDepartNameAbr == '' ||
+				addDepartNameEng == '' || addDepartNameEngAbr == '' || addDepartType == '' || addDepartCode == '' ||
+				addNote == '') {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				var param = {
+					"branchId": addbranchName,
+					"departParentId": addpDepartName,
+					"departName": adddepartName,
+					"departNameAbr": addDepartNameAbr,
+					"departNameEng": addDepartNameEng,
+					"departNameEngAbr": addDepartNameEngAbr,
+					"departType": addDepartType,
+					"departCode": addDepartCode,
+					"note": addNote
+				}
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(addOrgDeptUrl, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("添加成功");
+					$('#addDept').modal("toggle");
+					$(".modal-backdrop").remove(); //删除class值为modal-backdrop的标签，可去除阴影
+					loadpage("/org_plat/pages/store/departments.html");
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		})
+		//	查看回显信息
+	function checkDept(check) {
+		var editDept_id = $(check).parent().attr("deptid");
+		var param = {
+			"pid": editDept_id
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(getOrgDeptByIdUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			//初始化门店下拉框
+			getBranchName("#checkBranchId", '1');
+			$('#checkBranchId').val(reqResult.data.branchId);
+			//定义上级科室
+			SuperiorDepartment(reqResult.data.branchId, '#checkDepartParentId', '1');
+			$('#checkDepartParentId').val(reqResult.data.departParentId);
+			//			科室负责人
+			getOrgUserByBranchId($('#checkBranchId').val(), '#checkDepartUserName', '1');
+			$('#checkDepartUserName').val(reqResult.data.departManagerId);
+			//科室名称
+			$('#checkDepartName').val(reqResult.data.departName);
+			//科室名称简写
+			$('#checkDepartNameAbr').val(reqResult.data.departNameAbr);
+			//科室英文名称
+			$('#checkDepartNameEng').val(reqResult.data.departNameEng);
+			//科室英文名称简写
+			$('#checkDepartNameEngAbr').val(reqResult.data.departNameEngAbr);
+			//科室类型
+			departmentType();
+			$('#checkDepartType').val(reqResult.data.departType);
+			//科室编码
+			$('#checkDepartCode').val(reqResult.data.departCode);
+			//备注
+			$('#checkNote').val(reqResult.data.note);
+			//创建时间
+			$('#checkCreatetime').val(getLocalTime(reqResult.data.createtime));
+			//状态
+			if(reqResult.data.status == 0) {
+				$('#checkStatus input')[0].checked = "checked";
+			} else {
+				$('#checkStatus input')[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//  删除信息
+	function delDept(del_li) {
+		if(confirm("确认禁用该科室信息吗？")) {
+			var del_user_id = $(del_li).parent().attr("deptid");
+			var param = {
+				"pid": del_user_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(deleteOrgDeptUrl, param, otype, osync);
+			if(reqResult.result == 0) {
+				if(reqResult.data == 0) {
+					alert('该科室不符合禁用条件，请核实后操作！');
+					loadpage("/org_plat/pages/store/departments.html");
+				} else {
+					alert("禁用成功！");
+					loadpage("/org_plat/pages/store/departments.html");
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+	//	編輯回显信息
+	function editDept(edit_li) {
+		var editDept_id = $(edit_li).parent().attr("deptid");
+		var param = {
+			"pid": editDept_id
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(getOrgDeptByIdUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#orgDeptId').val(reqResult.data.orgDeptId); //回显
+			//初始化门店下拉框
+			getBranchName("#editBranchId", '1');
+			$('#editBranchId').val(reqResult.data.branchId);
+			//			科室负责人
+			getOrgUserByBranchId($('#editBranchId').val(), '#editDepartUserName', '1');
+			$('#editDepartUserName').val(reqResult.data.departManagerId);
+			//定义上级科室
+			SuperiorDepartment(reqResult.data.branchId, '#editDepartParentId', '1');
+			$('#editDepartParentId').val(reqResult.data.departParentId);
+			//科室名称
+			$('#editDepartName').val(reqResult.data.departName);
+			//科室名称简写
+			$('#editDepartNameAbr').val(reqResult.data.departNameAbr);
+			//科室英文名称
+			$('#editDepartNameEng').val(reqResult.data.departNameEng);
+			//科室英文名称简写
+			$('#editDepartNameEngAbr').val(reqResult.data.departNameEngAbr);
+			//科室类型
+			departmentType();
+			$('#editDepartType').val(reqResult.data.departType);
+			//科室编码
+			$('#editDepartCode').val(reqResult.data.departCode);
+			//创建时间
+			$('#editNote').val(reqResult.data.note);
+			//状态
+			if(reqResult.data.status == 0) {
+				$('#editStatus input')[0].checked = "checked";
+			} else {
+				$('#editStatus input')[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//  编辑保存信息
+	$('#editDeptSave').on('click', function() {
+			var edit_branchId = $('#editbranchId').val();
+			var edit_departParentId = $('#editdepartParentId').val();
+			var edit_departManagerId = $('#editdepartManagerId').val();
+			var edit_departName = $('#editdepartName').val();
+			var edit_departHisType = $('#editdepartHisType').val();
+			var edit_departCode = $("#editdepartCode");
+			var edit_status = $('#editstatus input').val();
+			if(edit_branchId == '' || edit_departParentId == '' || edit_departManagerId == '' || edit_departName == '' || edit_departHisType == '' || edit_departCode == '' || edit_status == '') {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				var param = $('#editDeptForm').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(updateOrgDeptUrl, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功!');
+					$('#editDept').modal("toggle");
+					$(".modal-backdrop").remove(); //删除class值为modal-backdrop的标签，可去除阴影
+					loadpage("/org_plat/pages/store/departments.html");
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		})
+		//	添加时级联门店科室
+	$('#addbranchName').on('change', function() {
+			var addbranchName = $('#addbranchName').val();
+			SuperiorDepartment(addbranchName, '#addpDepartName', '1');
+			//			科室负责人
+			getOrgUserByBranchId($('#addbranchName').val(), '#addDepartUserName', '1');
+		})
+		//	编辑时级联门店科室
+	$('#editBranchId').on('change', function() {
+		var editBranchId = $('#editBranchId').val();
+		SuperiorDepartment(editBranchId, '#editDepartParentId', '1');
+		getOrgUserByBranchId($('#editBranchId').val(), '#editDepartUserName', '1');
+	})
+</script>

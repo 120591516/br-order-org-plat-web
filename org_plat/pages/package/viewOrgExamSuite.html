@@ -1,0 +1,300 @@
+<section class="content">
+	<div class="box container-fluid no-margin">
+		<div class="box-header">
+			<div class="row margin-bottom">
+				<div class="col-md-11">
+					<h3 class="box-title">查看套餐</h3>
+				</div>
+				<div class="col-md-1 text-right">
+					<div class="input-group">
+						<a onclick='loadpage("/org_plat/pages/package/packAge.html")' class="btn btn-default">返回</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row margin-bottom">
+			<form class="form-horizontal" id="addPackInfor">
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">套餐名称</span>
+									<input type="text" class="form-control" id="examSuiteName" placeholder="套餐名称" name="examSuiteName" disabled>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">套餐英文名称</span>
+									<input type="text" class="form-control" id="examSuiteNameEng" placeholder="套餐英文名称" name="examSuiteNameEng" disabled>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">套餐输入码</span>
+									<input type="text" class="form-control" id="examSuiteInputCode" placeholder="套餐输入码" name="examSuiteInputCode" disabled>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">套餐代码</span>
+									<input type="text" class="form-control" id="examSuiteCode" placeholder="套餐代码" name="examSuiteCode" disabled>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">套餐价格</span>
+									<input type="text" class="form-control" id="examSuitePrice" placeholder="套餐价格" name="examSuitePrice" disabled>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">优惠价</span>
+									<input type="text" class="form-control" id="examSuiteDiscountPrice" placeholder="优惠价" name="examSuiteDiscountPrice" disabled>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon userlist_status_right_border">适用性别</span>
+									<label class="radio-inline">
+								        <input type="checkbox" id="examSuiteMale" name="examSuiteMale"  value="1" disabled />男
+						      	    </label>
+									<label class="radio-inline">
+								        <input type="checkbox"  id="examSuiteFemale" name="examSuiteFemale"  value="1" disabled/>女
+							        </label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="form-group">
+						<span class="col-md-1 span-self-style" for="lunch">套餐类型</span>
+						<div id="selectTypes"></div>
+						<input type="hidden" id="typeList" name="typeList" />
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="form-group">
+						<span class="col-md-1 span-self-style" for="lunch">高发疾病</span>
+						<div id="selectHids"></div>
+						<input type="hidden" id="highIncidenceDiseaseList" name="highIncidenceDiseaseList" />
+						</div>
+						</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">警告人数</span>
+									<input type="text" class="form-control" id="examSuiteWarnPeople" placeholder="警告人数" name="examSuiteWarnPeople" disabled>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">限制人数</span>
+									<input type="text" class="form-control" id="examSuiteLimitPeople" placeholder="限制人数" name="examSuiteLimitPeople" disabled>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">警告金额</span>
+									<input type="text" class="form-control" id="examSuiteWarnAmount" placeholder="警告金额" name="examSuiteWarnAmount" disabled>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">限制金额</span>
+									<input type="text" class="form-control" id="examSuiteLimitAmount" placeholder="限制金额" name="examSuiteLimitAmount" disabled>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-11">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">上传图片</span>
+									<div class="file-preview img_border">
+										<div id="edit_storeimg"></div>
+										<div class="clear"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-11">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">备注</span>
+									<textarea class="form-control" name="examSuiteNote" id="examSuiteNote" rows="3" id="textarea" style="resize:both;" disabled></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-md-12">
+						<div class="col-md-11">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">简介</span>
+									<textarea class="form-control" name="examSuiteSummary" id="examSuiteSummary" style="resize: both;" rows="3" id="textarea" disabled></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+	</div>
+</section>
+<script src="/org_plat/js/plugins/fileinput.js"></script>
+<script src="/org_plat/js/plugins/fileinput_locale_zh.js"></script>
+<script>
+	$(".img_border > #edit_storeimg >.float_left>.position_absolute").each(function() {
+		$(this).hover(function() {
+			$(this).animate({
+				width: 300,
+				height: 300,
+				top: -10,
+				left: 100
+			}, 500);
+			$(this).css("z-index", 999);
+			$(this).parent().removeClass("store_img_borderdiv ");
+		}, function() {
+			$(this).animate({
+				width: 250,
+				height: 250,
+				top: 0,
+				left: 125
+			}, 500);
+			$(this).css("z-index", 0);
+			$(this).parent().addClass("store_img_borderdiv");
+		});
+	});
+	//数据回显
+
+	var packageId = window.location.href.split('=')[1];
+	$('#typeList').val("");
+	$('#selectTypes').html("");
+	var otype = "GET"
+	var osync = false;
+	var param = {
+		"idOrgExamSuite": packageId
+	};
+	var reqResult = httpRequest(packAge_show, param, otype, osync);
+	if(reqResult.result == 0) {
+		$("#examSuiteName").val(reqResult.data.examSuiteName);
+		$("#examSuiteNameEng").val(reqResult.data.examSuiteNameEng);
+		$("#examSuiteInputCode").val(reqResult.data.examSuiteInputCode);
+		$("#examSuiteCode").val(reqResult.data.examSuiteCode);
+		$("#examSuitePrice").val(reqResult.data.examSuitePrice);
+		$("#examSuiteDiscountPrice").val(reqResult.data.examSuiteDiscountPrice);
+		$("#orgExamSuiteSex").val(reqResult.data.orgExamSuiteSex);
+		$("#typeList").val(reqResult.data.typeList);
+		var orgExamSuiteTypeVo = reqResult.data.orgExamSuiteTypeVo,
+			orgExamSuiteHidVo = reqResult.data.orgExamSuiteHidVo,
+			orgExamSuiteImgVo = reqResult.data.orgExamSuiteImgVo,
+			str = '';
+		if(orgExamSuiteHidVo != null && orgExamSuiteHidVo.length > 0) {
+			var isFrist = true,
+				hids;
+			for(var i = 0; i < orgExamSuiteHidVo.length; i++) {
+				if(!isFrist) {
+					hids = hids + "," + orgExamSuiteHidVo[i].highIncidenceDiseaseId;
+				} else {
+					hids = orgExamSuiteHidVo[i].highIncidenceDiseaseId;
+				}
+				$("#highIncidenceDiseaseList").val(hids);
+				isFrist = false;
+				$('#selectHids').append("<input type='checkbox' checked disabled>" +
+					orgExamSuiteHidVo[i].highIncidenceDiseaseName);
+
+			}
+		}
+		//添加体检套餐类型
+		if(orgExamSuiteTypeVo != null && orgExamSuiteTypeVo.length > 0) {
+			var isFrist = true,
+				types;
+			for(var i = 0; i < orgExamSuiteTypeVo.length; i++) {
+				if(!isFrist) {
+					types = types + "," + orgExamSuiteTypeVo[i].examTypeId;
+				} else {
+					types = orgExamSuiteTypeVo[i].examTypeId;
+				}
+				$("#typeList").val(types);
+				isFrist = false;
+
+				$('#selectTypes').append("<input type='checkbox' checked disabled >" +
+					orgExamSuiteTypeVo[i].examTypeName);
+
+			}
+		}
+		if(orgExamSuiteImgVo != null && orgExamSuiteImgVo.length > 0) {
+			for(var i = 0; i < orgExamSuiteImgVo.length; i++) {
+				str += '<div id="' + orgExamSuiteImgVo[i].dictImgId + '" class="float_left store_img_borderdiv position_relative"><div class="position_absolute" style="background-image:url(' + oplatIp + orgExamSuiteImgVo[i].imgLocation + ');"><a href="javascript:removeUploadImg(' + orgExamSuiteImgVo[i].dictImgId + ')" ></a></div></div>';
+			}
+		}
+		$("#edit_storeimg").append(str);
+		if(reqResult.data.examSuiteMale == 0) {
+			document.getElementById("examSuiteMale").checked = true
+		}
+		if(reqResult.data.examSuiteFemale == 0) {
+			document.getElementById("examSuiteFemale").checked = true
+		}
+
+		$("#examSuiteWarnPeople").val(reqResult.data.examSuiteWarnPeople);
+		$("#examSuiteWarnAmount").val(reqResult.data.examSuiteWarnAmount);
+		$("#examSuiteLimitPeople").val(reqResult.data.examSuiteLimitPeople);
+		$("#examSuiteLimitAmount").val(reqResult.data.examSuiteLimitAmount);
+		$("#examSuiteNote").val(reqResult.data.examSuiteNote);
+		$("#examSuiteSummary").val(reqResult.data.examSuiteSummary);
+	} else {
+		alert(reqResult.message);
+	}
+</script>

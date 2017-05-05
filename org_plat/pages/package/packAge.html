@@ -1,0 +1,381 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<div class="margin-bottom">
+		<h2><small>套餐</small></h2></div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">套餐</a>
+		</li>
+		<li class="active">套餐</li>
+	</ol>
+	<div class="box container-fluid no-margin">
+		<!--box-header -->
+		<div class="box-header">
+			<div class="row margin-bottom">
+				<div class="col-xs-12 col-md-8">
+					<h3 class="box-title">搜索</h3>
+				</div>
+				<div class="col-xs-6 col-md-4  text-right">
+					<a id="addSuite" class="btn btn-default" onclick="Judge('packAdd')">添 加</a>
+				</div>
+			</div>
+			<div class="row margin-bottom">
+				<form class="form-group container-fluid">
+					<div class="row margin-bottom">
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">名称</span> <input type="text" class="form-control" id="examSuiteName" placeholder="名称">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">代码</span> <input type="text" class="form-control" id="examSuiteCode" placeholder="代码">
+								</div>
+							</div>
+
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">输入码</span> <input type="text" class="form-control" id="examSuiteInputCode" placeholder="名称">
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">性别</span>
+									<select class="form-control selectpicker" id="examSuiteSex">
+										<option value="please">请选择</option>
+										<option value="0">通用</option>
+										<option value="1">男</option>
+										<option value="2">女</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">价格区间</span> <input type="text" class="form-control" id="priceStart" placeholder="￥"> <span class="input-group-btn"> <span class="btn" type="button">-</span>
+									</span> <input type="text" class="form-control" id="priceEnd" placeholder="￥">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">类型</span>
+									<select class="form-control selectpicker suiteTypeId" id="suiteTypeId">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-6 col-md-offset-6">
+								<div class="input-group pull-right">
+									<a class="btn btn-primary fa fa-search" id="mecSearch">搜 索</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- /.box-header -->
+	</div>
+</section>
+
+<!-- /Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+				</div>
+				<div class="box-body">
+					<table class="table table-bordered table-striped" id="example3">
+						<thead>
+							<tr>
+								<th>操作</th>
+								<th>名称</th>
+								<th>代码</th>
+								<th>英文名称</th>
+								<th>价格</th>
+								<th>输入码</th>
+								<th>日检查量</th>
+								<th>日警告量</th>
+								<th>适用性别</th>
+								<th>类型</th>
+							</tr>
+						</thead>
+						<tbody id="mainContent">
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /Main content -->
+<!--设置阀值模态框-->
+<div class="modal fade" id="limitPeopleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<input type="hidden" id="type" />
+				<input type="hidden" id="id" />
+				<span class="title"></span>
+				<div>
+					<span>日检查量</span><input type="text" class="form-control" id="limitPeople" placeholder="请输入日检查量">
+				</div>
+				<div>
+					<span>日警告量</span><input type="text" class="form-control" id="warnPeople" placeholder="请输入日警告量">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="setLimitPeople">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/org_plat/js/plugins/extendPagination.js"></script>
+<script type="text/javascript">
+	$('#mainContent').empty();
+	suiteSearch();
+	init_pager();
+	suiteTypeId();
+	page_curr = 1;
+
+	function suiteSearch() {
+		$('#mainContent').empty();
+		var examSuiteName = $('#examSuiteName').val().trim();
+		var examSuiteCode = $('#examSuiteCode').val().trim();
+		var examSuiteSex = $('#examSuiteSex').val().trim();
+		var examSuiteInputCode = $('#examSuiteInputCode').val().trim();
+		var priceStart = $('#priceStart').val().trim();
+		var priceEnd = $('#priceEnd').val().trim();
+		var suiteTypeId = $('#suiteTypeId').val();
+		var param = {
+			"page": page_curr,
+			"rows": 10
+		};
+
+		if(examSuiteName) {
+			param.examSuiteName = examSuiteName;
+		}
+		if(examSuiteCode) {
+			param.examSuiteCode = examSuiteCode;
+		}
+		if(examSuiteInputCode) {
+			param.inputCode = examSuiteInputCode;
+		}
+		if(priceStart) {
+			param.priceStart = priceStart;
+		}
+		if(priceEnd) {
+			param.priceEnd = priceEnd;
+		}
+		if(examSuiteSex != 'please') {
+			param.examSuiteSex = examSuiteSex;
+		}
+		if(suiteTypeId != 'please' && suiteTypeId != null && suiteTypeId != 0) {
+			param.suiteTypeId = suiteTypeId;
+		}
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(packAgeSearchOul, param, otype, osync);
+		if(reqResult.result == 0) {
+			total_count = reqResult.data.total;
+			createTable(page_curr, limit, total_count, reqResult);
+			return false;
+		}
+	}
+
+	// 初始化分页信息
+	function init_pager() {
+		$('#callBackPager').extendPagination({
+			totalCount: total_count,
+			showCount: count_curr,
+			limit: limit,
+			callback: function(curr, limit, totalCount) {
+				page_curr = curr;
+				total_count = totalCount;
+				suiteSearch();
+			}
+		});
+	}
+
+	function createTable(currPage, limit, total, dataBack) {
+		var showNum = limit;
+		//获取操作类型
+//		var operationList = dataBack.operationList;
+//		//			判断添加按钮
+//		if(operationList.add == 1) {
+//			$('#addSuite').show();
+//		} else {
+//			$('#addSuite').hide();
+//		}
+		var str = '';
+		if(total - (currPage * limit) < 0)
+			showNum = total - ((currPage - 1) * limit);
+		for(var i = 0; i < showNum; i++) {
+			data = dataBack.data.list[i];
+			var examSuiteId = '"' + data.examSuiteId + '"';
+			var urlView = "'/org_plat/pages/package/viewOrgExamSuite.html?id=" + data.examSuiteId + "'";
+			var urlEidt = '"/org_plat/pages/package/addPackAge.html?id=' + data.examSuiteId + '"';
+			var urlFeeItem = "'/org_plat/pages/package/packAgeFeeItemView.html?id=" + data.examSuiteId + "'";
+			str += "<tr><td idOrgExamSuite='" + data.examSuiteId + "' name='" + data.examSuiteName + "' people='" + data.examSuiteLimitPeople + "' wPeople='" + data.examSuiteWarnPeople + "' >";
+//			if(operationList.select==1){
+			    str += '<a onclick="loadpage(' + urlView + ')" style="margin-right:5px" title="查看信息"><i class="fa fa-eye"></i></a>';
+//			}
+//          if(operationList.update==1){
+			    str += "<a style='margin-right:5px' title='编辑信息' onclick='loadpage(" + urlEidt + ")'><i class='fa fa-pencil'></i></a>";
+//          }
+//          if(operationList.delete==1){
+			    str += "<a style='margin-right:5px' title='删除信息'  onclick='del_packAge(this)'><i class='fa fa-trash-o'></i></a>";
+//          }
+			str += '<a style="margin-right:5px" title="查看收费项信息" onclick="loadpage(' + urlFeeItem + ')"><i class="fa fa-jpy"></i></a>';
+			str += "<a data-toggle='modal' href='#limitPeopleModal'  title='设置阀值' onclick='openModel(this,2)' href='#limitPeopleModal' ><i class='fa fa-cog'></i></a></td>";
+			if(data.examSuiteName.length > 10) {
+				str += "<td>" + data.examSuiteName.substring(0, 9) + "..." + "</td>";
+			} else {
+				str += "<td>" + data.examSuiteName + "</td>";
+			}
+			str += "<td>" + data.examSuiteCode + "</td>";
+			str += "<td>" + data.examSuiteNameEng + "</td>";
+			str += "<td>" + data.examSuitePrice + "</td>";
+			str += "<td>" + data.examSuiteInputCode + "</td>";
+			str += "<td>" + data.examSuiteLimitPeople + "</td>";
+			str += "<td>" + data.examSuiteWarnPeople + "</td>";
+			str += "<td>" + data.orgExamSuiteSex + "</td>";
+			if(data.typeNameList == '' ||data.typeNameList == null) {
+				str += "<td>空</td>";
+			}else if(data.typeNameList.length > 10){
+				str += "<td>" + data.typeNameList.substring(0, 9) + "...</td>";
+			}else{
+				str += "<td>" + data.typeNameList + "</td>";
+			}
+			str += "</tr>";
+		}
+		$("#mainContent").append(str);
+		return false;
+	}
+
+	function del_packAge(del_li) {
+		if(confirm("确认删除该套餐吗？")) {
+			var delPackage = $(del_li).parent().attr("idOrgExamSuite");
+			var param = {
+				"idOrgExamSuite": delPackage
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(packAge_Dele, param, otype, osync);
+			if(reqResult.data > 0) {
+				alert("删除成功");
+				suiteSearch();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+
+	function Judge(param) {
+		var urlAdd = "/org_plat/pages/package/addPackAge.html?id=packAdd";
+		if(param == "packAdd") {
+			loadpage(urlAdd);
+			//			loadpageLi("/org_plat/pages/package/addPackAge.html","packAdd");
+		}
+	}
+
+	$('#mecSearch').on('click', function() {
+		suiteSearch();
+		init_pager();
+		return false;
+	});
+	var $type = $('#type'),
+		$id = $('#id'),
+		$limitPeople = $('#limitPeople'),
+		$warnPeople = $('#warnPeople'),
+		$setLimitPeople = $('#setLimitPeople'),
+		$title = $('.title'),
+		postUrl,
+		id,
+		name,
+		limitPeopleOld,
+		warnPeopleOld;
+	//打开选择框
+	function openModel(idthis, type) {
+		id = $(idthis).parent().attr("idOrgExamSuite");
+		limitPeopleOld = $(idthis).parent().attr("people");
+		warnPeopleOld = $(idthis).parent().attr("wPeople");
+		name = $(idthis).parent().attr("name");
+		$type.val(type);
+		$setLimitPeople.val(limitPeopleOld);
+		$id.val(id);
+		$title.html(name);
+		$limitPeople.val(limitPeopleOld);
+		$warnPeople.val(warnPeopleOld);
+	}
+	//设置门店限制 保存 
+	$setLimitPeople.on('click', function() {
+		var param = {
+			limitPeople: $limitPeople.val(),
+			warnPeople: $warnPeople.val()
+		};
+
+		if($type.val() == 1) {
+			param.branchId = $id.val();
+			postUrl = liminal_value_branch_setting;
+		}
+		if($type.val() == 2) {
+			param.suiteId = $id.val();
+			postUrl = liminal_value_suite_setting;
+		}
+
+		var otype = "POST";
+		var osync = false;
+		if(validationParam(param, type)) {
+			return;
+		}
+		$type.val('');
+		$id.val('');
+		$limitPeople.val('');
+		$warnPeople.val('');
+		$title.html('')
+		var reqResult = httpRequest(postUrl, param, otype, osync);
+		if(reqResult.result == 0 && reqResult.data > 0) {
+			alert("设置成功");
+			suiteSearch();
+		}
+	});
+	//验证
+	function validationParam(param, type) {
+		if(type == 1 && (param.branchId == null || param.branchId == '' || param.branchId == "")) {
+			alert("请选择门店");
+			return true;
+		}
+		if(type == 2 && (param.suiteId == null || param.suiteId == '' || param.suiteId == "")) {
+			alert("请选择套餐");
+			return true;
+		}
+		if(param.limitPeople == null || param.limitPeople == '' || param.limitPeople == "") {
+			alert("请输入限制人数");
+			return true;
+		}
+		if(param.warnPeople == null || param.warnPeople == '' || param.warnPeople == "") {
+			alert("请输入限制人数");
+			return true;
+		}
+
+		return false;
+
+	}
+</script>

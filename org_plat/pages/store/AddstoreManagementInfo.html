@@ -1,0 +1,445 @@
+<!-- /Content Header (Page header) -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<!--box-header -->
+				<div class="box-header">
+					<div class="row">
+						<div class="col-md-11">
+							<h3 class="box-title">添加门店</h3>
+						</div>
+						<div class="col-md-1 text-right">
+							<div class="input-group">
+								<a class="btn btn-default" id='storeAdd_backbtn' onclick='loadpage("/org_plat/pages/store/storeManagement.html")'>返回</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<form class="bs-example-form" role="form" method="post" novalidate="novalidate" id='storeManagement_addform'>
+						<div class="row margin-bottom">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">门店名称</span>
+									<input type="text" id="add_branchName" class="form-control" name="branchName" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+								<div id="add_branchNameTip"></div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">门店代码</span>
+									<input type="text" id="add_branchCode" class="form-control" name="branchCode" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+								<div id="add_branchCodeTip"></div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group" id="add_branchArea">
+									<span class="input-group-addon">门店地区</span>
+									<select class="form-control selectpicker prov" name="branchProvinceId">
+									</select>
+									<span class="input-group-addon">市</span>
+									<select class="form-control selectpicker city" name="branchCityId">
+									</select>
+									<span class="input-group-addon">区</span>
+									<select class="form-control selectpicker dist" name="branchAreaId" id="branchAreaId">
+									</select>
+								</div>
+								<div id="branchAreaIdTip"></div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">详细地址</span>
+									<input type="text" id="add_detailed_branchArea" class="form-control" name="branchAddress" aria-describedby="basic-addon1" required>
+								</div>
+								<div id="add_detailed_branchAreaTip"></div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">警告人数</span>
+									<input type="text" id="add_warnPeople" class="form-control" name="warnPeople" aria-describedby="basic-addon1" required>
+								</div>
+								<div id="add_warnPeopleTip"></div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">警告金额</span>
+									<input type="text" id="add_warnAmount" class="form-control" name="warnAmount" aria-describedby="basic-addon1" required>
+									<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+								</div>
+								<div id="add_warnAmountTip"></div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">限制人数</span>
+									<input type="text" id="add_limitPeople" class="form-control" name="limitPeople" aria-describedby="basic-addon1" required>
+								</div>
+								<div id="add_limitPeopleTip"></div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">限制金额</span>
+									<input type="text" id="add_limitAmount" class="form-control" name="limitAmount" aria-describedby="basic-addon1" required>
+									<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+								</div>
+								<div id="add_limitAmountTip"></div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon userlist_status_right_border">拆分套餐</span>
+									<input type="radio" id="add_splitSuite_0" name="splitSuite" value="0" aria-describedby="basic-addon1" required checked="checked">是
+									<input type="radio" id="add_splitSuite_1" name="splitSuite" value="1" aria-describedby="basic-addon1" required>否
+								</div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-4">
+								<div class="input-group">
+									<input type="hidden" name="examStartTime" id='add_examStartTime_hid' />
+									<!--<input type="hidden" name="examEndTime" id='add_exameEndTime_hid' />-->
+									<span class="input-group-addon">体检开始时间</span>
+									<span class="input-group-addon">时</span>
+									<select class="form-control selectpicker" id="add_examStartTime_h">
+										<option value="00">00</option>
+										<option value="01">01</option>
+										<option value="02">02</option>
+										<option value="03">03</option>
+										<option value="04">04</option>
+										<option value="05">05</option>
+										<option value="06">06</option>
+										<option value="07">07</option>
+										<option value="08">08</option>
+										<option value="09">09</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+									</select>
+									<span class="input-group-addon">分</span>
+									<select class="form-control selectpicker" id="add_examStartTime_m">
+										<option value="00">00</option>
+										<option value="05">05</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="25">25</option>
+										<option value="30">30</option>
+										<option value="35">35</option>
+										<option value="40">40</option>
+										<option value="45">45</option>
+										<option value="50">50</option>
+										<option value="55">55</option>
+									</select>
+								</div>
+								<div id="add_examStartTime_hTip"></div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<!--<input type="hidden" name="examStartTime" id='add_examStartTime_hid' />-->
+									<input type="hidden" name="examEndTime" id='add_exameEndTime_hid' />
+									<span class="input-group-addon">体检结束时间</span>
+									<span class="input-group-addon">时</span>
+									<select class="form-control selectpicker" id="add_examEndTime_h">
+										<option value="00">00</option>
+										<option value="01">01</option>
+										<option value="02">02</option>
+										<option value="03">03</option>
+										<option value="04">04</option>
+										<option value="05">05</option>
+										<option value="06">06</option>
+										<option value="07">07</option>
+										<option value="08">08</option>
+										<option value="09">09</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+									</select>
+									<span class="input-group-addon">分</span>
+									<select class="form-control selectpicker" id="add_examEndTime_m">
+										<option value="00">00</option>
+										<option value="05">05</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="25">25</option>
+										<option value="30">30</option>
+										<option value="35">35</option>
+										<option value="40">40</option>
+										<option value="45">45</option>
+										<option value="50">50</option>
+										<option value="55">55</option>
+									</select>
+								</div>
+								<div id="add_examEndTime_hTip"></div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-11">
+								<div class="input-group">
+									<span class="input-group-addon">门店说明</span>
+									<textarea name="note" class="form-control" id="add_note"></textarea>
+								</div>
+								<div id="add_noteTip"></div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-11">
+								<div class="input-group">
+									<span class="input-group-addon">门店介绍</span>
+									<textarea name="summary" class="form-control"  id="add_summary"></textarea>
+								</div>
+								<div id="add_summaryTip"></div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">门店照片</span>
+									<input id="add_storeManagement_picture" class="file" type="file" name="file" multiple data-min-file-count="1">
+									<input type="hidden" name="imgId" id="add_imgId" value="" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-md-push-6">
+								<div class="input-group">
+									<button type="button" class="btn btn-primary" id='add_store_btn'>添加</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<script src="/org_plat/js/create/Ajax.js"></script>
+<script src="/org_plat/js/plugins/formValidator-4.0.1.js"></script>
+<script src="/org_plat/js/plugins/formValidatorRegex.js"></script>
+<script>
+	$(document).ready(function() {
+		prov_init();
+		//表单验证
+		$.formValidator.initConfig({
+			submitButtonID: "add_store_btn",
+			debug: true,
+			onSuccess: function() {
+				addStoreInfo();
+			},
+			onError: function() {
+				alert("添加失败，请根据网页提示重新添加!")
+			}
+		});
+		//门店代码
+		$("#add_branchCode").formValidator({
+			onShow: "请输入门店代码!",
+			onFocus: "只能输入数字!",
+			onCorrect: "输入正确"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "只能输入数字，请重新输入!"
+		});
+		//门店名称
+		$("#add_branchName").formValidator({
+			onShow: "请输入门店名称!",
+			onFocus: "请输入门店名称!",
+			onCorrect: "输入正确!"
+		}).inputValidator({
+			min: 2,
+			onError: "内容长度错误,请重新输入!"
+		});
+		//门店地区
+		$("#branchAreaId").formValidator({
+			onShow: "请选择门店所属地区",
+			onFocus: "门店所属地区必须选择",
+			onCorrect: "已选择"
+		}).inputValidator({
+			min: 1,
+			onError: "所属地请选择到区!"
+		});
+		//详细地址
+		$("#add_detailed_branchArea").formValidator({
+				onShow: "请输入详细地址",
+				onFocus: "详细地址至少2个字符,最多50个字符"
+			}).inputValidator({
+				min: 2,
+				max: 50,
+				onError: "你输入的详细地址非法,请确认"
+			})
+			//警告人数
+		$("#add_warnPeople").formValidator({
+			onShow: "请输入警告人数数量!",
+			onFocus: "只能输入数字!",
+			onCorrect: "输入正确"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "只能输入数字，请重新输入!"
+		});
+		//警告金额
+		$("#add_warnAmount").formValidator({
+			onShow: "请输入警告金额数目!",
+			onFocus: "只能输入数字!",
+			onCorrect: "输入正确"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "只能输入数字，请重新输入!"
+		});
+		//限制人数
+		$("#add_limitPeople").formValidator({
+			onShow: "请输入限制人数数量!",
+			onFocus: "只能输入数字!",
+			onCorrect: "输入正确"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "只能输入数字，请重新输入!"
+		});
+		//限制金额
+		$("#add_limitAmount").formValidator({
+			onShow: "请输入套餐编码",
+			onFocus: "只能输入数字!",
+			onCorrect: "输入正确"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "只能输入数字，请重新输入!"
+		});
+		//开始时间
+		$("#add_examStartTime_h").formValidator({
+			onShow: "请选择开始时间",
+			onFocus: "开始时间必须选择",
+			onCorrect: "已选择"
+		}).inputValidator({
+			min: 1,
+			onError: "还未选择开始时间!"
+		});
+		//结束时间
+		$("#add_examEndTime_h").formValidator({
+			onShow: "请选择开始时间",
+			onFocus: "开始时间必须选择",
+			onCorrect: "已选择"
+		}).inputValidator({
+			min: 1,
+			onError: "还未选择开始时间!"
+		});
+		//门店说明
+		$("#add_note").formValidator({
+			onShow: "请输入门店说明!",
+			onFocus: "请输入门店说明!",
+			onCorrect: "输入正确!"
+		}).inputValidator({
+			min: 2,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: '^[\u0391-\uFFE5]+$',
+			onError: "只能输入文字,请重新输入!"
+		});
+		//门店介绍
+		$("#add_summary").formValidator({
+			onShow: "请输入门店介绍!",
+			onFocus: "请输入门店介绍!",
+			onCorrect: "输入正确!"
+		}).inputValidator({
+			min: 2,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: '^[\u0391-\uFFE5]+$',
+			onError: "只能输入文字,请重新输入!"
+		});
+
+	})
+	var uploadImagesUrl = oplatIp + '/br-order-org-plat-controller/uploadImg/uploadImg'; //上传图片路径
+	$("#add_storeManagement_picture").fileinput({
+		uploadUrl: uploadImagesUrl, // you must set a valid URL here else you will get an error
+		allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg', 'bmp'],
+		overwriteInitial: false,
+		maxFileSize: 100000,
+		maxFilesNum: 10,
+		//allowedFileTypes: ['image', 'video', 'flash'],
+		slugCallback: function(filename) {
+			return filename.replace('(', '_').replace(']', '_');
+		}
+	})
+	$("#add_storeManagement_picture").on("fileuploaded", function(event, data, previewId, index) {
+		var id_length = $('.file-preview-frame').length;
+		var imgInfoLenth = $('#edit_storeimg div[role=imgInfo]').length;
+		var upload_imgs = [];
+		upload_imgs += [(data.response.imgId - id_length + 1) + 'A,']
+		for(var i = 0; i < id_length - 1; i++) {
+			upload_imgs += [(data.response.imgId - i) + ','];
+		}
+		$('#add_imgId').val('');
+		$('#add_imgId').val(upload_imgs);
+	});
+	//			添加门店信息
+	function addStoreInfo() {
+		//		开始时间/结束时间结束时
+		var add_examStartTime_h = $('#add_examStartTime_h').val();
+		var add_examStartTime_m = $('#add_examStartTime_m').val();
+		$('#add_examStartTime_hid').val(add_examStartTime_h + ':' + add_examStartTime_m);
+		var add_examEndTime_h = $('#add_examEndTime_h').val();
+		var add_examEndTime_m = $('#add_examEndTime_m').val();
+		$('#add_exameEndTime_hid').val(add_examEndTime_h + ':' + add_examEndTime_m);
+		var param = $('#storeManagement_addform').serialize();
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(storeManagement_addOrganizationBranch_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			alert("添加成功");
+			loadpage("/org_plat/pages/store/storeManagement.html");
+		} else {
+			alert(reqResult.message);
+		}
+	}
+</script>
+<script src="/org_plat/js/plugins/fileinput.js"></script>
+<script src="/org_plat/js/plugins/fileinput_locale_zh.js"></script>

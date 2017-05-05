@@ -1,0 +1,262 @@
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box width_70">
+				<div class="box-header">
+					<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">查看体检项</h3>
+					<a class="btn btn-default" onclick='loadpage("/org_plat/pages/businessDictionary/examinationItem.html")'>返回</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="box width_70">
+		<div class="box-body">
+			<div class="row user_power_btn">
+				<form class="form-group container-fluid">
+					<div class="row margin-bottom">
+						<div class="col-md-2 col-md-offset-5">
+							<h4 class="box-title">基本信息</h4>
+						</div>
+					</div>
+					<div class="col-md-5 col-md-push-1">
+                        <div class="input-group margin-bottom">
+							<span class="input-group-addon">体检项名称</span>
+							<input type="text" class="form-control" name="examItemName" id="checkExamItemName" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">体检项名称简称</span>
+							<input type="text" class="form-control" name="examItemNameAbr" id="checkExamItemNameAbr" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">体检项英文名称</span>
+							<input type="text" class="form-control" name="examItemNameEng" id="checkExamItemNameEng" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">体检项打印名称</span>
+							<input type="text" class="form-control" name="examItemNamePrn" id="checkExamItemNamePrn" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">体检项英文名称缩写</span>
+							<input type="text" class="form-control" name="examItemNameEngAbr" id="checkExamItemNameEngAbr" disabled="true">
+						</div>
+					</div>
+					<div class="col-md-5 col-md-push-1">
+                        <div class="input-group margin-bottom">
+							<span class="input-group-addon">体检项目代码</span>
+							<input type="text" class="form-control" name="examItemCode" id="checkExamItemCode" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">值类型</span>
+							<input type="text" class="form-control" name="examItemValueType" id="checkExamItemValueType" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">项目类型</span>
+							<select class="form-control getEitemId" id="checkExamItemTypeId" name="examItemTypeId" disabled="true">
+							</select>
+						</div>
+						<div class="input-group margin-bottom" id="checkSex">
+							<span class="input-group-addon userlist_status_right_border">适用性别</span>
+							<label class="radio-inline">
+								<input type="checkbox" value="1" name='fMale' id="checkfMale" disabled="disabled"> 适用男
+								<input type="hidden" name='fMale' id="editfMaleHidden" value="1">
+							</label>
+							<label class="radio-inline">
+								<input type="checkbox" value="1" name='fFemale' id="checkfFemale" disabled="disabled"> 适用女
+								<input type="hidden" name='fFemale' id="editfFemaleHidden" value="1">
+							</label>
+						</div>
+					</div>
+
+					<div class="row margin-bottom">
+						<div class="col-md-2 col-md-offset-5">
+							<h4 class="box-title">详细信息</h4>
+						</div>
+					</div>
+					<div class="col-md-5 col-md-push-1">
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">小结级别</span>
+							<input type="text" class="form-control" name="examItemConclusionLevel" id="checkExamItemConclusionLevel" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">小结标题</span>
+							<input type="text" class="form-control" name="examItemConclusionTitle" id="checkExamItemConclusionTitle" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">值单位</span>
+							<input type="text" class="form-control" name="examItemValueUnit" id="checkExamItemValueUnit" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">数值型增量</span>
+							<input type="text" class="form-control" name="examItemIncrement" id="checkExamItemIncrement" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">应用范围</span>
+							<input type="text" class="form-control" name="fUseAppMaxMin" id="checkfUseAppMaxMin" disabled="true">
+						</div>
+					</div>
+					<div class="col-md-5 col-md-push-1">
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">精度</span>
+							<input type="text" class="form-control" name="examItemNumPrecision" id="checkExamItemNumPrecision" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">含低值</span>
+							<input type="text" class="form-control" name="fIncludeMin" id="checkfIncludeMin" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">含高值</span>
+							<input type="text" class="form-control" name="fIncludeMax" id="checkfIncludeMax" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">表达式</span>
+							<input type="text" class="form-control" name="examItemExpression" id="checkExamItemExpression" disabled="true">
+						</div>
+					</div>
+
+					<div class="row margin-bottom">
+						<div class="col-md-2 col-md-offset-5">
+							<h4 class="box-title">男性信息</h4>
+						</div>
+					</div>
+					<div class="col-md-5 col-md-push-1">
+                        <div class="input-group margin-bottom">
+							<span class="input-group-addon">男性缺省值</span>
+							<input type="text" class="form-control" name="maleValueDef" id="checkMaleValueDef" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">男性上限</span>
+							<input type="text" class="form-control" name="maleValueMax" id="checkMaleValueMax" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">男性下限</span>
+							<input type="text" class="form-control" name="maleValueMin" id="checkMaleValueMin" disabled="true">
+						</div>
+					</div>
+					<div class="col-md-5 col-md-push-1">
+                        <div class="input-group margin-bottom">
+							<span class="input-group-addon">男性生命值上限</span>
+							<input type="text" class="form-control" name="maleValueSeverUp" id="checkMaleValueSeverUp" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">男性生命值下限</span>
+							<input type="text" class="form-control" name="maleValueServerDown" id="checkMaleValueServerDown" disabled="true">
+						</div>
+					</div>
+
+					<div class="row margin-bottom">
+						<div class="col-md-2 col-md-offset-5">
+							<h4 class="box-title">女性信息</h4>
+						</div>
+					</div>
+					<div class="col-md-5 col-md-push-1">
+                        <div class="input-group margin-bottom">
+							<span class="input-group-addon">女性缺省值</span>
+							<input type="text" class="form-control" name="femaleValueDef" id="checkfemaleValueDef" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">女性上限</span>
+							<input type="text" class="form-control" id="checkfemaleValueMax" name="femaleValueMax" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">女性下限</span>
+							<input type="text" class="form-control" name="femaleValueMin" id="checkfemaleValueMin" disabled="true">
+						</div>
+					</div>
+					<div class="col-md-5 col-md-push-1">
+                        <div class="input-group margin-bottom">
+							<span class="input-group-addon">女性生命值上限</span>
+							<input type="text" class="form-control" name="femaleValueServerUp" id="checkfemaleValueServerUp" disabled="true">
+						</div>
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">女性生命值下限</span>
+							<input type="text" class="form-control" name="femaleValueServerDown" id="checkfemaleValueServerDown" disabled="true">
+						</div>
+					</div>
+					<div class="col-md-10 col-md-push-1">
+						<div class="input-group margin-bottom">
+							<span class="input-group-addon">备注</span>
+							<input type="text" class="form-control" name="examItemNote" id="checkExamItemNote" disabled="true">
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+</section>
+<script>
+    var examItemId = window.location.href.split('=')[1];
+	var param = {
+		"orgExamItemId": examItemId
+	};
+	var otype = "get";
+	var osync = false;
+	var reqResult = httpRequest(getOrgExamItemByIdUrl, param, otype, osync);
+	if(reqResult.result == 0) {
+		var checkExamItemName = $('#checkExamItemName').val(reqResult.data.examItemName);
+		var checkExamItemNameAbr = $('#checkExamItemNameAbr').val(reqResult.data.examItemNameAbr);
+		var checkExamItemNamePrn = $('#checkExamItemNamePrn').val(reqResult.data.examItemNamePrn);
+		var checkExamItemNameEng = $('#checkExamItemNameEng').val(reqResult.data.examItemNameEng);
+		var checkExamItemNameEngAbr = $('#checkExamItemNameEngAbr').val(reqResult.data.examItemNameEngAbr);
+		var checkExamItemCode = $('#checkExamItemCode').val(reqResult.data.examItemCode);
+		var checkExamItemTypeName = $('#checkExamItemTypeName').val(reqResult.data.examItemTypeName);
+		var checkExamItemValueType = $('#checkExamItemValueType').val(reqResult.data.examItemValueType);
+		var checkExamItemValueUnit = $('#checkExamItemValueUnit').val(reqResult.data.examItemValueUnit);
+		var checkExamItemConclusionLevel = $('#checkExamItemConclusionLevel').val(reqResult.data.examItemConclusionLevel);
+		var checkExamItemConclusionTitle = $('#checkExamItemConclusionTitle').val(reqResult.data.examItemConclusionTitle);
+		var checkExamItemIncrement = $('#checkExamItemIncrement').val(reqResult.data.examItemIncrement);
+		var checkExamItemNumPrecision = $('#checkExamItemNumPrecision').val(reqResult.data.examItemNumPrecision);
+		var checkfUseAppMaxMin = $('#checkfUseAppMaxMin').val(reqResult.data.fUseAppMaxMin);
+		var checkfIncludeMin = $('#checkfIncludeMin').val(reqResult.data.fIncludeMin);
+		var checkfIncludeMax = $('#checkfIncludeMax').val(reqResult.data.fIncludeMax);
+		var checkExamItemExpression = $('#checkExamItemExpression').val(reqResult.data.examItemExpression);
+		var checkMaleValueDef = $('#checkMaleValueDef').val(reqResult.data.maleValueDef);
+		var checkMaleValueMin = $('#checkMaleValueMin').val(reqResult.data.maleValueMin);
+		var checkMaleValueMax = $('#checkMaleValueMax').val(reqResult.data.maleValueMax);
+		var checkMaleValueServerDown = $('#checkMaleValueServerDown').val(reqResult.data.maleValueServerDown);
+		var checkMaleValueSeverUp = $('#checkMaleValueSeverUp').val(reqResult.data.maleValueSeverUp);
+		var checkfemaleValueDef = $('#checkfemaleValueDef').val(reqResult.data.femaleValueDef);
+		var checkfemaleValueMin = $('#checkfemaleValueMin').val(reqResult.data.femaleValueMin);
+		var femaleValueMax = $('#checkfemaleValueMax').val(reqResult.data.femaleValueMax);
+		var checkfemaleValueServerDown = $('#checkfemaleValueServerDown').val(reqResult.data.femaleValueServerDown);
+		var checkfemaleValueServerUp = $('#checkfemaleValueServerUp').val(reqResult.data.femaleValueServerUp);
+		var checkExamItemNote = $('#checkExamItemNote').val(reqResult.data.examItemNote);
+		//初始化体检机构
+		getExamItemType();
+		$('#checkExamItemTypeId').val(reqResult.data.examItemTypeId);
+		$('#checkExamItemName').val(reqResult.data.examItemName);
+		$('#checkExamItemNameAbr').val(reqResult.data.examItemNameAbr);
+		$('#checkExamItemNamePrn').val(reqResult.data.examItemNamePrn);
+		$('#checkExamItemNameEng').val(reqResult.data.examItemNameEng);
+		$('#checkExamItemNameEngAbr').val(reqResult.data.examItemNameEngAbr);
+		$('#checkExamItemCode').val(reqResult.data.examItemCode);
+		$('#checkExamItemValueType').val(reqResult.data.examItemValueType);
+		$('#checkExamItemValueUnit').val(reqResult.data.examItemValueUnit);
+		$('#checkExamItemConclusionLevel').val(reqResult.data.examItemConclusionLevel);
+		$('#checkExamItemConclusionTitle').val(reqResult.data.examItemConclusionTitle);
+		$('#checkExamItemIncrement').val(reqResult.data.examItemIncrement);
+		$('#checkExamItemNumPrecision').val(reqResult.data.examItemNumPrecision);
+		$('#checkfUseAppMaxMin').val(reqResult.data.fUseAppMaxMin);
+		$('#checkfIncludeMin').val(reqResult.data.fIncludeMin);
+		$('#checkfIncludeMax').val(reqResult.data.fIncludeMax);
+		$('#checkExamItemExpression').val(reqResult.data.examItemExpression);
+		$('#checkMaleValueDef').val(reqResult.data.maleValueDef);
+		$('#checkMaleValueMin').val(reqResult.data.maleValueMin);
+		$('#checkMaleValueMax').val(reqResult.data.maleValueMax);
+		$('#checkMaleValueServerDown').val(reqResult.data.maleValueServerDown);
+		$('#checkMaleValueSeverUp').val(reqResult.data.maleValueSeverUp);
+		$('#checkfemaleValueDef').val(reqResult.data.femaleValueDef);
+		$('#checkfemaleValueMin').val(reqResult.data.femaleValueMin);
+		$('#checkfemaleValueMax').val(reqResult.data.femaleValueMax);
+		$('#checkfemaleValueServerDown').val(reqResult.data.femaleValueServerDown);
+		$('#checkfemaleValueServerUp').val(reqResult.data.femaleValueServerUp);
+		$('#checkExamItemNote').val(reqResult.data.examItemNote);
+		(reqResult.data.fMale === 0) ? $("#checkfMale").attr('checked', 'checked'): null;
+		(reqResult.data.fFemale === 0) ? $("#checkfFemale").attr('checked', 'checked'): null;
+		console.log(reqResult)
+	} else {
+		alert(reqResult.message);
+	}
+</script>

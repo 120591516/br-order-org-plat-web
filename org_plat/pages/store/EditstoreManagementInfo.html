@@ -1,0 +1,445 @@
+<!-- /Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<!--box-header -->
+				<div class="box-header">
+					<div class="row">
+						<div class="col-md-11">
+							<h3 class="box-title">编辑门店</h3>
+						</div>
+						<div class="col-md-1 text-right">
+							<div class="input-group">
+								<a class="btn btn-default" id='storeEdit_backbtn' onclick="loadpage('/org_plat/pages/store/storeManagement.html')">返回</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<form class="bs-example-form" role="form" id="edit_form">
+						<input type="hidden" name="branchId" id="edit_storeinput_hid" value="" />
+
+						<div class="row margin-bottom">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">门店代码</span>
+									<input type="text" id="edit_branchCode" class="form-control" name="branchCode" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+							<span class='store_checkbranchCode'></span>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">门店名称</span>
+									<input type="text" id="edit_branchName" class="form-control" name="branchName" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+							<span class='store_checkbranchName'></span>
+							<div class="col-md-4">
+								<div class="input-group" id="edit_branchArea">
+									<span class="input-group-addon">所在地区</span>
+									<select class="form-control selectpicker prov" id='edit_prov' name="branchProvinceId">
+									</select>
+									<span class="input-group-addon">市</span>
+									<select class="form-control selectpicker city" id='edit_city' name="branchCityId">
+									</select>
+									<span class="input-group-addon">区</span>
+									<select class="form-control selectpicker dist" id='edit_dist' name="branchAreaId">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">详细地址</span>
+									<input type="text" id="edit_detailed_branchArea" class="form-control" name="branchAddress" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+							<span class='store_checkbranchArea'></span>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">警告人数</span>
+									<input type="text" id="edit_warnPeople" class="form-control" name="warnPeople" aria-describedby="basic-addon1" required>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">警告金额</span>
+									<input type="text" id="edit_warnAmount" class="form-control" name="warnAmount" aria-describedby="basic-addon1" required>
+									<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+								</div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">限制人数</span>
+									<input type="text" id="edit_limitPeople" class="form-control" name="limitPeople" aria-describedby="basic-addon1" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">限制金额</span>
+									<input type="text" id="edit_limitAmount" class="form-control" name="limitAmount" aria-describedby="basic-addon1" required>
+									<span class="input-group-addon"><a class="fa fa-cny none_cursor"></a></span>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group" id='edit_splitSuite'>
+									<span class="input-group-addon userlist_status_right_border">拆分套餐</span>
+									<input type="radio" id="edit_splitSuite_0" name="splitSuite" value="0" aria-describedby="basic-addon1" checked="checked" required>是
+									<input type="radio" id="edit_splitSuite_1" name="splitSuite" value="1" aria-describedby="basic-addon1" required>否
+								</div>
+							</div>
+							<span class="store_checksplitSuite"></span>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">体检开始时间</span>
+									<input type="hidden" name="examStartTime" id='edit_examStartTime_hid' />
+									<span class="input-group-addon">时</span>
+									<select class="form-control selectpicker" id="edit_examStartTime_h">
+										<option value="00">00</option>
+										<option value="01">01</option>
+										<option value="02">02</option>
+										<option value="03">03</option>
+										<option value="04">04</option>
+										<option value="05">05</option>
+										<option value="06">06</option>
+										<option value="07">07</option>
+										<option value="08">08</option>
+										<option value="09">09</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+									</select>
+									<span class="input-group-addon">分</span>
+									<select class="form-control selectpicker" id="edit_examStartTime_m">
+										<option value="00">00</option>
+										<option value="05">05</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="25">25</option>
+										<option value="30">30</option>
+										<option value="35">35</option>
+										<option value="40">40</option>
+										<option value="45">45</option>
+										<option value="50">50</option>
+										<option value="55">55</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">体检结束时间</span>
+									<input type="hidden" name="examEndTime" id='edit_exameEndTime_hid' />
+									<span class="input-group-addon">时</span>
+									<select class="form-control selectpicker" id="edit_examEndTime_h">
+										<option value="00">00</option>
+										<option value="01">01</option>
+										<option value="02">02</option>
+										<option value="03">03</option>
+										<option value="04">04</option>
+										<option value="05">05</option>
+										<option value="06">06</option>
+										<option value="07">07</option>
+										<option value="08">08</option>
+										<option value="09">09</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+									</select>
+									<span class="input-group-addon">分</span>
+									<select class="form-control selectpicker" id="edit_examEndTime_m">
+										<option value="00">00</option>
+										<option value="05">05</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+										<option value="25">25</option>
+										<option value="30">30</option>
+										<option value="35">35</option>
+										<option value="40">40</option>
+										<option value="45">45</option>
+										<option value="50">50</option>
+										<option value="55">55</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="input-group" id="edit_status">
+									<span class="input-group-addon userlist_status_right_border">状 态</span>
+									<input type="radio" name='status' value="0" aria-describedby="basic-addon1" checked="checked" />启用
+									<input type="radio" name='status' value="1" aria-describedby="basic-addon1" />禁用
+								</div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-11">
+								<div class="input-group">
+									<span class="input-group-addon">门店说明</span>
+									<textarea name="note" class="form-control" id="edit_note" rows="" cols=""></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-11">
+								<div class="input-group">
+									<span class="input-group-addon">门店介绍</span>
+									<textarea name="summary" class="form-control" id="edit_summary" rows="" cols=""></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="row margin-bottom">
+							<div class="col-md-12">
+								<div class="input-group">
+									<span class="input-group-addon">
+                					门店照片
+                				</span>
+									<div class="file-preview img_border">
+										<div id="edit_storeimg"></div>
+										<div class="clear"></div>
+									</div>
+									<input id="edit_storeManagement_picture" class="file" type="file" name="file" multiple data-min-file-count="1">
+									<input type="hidden" name="imgId" id="edit_imgId" value="" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-md-push-6">
+								<div class="input-group">
+									<button type="button" class="btn btn-primary" id='edit_store_btn'>保存</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<script src="/org_plat/js/create/Ajax.js"></script>
+<script>
+	$(document).ready(function() {
+			edit_store();
+			//	图片放大动画
+			$(".img_border > #edit_storeimg >.float_left>.position_absolute").each(function() {
+				$(this).hover(function() {
+					$(this).stop().animate({
+						width: 300,
+						height: 300,
+						top: -10,
+						left: 100
+					}, 1000);
+					$(this).css("z-index", 999);
+					$(this).parent().removeClass("store_img_borderdiv ");
+				}, function() {
+					$(this).stop().animate({
+						width: 250,
+						height: 250,
+						top: 0,
+						left: 125
+					}, 1000);
+					$(this).css("z-index", 0);
+					$(this).parent().addClass("store_img_borderdiv ");
+				});
+			});
+		})
+		//	门店信息回显
+	function edit_store() {
+		var param = {
+			"id": getParamValue()
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(storeManagement_getOrgBranchById_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#edit_storeinput_hid').val(reqResult.data.branchId);
+			var edit_branchCode = $('#edit_branchCode').val(reqResult.data.branchCode);
+			var edit_branchName = $('#edit_branchName').val(reqResult.data.branchName);
+			var edit_branchArea = $('#edit_detailed_branchArea').val(reqResult.data.branchAddress);
+			var edit_warnPeople = $('#edit_warnPeople').val(reqResult.data.warnPeople);
+			var edit_limitPeople = $('#edit_limitPeople').val(reqResult.data.limitPeople);
+			var edit_warnAmount = $('#edit_warnAmount').val(reqResult.data.warnAmount);
+			var edit_limitAmount = $('#edit_limitAmount').val(reqResult.data.limitAmount);
+			var edit_note = $('#edit_note').val(reqResult.data.note);
+			var edit_summary = $('#edit_summary').val(reqResult.data.summary);
+			var edit_splitSuite = $('#edit_splitSuite input');
+			var data_examStartTime = reqResult.data.examStartTime.split(':');
+			var data_examEndTime = reqResult.data.examEndTime.split(':');
+			var edit_examStartTime_h = $('#edit_examStartTime_h').val(data_examStartTime[0]);
+			var edit_examStartTime_m = $('#edit_examStartTime_m').val(data_examStartTime[1]);
+			var edit_examEndTime_h = $('#edit_examEndTime_h').val(data_examEndTime[0]);
+			var edit_examEndTime_m = $('#edit_examEndTime_m').val(data_examEndTime[1]);
+			var edit_status = $('#edit_status input');
+			$('#edit_storeManagement_picture').val(reqResult.data.imgLocation);
+			//初始化省份
+			prov_init();
+			//定义省份
+			$('#edit_prov').val(reqResult.data.branchProvinceId);
+			//初始化城市
+			prov_city(reqResult.data.branchProvinceId);
+			//定义城市
+			$('#edit_city').val(reqResult.data.branchCityId);
+			//初始化区县
+			city_town(reqResult.data.branchCityId);
+			//定义区县
+			$('#edit_dist').val(reqResult.data.branchAreaId);
+			if(reqResult.data.splitSuite == 0) {
+				edit_splitSuite[0].checked = "checked";
+			} else {
+				edit_splitSuite[1].checked = "checked";
+			}
+			if(reqResult.data.status == 0) {
+				edit_status[0].checked = "checked";
+			} else {
+				edit_status[1].checked = "checked";
+			}
+			var init_img_array = [];
+			if(reqResult.data.img != '') {
+				var datal = reqResult.data.img;
+				var str = '';
+				for(var i = 0; i < datal.length; i++) {
+					init_img_array.push(datal[i].imgId);
+					str += '<div role="imgInfo" id="' + datal[i].imgId + '" class="float_left store_img_borderdiv position_relative"><div class="position_absolute" style="background-image:url(' + oplatIp + datal[i].imgLocation + ');"><a href="javascript:removeUploadImg(' + datal[i].imgId + ')" class="fa fa-close fa_red pull-right"></a></div></div>';
+				}
+			}
+			$('#edit_imgId').val(init_img_array.join(","));
+			$("#edit_storeimg").append(str);
+			var img_border_toggle = $('#edit_storeimg').length;
+			if(img_border_toggle == 0) {
+				alert(img_border_toggle);
+				$('.img_border').css('border-color', "#FFFFFF");
+			}
+
+		} else {
+			alert(reqResult.message);
+		}
+		return false;
+	}
+	//		编辑修改保存信息	
+	$('#edit_store_btn').on('click', function() {
+			var edit_branchCode = $('#edit_branchCode').val();
+			var edit_branchName = $('#edit_branchName').val();
+			var edit_branchArea = $('#edit_detailed_branchArea').val();
+			var edit_splitSuite = $('#edit_splitSuite input');
+			var edit_examStartTime_h = $('#edit_examStartTime_h').val();
+			var edit_examStartTime_m = $('#edit_examStartTime_m').val();
+			var edit_examEndTime_h = $('#edit_examEndTime_h').val();
+			var edit_examEndTime_m = $('#edit_examEndTime_m').val();
+			var edit_examStartTime_hid = $('#edit_examStartTime_hid').val(edit_examStartTime_h + ':' + edit_examStartTime_m);
+			var edit_examEndTime_hid = $('#edit_exameEndTime_hid').val(edit_examEndTime_h + ':' + edit_examEndTime_m);
+			var edit_status = $('#edit_status input');
+			if(edit_branchCode == '') {
+				alert('门店代码不能为空');
+				return false;
+			} else if(edit_branchName == '') {
+				alert('门店名称不能为空');
+				return false;
+			} else if(edit_branchArea == '') {
+				alert('门店详细地址不能为空');
+				return false;
+			} else if(edit_splitSuite == '') {
+				alert('拆分套餐不能为空');
+				return false;
+			} else if(edit_examStartTime_h == '' || edit_examStartTime_m == '') {
+				alert('体检时段开始时间不能为空');
+				return false;
+			} else if(edit_examEndTime_h == '' || edit_examEndTime_m == '') {
+				alert('体检时段结束时间不能为空');
+				return false;
+			} else {
+				var param = $('#edit_form').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(storeManagement_updateOrgBranch_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功');
+					loadpage("/org_plat/pages/store/storeManagement.html");
+				} else {
+					alert('编辑失败!');
+				}
+			}
+		})
+		//	返回上一頁
+	$('#storeEdit_backbtn').on('click', function() {
+			storeManagementBack();
+			return false;
+		})
+		//	图片上传
+	var uploadImagesUrl = oplatIp + '/br-order-org-plat-controller/uploadImg/uploadImg'; //上传图片路径
+	$("#edit_storeManagement_picture").fileinput({
+		uploadUrl: uploadImagesUrl, // you must set a valid URL here else you will get an error
+		allowedFileExtensions: ['jpg', 'png', 'gif', 'jpeg', 'bmp'],
+		overwriteInitial: false,
+		maxFileSize: 100000,
+		maxFilesNum: 10,
+		//allowedFileTypes: ['image', 'video', 'flash'],
+		slugCallback: function(filename) {
+			return filename.replace('(', '_').replace(']', '_');
+		}
+	})
+	$("#edit_storeManagement_picture").on("fileuploaded", function(event, data, previewId, index) {
+		var id_length = $('.file-preview-frame').length;
+		var imgInfoLenth = $('#edit_storeimg div[role=imgInfo]').length;
+		var upload_imgs = [];
+		if(imgInfoLenth == 0) {
+			upload_imgs += [(data.response.imgId - id_length + 1) + 'A,']
+			for(var i = 0; i < id_length - 1; i++) {
+				upload_imgs += [(data.response.imgId - i) + ','];
+			}
+		} else if(imgInfoLenth == 1) {
+			upload_imgs += [$('#edit_storeimg div[role=imgInfo]').attr('id') + 'A,']
+			for(var i = 0; i < id_length; i++) {
+				upload_imgs += [(data.response.imgId - i) + ','];
+			}
+		} else {
+			upload_imgs += [$($('#edit_storeimg div[role=imgInfo]')[0]).attr('id') + 'A,'];
+			for(var j = 1; j < imgInfoLenth; j++) {
+				upload_imgs += [$($('#edit_storeimg div[role=imgInfo]')[j]).attr('id') + ','];
+			}
+			for(var i = 0; i < id_length; i++) {
+				upload_imgs += [(data.response.imgId - i) + ','];
+			}
+		}
+		$('#edit_imgId').val('');
+		$('#edit_imgId').val(upload_imgs);
+	});
+	//删除已上传图片
+	function removeUploadImg(imgId) {
+		var imgIds = $("#edit_imgId").val().split(",");
+		imgIds.splice($.inArray(imgId.toString(), imgIds), 1);
+		$("#edit_imgId").val(imgIds.join(","));
+		var del_img_div = "#" + imgId.toString();
+		$(del_img_div).remove();
+	}
+</script>
+<script src="/org_plat/js/plugins/fileinput.js"></script>
+<script src="/org_plat/js/plugins/fileinput_locale_zh.js"></script>

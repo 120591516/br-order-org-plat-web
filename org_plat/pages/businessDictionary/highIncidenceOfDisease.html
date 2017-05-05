@@ -1,0 +1,571 @@
+<section class="content-header">
+	<div class="margin-bottom">
+		<h2><small>高发疾病</small></h2>
+	</div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">字典维护</a>
+		</li>
+		<li class="active">高发疾病</li>
+	</ol>
+</section>
+<!-- /Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+					<div class="row">
+						<div class="col-md-8">
+							<h3 class="box-title col-md-11 margin">列表</h3>
+						</div>
+						<div class="col-md-4">
+							<div class="row">
+								<div class="col-md-4 pull-right">
+									<a href="#add_highIncidenceOfDisease_modal" id="addHig" data-toggle="modal" class="btn btn-default margin">添加</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table formCss">
+						<thead>
+							<tr>
+								<th>编辑</th>
+								<th>高发疾病名称</th>
+								<th>高发疾病英文名称</th>
+								<th>高发疾病编码</th>
+								<th>备注</th>
+								<th>创建时间</th>
+								<th>高发疾病状态</th>
+							</tr>
+							<tr class="warning no-result">
+								<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+							</tr>
+						</thead>
+						<tbody id="highIncidenceOfDisease_tbody_main">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /Main content -->
+<!--模态框-->
+<div class="modal fade" id="add_highIncidenceOfDisease_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">添加高发疾病</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" method="post" novalidate="novalidate" id='add_highIncidenceOfDiseaseInfo'>
+					<div class="input-group">
+						<span class="input-group-addon">高发疾病名称</span>
+						<input type="text" id="add_highIncidenceDiseaseName" class="form-control" name="highIncidenceDiseaseName" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<div id="add_highIncidenceDiseaseNameTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon">高发疾病英文名称</span>
+						<input type="text" id="add_highIncidenceDiseaseNameEng" class="form-control" name="highIncidenceDiseaseNameEng" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<div id="add_highIncidenceDiseaseNameEngTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon">高发疾病编码</span>
+						<input type="text" id="add_highIncidenceDiseaseCode" class="form-control" name="highIncidenceDiseaseCode" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<div id="add_highIncidenceDiseaseCodeTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon">备注</span>
+						<input type="text" id="add_highIncidenceDiseaseNote" class="form-control" name="highIncidenceDiseaseNote" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<div id="add_highIncidenceDiseaseNoteTip"></div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="add_highIncidenceOfDisease_btn">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框查看-->
+<div class="modal fade" id="check_highIncidenceOfDisease_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">查看高发疾病</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="check_highIncidenceOfDiseaseInfo">
+					<div class="input-group">
+						<span class="input-group-addon">高发疾病名称</span>
+						<input type="text" id="check_highIncidenceDiseaseName" class="form-control" name="highIncidenceDiseaseName" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">高发疾病英文名称</span>
+						<input type="text" id="check_highIncidenceDiseaseNameEng" class="form-control" name="highIncidenceDiseaseNameEng" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">高发疾病编码</span>
+						<input type="text" id="check_highIncidenceDiseaseCode" class="form-control" name="highIncidenceDiseaseCode" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">备注</span>
+						<input type="text" id="check_highIncidenceDiseaseNote" class="form-control" name="highIncidenceDiseaseNote" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">创建时间</span>
+						<input type="text" id="check_highIncidenceDiseaseCreateTime" class="form-control" name="highIncidenceDiseaseCreateTime" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group" id='check_highIncidenceDiseaseStatus'>
+						<span class="input-group-addon">高发疾病状 态</span>
+						<input type="radio" name='highIncidenceDiseaseStatus' value="0" class="userlist_statusinput_vertical" disabled="disabled" />启用
+						<input type="radio" name='highIncidenceDiseaseStatus' value="1" class="userlist_statusinput_vertical" disabled="disabled" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框修改-->
+<div class="modal fade" id="edit_highIncidenceOfDisease_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel_edit">编辑高发疾病</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="edit_highIncidenceOfDiseaseInfo">
+					<input type="hidden" name="highIncidenceDiseaseId" id="edit_highIncidenceDiseaseId" value="" />
+					<div class="input-group">
+						<span class="input-group-addon">高发疾病名称</span>
+						<input type="text" id="edit_highIncidenceDiseaseName" class="form-control" name="highIncidenceDiseaseName" aria-describedby="basic-addon1">
+					</div>
+					<div id="edit_highIncidenceDiseaseNameTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon">高发疾病英文名称</span>
+						<input type="text" id="edit_highIncidenceDiseaseNameEng" class="form-control" name="highIncidenceDiseaseNameEng" aria-describedby="basic-addon1">
+					</div>
+					<div id="edit_highIncidenceDiseaseNameEngTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon">高发疾病编码</span>
+						<input type="text" id="edit_highIncidenceDiseaseCode" class="form-control" name="highIncidenceDiseaseCode" aria-describedby="basic-addon1">
+					</div>
+					<div id="edit_highIncidenceDiseaseCodeTip"></div>
+					<div class="input-group">
+						<span class="input-group-addon">高发疾病备注</span>
+						<input type="text" id="edit_highIncidenceDiseaseNote" class="form-control" name="highIncidenceDiseaseNote" aria-describedby="basic-addon1">
+					</div>
+					<div id="edit_highIncidenceDiseaseNoteTip"></div>
+					<div class="input-group" id='edit_highIncidenceDiseaseStatus'>
+						<span class="input-group-addon">高发疾病状 态</span>
+						<input type="radio" name='highIncidenceDiseaseStatus' value="0" class="userlist_statusinput_vertical" />启用
+						<input type="radio" name='highIncidenceDiseaseStatus' value="1" class="userlist_statusinput_vertical" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id='edit_highIncidenceOfDisease_btn'>保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/org_plat/js/plugins/extendPagination.js"></script>
+<script src="/org_plat/js/plugins/formValidator-4.0.1.js"></script>
+<script src="/org_plat/js/plugins/formValidatorRegex.js"></script>
+<script>
+	//添加高发疾病校验
+	$('#addHig').on('click', function() {
+		$.formValidator.initConfig({
+			submitButtonID: "add_highIncidenceOfDisease_btn",
+			debug: true,
+			onSuccess: function() {
+				add_highIncidenceOfDiseaseInfo();
+			},
+			onError: function() {
+				alert("添加失败，请根据页面提示重新添加!")
+			},
+		});
+		//高发疾病名称
+		$("#add_highIncidenceDiseaseName").formValidator({
+			onShow: "请输入高发疾病名称!",
+			onFocus: "高发疾病名称名称在十个字以内!",
+			onCorrect: "输入正确!"
+		}).inputValidator({
+			min: 1,
+			max: 20,
+			onError: "内容长度错误，请重新输入!"
+		}).regexValidator({
+			regExp: '^[\u0391-\uFFE5]+$',
+			onError: "只能输入汉字,请重新输入!"
+		});
+		//高发疾病英文名称
+		$("#add_highIncidenceDiseaseNameEng").formValidator({
+			onShow: "请输入高发疾病英文名称",
+			onFocus: "高发疾病英文名称由26个大小写字母组成!",
+			onCorrect: "输入正确"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: '^[ A-Za-z]*$',
+			onError: "只能输入大小写字母,请重新输入!"
+		});
+		//高发疾病编码
+		$("#add_highIncidenceDiseaseCode").formValidator({
+			onShow: "请输入高发疾病编码",
+			onFocus: "只能输入数字!",
+			onCorrect: "输入正确"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: "num",
+			dataType: "enum",
+			onError: "只能输入数字，请重新输入!"
+		});
+		//备注
+		$("#add_highIncidenceDiseaseNote").formValidator({
+			onShow: "请输入备注!",
+			onFocus: "备注在10个字以内!",
+			onCorrect: "输入正确!"
+		}).inputValidator({
+			min: 2,
+			max: 20,
+			onError: "内容长度错误,请重新输入!"
+		}).regexValidator({
+			regExp: '^[\u0391-\uFFE5]+$',
+			onError: "只能输入大小写字母,请重新输入!"
+		});
+	})
+
+	//编辑高发疾病校验
+	function judgeEditHighdis() {
+		$.formValidator.initConfig({
+			submitButtonID: "edit_highIncidenceOfDisease_btn",
+			debug: true,
+			onSuccess: function() {
+				editHighdisSave();
+			},
+			onError: function() {
+				alert("编辑失败，请根据页面提示重新编辑啊!")
+			},
+		});
+		//高发疾病名称
+		$('#edit_highIncidenceDiseaseName').on('change', function() {
+				$("#edit_highIncidenceDiseaseName").formValidator({
+					onShow: "请输入高发疾病名称!",
+					onFocus: "高发疾病名称名称在十个字以内!",
+					onCorrect: "输入正确!"
+				}).inputValidator({
+					min: 1,
+					max: 20,
+					onError: "内容长度错误，请重新输入!"
+				}).regexValidator({
+					regExp: '^[\u0391-\uFFE5]+$',
+					onError: "只能输入汉字,请重新输入!"
+				});
+			})
+			//高发疾病英文名称
+		$('#edit_highIncidenceDiseaseNameEng').on('change', function() {
+			$("#edit_highIncidenceDiseaseNameEng").formValidator({
+				onShow: "请输入高发疾病英文名称",
+				onFocus: "高发疾病英文名称由26个大小写字母组成!",
+				onCorrect: "输入正确"
+			}).inputValidator({
+				min: 2,
+				max: 20,
+				onError: "内容长度错误,请重新输入!"
+			}).regexValidator({
+				regExp: '^[ A-Za-z]*$',
+				onError: "只能输入大小写字母,请重新输入!"
+			});
+		});
+		//高发疾病编码
+		$('#edit_highIncidenceDiseaseCode').on('change', function() {
+			$("#edit_highIncidenceDiseaseCode").formValidator({
+				onShow: "请输入高发疾病编码",
+				onFocus: "只能输入数字!",
+				onCorrect: "输入正确"
+			}).inputValidator({
+				min: 2,
+				max: 20,
+				onError: "内容长度错误,请重新输入!"
+			}).regexValidator({
+				regExp: "num",
+				dataType: "enum",
+				onError: "只能输入数字，请重新输入!"
+			});
+		});
+		//备注
+		$('#edit_highIncidenceDiseaseNote').on('change', function() {
+			$("#edit_highIncidenceDiseaseNote").formValidator({
+				onShow: "请输入备注!",
+				onFocus: "备注在10个字以内!",
+				onCorrect: "输入正确!"
+			}).inputValidator({
+				min: 2,
+				max: 20,
+				onError: "内容长度错误,请重新输入!"
+			}).regexValidator({
+				regExp: '^[\u0391-\uFFE5]+$',
+				onError: "只能输入大小写字母,请重新输入!"
+			});
+		});
+
+	}
+	//  分页
+	init_page();
+
+	function init_page() {
+		page_curr = 1;
+		$('#highIncidenceOfDisease_tbody_main').empty();
+		//1.请求后端信息并展示
+		highIncidenceOfDiseaseInfo();
+	}
+	//  初始化分页信息
+	$('#callBackPager').extendPagination({
+		totalCount: total_count,
+		showCount: count_curr,
+		limit: limit,
+		callback: function(curr, limit, totalCount) {
+			page_curr = curr;
+			total_count = totalCount;
+			highIncidenceOfDiseaseInfo();
+		}
+	});
+
+	function highIncidenceOfDiseaseInfo() {
+		var otype = "get";
+		var osync = false;
+		var param = {
+			"page": page_curr,
+			"rows": count_curr
+		}
+		var reqResult = httpRequest(highIncidenceOfDisease_getHighIncidenceDiseaseList_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			total_count = reqResult.data.total;
+			createTable(page_curr, limit, total_count, reqResult);
+		}
+		return false;
+	}
+	//		高发疾病列表展示
+	function createTable(currPage, limit, total, dataBack) {
+		$('#highIncidenceOfDisease_tbody_main').empty();
+		var showNum = limit;
+		if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+		for(var i = 0; i < showNum; i++) {
+			var datal = dataBack.data.list;
+			for(var i = 0; i < showNum; i++) {
+				var Tbody = document.getElementById('highIncidenceOfDisease_tbody_main');
+				var lRow = Tbody.insertRow(); //创建行
+				var highIncidenceDiseaseStatus = (nullformat(datal[i].highIncidenceDiseaseStatus) === 0) ? "启用" : "禁用";
+				var operationByRole = dataBack.operationList; //获取操作类型
+				var operationByRoleAdd = document.getElementById('addHig'); //获取添加按钮
+				//				判断操作类型
+				(operationByRole.highIncidenceDisease_insert === false) ? operationByRoleAdd.style.display = 'none': operationByRoleAdd.style.display = ''; //1为添加
+				//创建列
+				var firstColumn = lRow.insertCell();
+				var secondColumn = lRow.insertCell();
+				var thirdColumn = lRow.insertCell();
+				var forthColumn = lRow.insertCell();
+				var fifthColumn = lRow.insertCell();
+				var sixColumn = lRow.insertCell();
+				var sevenColumn = lRow.insertCell();
+				firstColumn.setAttribute('highIncidenceDiseaseId', datal[i].highIncidenceDiseaseId); //给td添加属性
+				//添加第一列内容
+				//创建查看标签
+				var aCheck = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.highIncidenceDisease_detail === true) ? iElement.className = "fa fa-eye": ''; //4为查看
+				aCheck.appendChild(iElement);
+				aCheck.setAttribute("href", "#check_highIncidenceOfDisease_modal");
+				aCheck.setAttribute("data-toggle", "modal");
+				aCheck.style.marginLeft = "5px";
+				aCheck.onclick = function() {
+					check_highIncidenceOfDiseaseInfo(this)
+				};
+				firstColumn.appendChild(aCheck);
+				//创建编辑标签
+				var aEdit = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.highIncidenceDisease_update === true) ? iElement.className = "fa fa-pencil": ''; //3为更新
+				aEdit.appendChild(iElement);
+				aEdit.setAttribute("href", "#edit_highIncidenceOfDisease_modal");
+				aEdit.setAttribute("data-toggle", "modal");
+				aEdit.style.marginLeft = "5px";
+				aEdit.onclick = function() {
+					edit_highIncidenceOfDiseaseInfo(this)
+				};
+				firstColumn.appendChild(aEdit);
+				//创建删除标签
+				var aDelete = document.createElement("a");
+				var iElement = document.createElement("i");
+				(operationByRole.highIncidenceDisease_delete === true) ? iElement.className = "fa fa-trash-o": ''; //2为删除
+				aDelete.appendChild(iElement);
+				aDelete.style.marginLeft = "5px";
+				aDelete.onclick = function() {
+					del_highIncidenceOfDiseaseInfo(this)
+				};
+				firstColumn.appendChild(aDelete);
+				//添加第二列内容	
+				secondColumn.innerText = nullformat(datal[i].highIncidenceDiseaseName);
+				//添加第三列内容	
+				thirdColumn.innerText = nullformat(datal[i].highIncidenceDiseaseNameEng);
+				//添加第四列内容	
+				forthColumn.innerText = nullformat(datal[i].highIncidenceDiseaseCode);
+				//添加第二列内容	
+				if(datal[i].highIncidenceDiseaseNote != '' && datal[i].highIncidenceDiseaseNote.length > 10) {
+					fifthColumn.innerText = nullformat(datal[i].highIncidenceDiseaseNote.substring(0, 9) + '...');
+				} else {
+					fifthColumn.innerText = nullformat(datal[i].highIncidenceDiseaseNote);
+				}
+				//添加第三列内容	
+				sixColumn.innerText = getLocalTime(nullformat(datal[i].highIncidenceDiseaseCreateTime));
+				//添加第四列内容	
+				sevenColumn.innerText = highIncidenceDiseaseStatus;
+			}
+			return false;
+		}
+	}
+	//	添加高发疾病信息
+	//		$('#add_highIncidenceOfDisease_btn').on('click', function() {
+	//			add_highIncidenceOfDiseaseInfo();
+	//		})
+
+	function add_highIncidenceOfDiseaseInfo() {
+		var add_highIncidenceDiseaseName = $('#add_highIncidenceDiseaseName').val();
+		var add_highIncidenceDiseaseNameEng = $('#add_highIncidenceDiseaseNameEng').val();
+		var add_highIncidenceDiseaseCode = $('#add_highIncidenceDiseaseCode').val();
+		var add_highIncidenceDiseaseNote = $('#add_highIncidenceDiseaseNote').val();
+		if(add_highIncidenceDiseaseName == '' || add_highIncidenceDiseaseNameEng == '' || add_highIncidenceDiseaseCode == '' || add_highIncidenceDiseaseNote == '') {
+			alert('请输入完整信息后添加！');
+			return false;
+		} else {
+			var param = $('#add_highIncidenceOfDiseaseInfo').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(highIncidenceOfDisease_addhighIncidenceDisease_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('添加成功！');
+				window.location.reload();
+			} else {
+				alert("error");
+			}
+		}
+	}
+	//	删除高发疾病信息
+	function del_highIncidenceOfDiseaseInfo(del_li) {
+		if(confirm("确认删除该高发疾病吗？")) {
+			var del_blood_id = $(del_li).parent().attr("highIncidenceDiseaseId");
+			var param = {
+				"idHighIncidenceDisease": del_blood_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(highIncidenceOfDisease_deleteHighIncidenceDisease_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("删除成功");
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+	//	查看高发疾病信息
+	function check_highIncidenceOfDiseaseInfo(check) {
+		var check_bloodid = $(check).parent().attr("highIncidenceDiseaseId");
+		var param = {
+			"idhighIncidenceDisease": check_bloodid
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(highIncidenceOfDisease_gethighIncidenceDiseaseById_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#check_highIncidenceDiseaseName').val(nullformat(reqResult.data.highIncidenceDiseaseName));
+			$('#check_highIncidenceDiseaseNameEng').val(nullformat(reqResult.data.highIncidenceDiseaseNameEng));
+			$('#check_highIncidenceDiseaseCode').val(nullformat(reqResult.data.highIncidenceDiseaseCode));
+			$('#check_highIncidenceDiseaseNote').val(nullformat(reqResult.data.highIncidenceDiseaseNote));
+			$('#check_highIncidenceDiseaseCreateTime').val(getLocalTime(reqResult.data.highIncidenceDiseaseCreateTime));
+			if(reqResult.data.highIncidenceDiseaseStatus == 0) {
+				$('#check_highIncidenceDiseaseStatus input')[0].checked = "checked";
+			} else {
+				$('#check_highIncidenceDiseaseStatus input')[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//	编辑回显高发疾病信息
+	function edit_highIncidenceOfDiseaseInfo(edit) {
+		judgeEditHighdis();
+		var edit_blood_id = $(edit).parent().attr("highIncidenceDiseaseId");
+		var param = {
+			"idhighIncidenceDisease": edit_blood_id
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(highIncidenceOfDisease_gethighIncidenceDiseaseById_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#edit_highIncidenceDiseaseId').val(nullformat(reqResult.data.highIncidenceDiseaseId))
+			$('#edit_highIncidenceDiseaseName').val(nullformat(reqResult.data.highIncidenceDiseaseName));
+			$('#edit_highIncidenceDiseaseNameEng').val(nullformat(reqResult.data.highIncidenceDiseaseNameEng));
+			$('#edit_highIncidenceDiseaseCode').val(nullformat(reqResult.data.highIncidenceDiseaseCode));
+			$('#edit_highIncidenceDiseaseNote').val(nullformat(reqResult.data.highIncidenceDiseaseNote));
+			if(reqResult.data.highIncidenceDiseaseStatus == 0) {
+				$('#edit_highIncidenceDiseaseStatus input')[0].checked = "checked";
+			} else {
+				$('#edit_highIncidenceDiseaseStatus input')[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//  编辑保存信息
+	function editHighdisSave() {
+		var edit_highIncidenceDiseaseName = $('#edit_highIncidenceDiseaseName').val();
+		var edit_highIncidenceDiseaseNameEng = $('#edit_highIncidenceDiseaseNameEng').val();
+		var edit_highIncidenceDiseaseCode = $('#edit_highIncidenceDiseaseCode').val();
+		var edit_highIncidenceDiseaseNote = $('#edit_highIncidenceDiseaseNote').val();
+		if(edit_highIncidenceDiseaseName == '' || edit_highIncidenceDiseaseNameEng == '' || edit_highIncidenceDiseaseCode == '' || edit_highIncidenceDiseaseNote == '') {
+			alert('请输入完整信息！');
+			return false;
+		} else {
+			var param = $('#edit_highIncidenceOfDiseaseInfo').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(highIncidenceOfDisease_updateHighIncidenceDisease_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert('编辑成功');
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+</script>

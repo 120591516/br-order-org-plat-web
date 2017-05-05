@@ -1,0 +1,425 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<div class="margin-bottom">
+		<h2><small>用户订单</small></h2>
+	</div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">预约</a>
+		</li>
+		<li class="active">用户订单</li>
+	</ol>
+	<div class="box container-fluid no-margin">
+		<div class="box-header">
+			<div class="row margin-bottom">
+				<div class="col-md-11">
+					<h3 class="box-title"><br />搜索</h3>
+				</div>
+			</div>
+			<div class="row margin-bottom">
+				<form class="form-group container-fluid">
+					<div class="row margin-bottom">
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">订单号</span>
+									<input type="text" class="form-control" name="orderNo" id="serOrderNo" placeholder="订单号">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">门店</span>
+									<select class="form-control selectpicker brands" id="serBranchId" name="branchId">
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">套餐</span>
+									<select class="form-control selectpicker suiteTypeId" id="serExamSuiteId" name="examSuiteId">
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">体检人</span>
+									<input type="text" class="form-control" name="customerPatientName" id="serCustomerPatientName" placeholder="体检人">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row margin-bottom">
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="laydate-icon input-group-addon" onclick="laydate(start)"></span>
+									<input type="text" class="form-control" name="startExamTime" id="serStartExamTime" placeholder="开始时间">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+									<!--<span class="input-group-addon"></span>-->
+									<span class="laydate-icon input-group-addon" onclick="laydate(end)"></span>
+									<input type="text" class="form-control" name="endExamTime" id="serEndExamTime" placeholder="结束时间">
+
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">手机号码</span>
+									<input type="text" class="form-control" name="customerPatientPhone" id="serCustomerPatientPhone" placeholder="手机号码">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">身份证号</span>
+									<input type="text" class="form-control" name="customerPatientIdCard" id="serCustomerPatientIdCard" placeholder="身份证号">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-md-offset-6">
+							<div class="col-md-6 col-md-offset-6">
+								<div class="input-group pull-right">
+									<a class="btn btn-primary fa fa-search" id="searchAll">搜 索</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+				</div>
+				<div class="box-body">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>操作</th>
+								<th>订单号</th>
+								<th>门店</th>
+								<th>套餐</th>
+								<th>体检人</th>
+								<th>体检时间</th>
+								<th>身份证号</th>
+								<th>手机号</th>
+								<th>创建时间</th>
+								<th>订单状态</th>
+							</tr>
+							<tr class="warning no-result">
+								<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+							</tr>
+						</thead>
+						<tbody id="recordTbody"></tbody>
+					</table>
+					<div class="row">
+						<div class="col-xs-6 col-md-6" id="callBackPager"></div>
+						<div class="col-xs-6 col-md-6 ctr margin_top_20px">
+							<button type="button" class="btn btn-default exportInfoBtn" onclick="exportInfo()">excle导出</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--模态框查看-->
+<div class="modal fade" id="checkOrderList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">查看订单</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form">
+					<div class="input-group">
+						<span class="input-group-addon">订单号</span>
+						<input type="text" id="checkOrderNo" class="form-control" name="orderNo" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">订单状态</span>
+						<input type="text" id="checkCustomerOrderStatusName" class="form-control" name="customerOrderStatusName" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">门店名称</span>
+						<select class="form-control selectpicker brands" id="checkBranchId" name="branchId" disabled="disabled">
+						</select>
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">套餐名称</span>
+						<select class="form-control selectpicker suiteTypeId" id="checkExamSuiteIs" name="examSuiteIs" disabled="disabled">
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">体检人</span>
+						<input type="text" id="checkCustomerInfoName" class="form-control" name="customerInfoName" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">体检时间</span>
+						<input type="text" id="checkExamTime" class="form-control" name="examTime" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">身份证号</span>
+						<input type="text" id="checkpatientIdCardNo" class="form-control" name="patientIdCardNo" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">手机号</span>
+						<input type="text" id="checkPositionPhone" class="form-control" name="positionPhone" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">创建时间</span>
+						<input type="text" id="checkCustomerOrderCreateTime" class="form-control" name="customerOrderCreateTime" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/org_plat/js/plugins/extendPagination.js"></script>
+<script>
+	$(document).ready(function() {
+		suitListInfo('#serExamSuiteId','0');
+		brands();
+		var date = new Date();
+		var time = '';
+		time += date.getFullYear() + '-';
+		time += date.getMonth() + 1 + '-';
+		time += date.getDate();
+	});
+	//日历控件皮肤
+	! function() {
+		laydate.skin('danlan'); //切换皮肤，请查看skins下面皮肤库
+		laydate({
+			elem: 'input'
+		}); //绑定元素
+	}();
+	//列表日期范围限制
+	var start = {
+		elem: '#serStartExamTime',
+		format: 'YYYY-MM-DD',
+		istime: false,
+		istoday: true,
+		choose: function(datas) {
+			end.min = datas; //开始日选好后，重置结束日的最小日期
+			end.start = datas //将结束日的初始值设定为开始日
+		}
+	};
+	var end = {
+		elem: '#serEndExamTime',
+		format: 'YYYY-MM-DD',
+		max: '2099-06-16',
+		istime: false,
+		istoday: true,
+		choose: function(datas) {
+			start.max = datas; //结束日选好后，充值开始日的最大日期
+		}
+	};
+	//	laydate(start);
+	//	laydate(end);
+	//	套餐分页信息展示
+	init_page();
+
+	function init_page() {
+		page_curr = 1;
+		$('#recordTbody').empty();
+		//1.请求后端信息并展示
+		recordSearch();
+		//2.初始化分页信息
+		init_pager();
+	}
+	// 初始化分页信息
+	function init_pager() {
+		$('#callBackPager').extendPagination({
+			totalCount: total_count,
+			showCount: count_curr,
+			limit: limit,
+			callback: function(curr, limit, totalCount) {
+				page_curr = curr;
+				total_count = totalCount;
+				recordSearch();
+			}
+		});
+	}
+	$('#searchAll').on('click', function() {
+		recordSearch();
+		init_pager();
+		return false;
+	})
+
+	function recordSearch() {
+		var orderNo = $("#serOrderNo").val();
+		var branchId = $("#serBranchId").val();
+		var examSuiteId = $("#serExamSuiteId").val();
+		var customerPatientName = $("#serCustomerPatientName").val();
+		var startExamTime = $("#serStartExamTime").val();
+		var endExamTime = $("#serEndExamTime").val();
+		var customerPatientPhone = $("#serCustomerPatientPhone").val();
+		var customerPatientIdCard = $("#serCustomerPatientIdCard").val();
+		var otype = "post";
+		var osync = false;
+		var param = {
+			"page": page_curr,
+			"rows": count_curr
+		};
+		if(orderNo) {
+			param.orderNo = orderNo;
+		}
+		if(branchId) {
+			param.branchId = branchId;
+		}
+		if(examSuiteId) {
+			param.examSuiteId = examSuiteId;
+		}
+		if(customerPatientName) {
+			param.customerPatientName = customerPatientName;
+		}
+		if(startExamTime) {
+			param.startExamTime = startExamTime;
+		}
+		if(endExamTime) {
+			param.endExamTime = endExamTime;
+		}
+		if(customerPatientPhone) {
+			param.customerPatientPhone = customerPatientPhone;
+		}
+		if(customerPatientIdCard) {
+			param.customerPatientIdCard = customerPatientIdCard;
+		}
+		var reqResult = httpRequest(getCustomerOrderByPageUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			total_count = reqResult.data.total;
+			showRecordList(page_curr, limit, total_count, reqResult);
+		}
+		//		init_pager();
+		return false;
+	}
+	//展示列表
+	function showRecordList(currPage, limit, total, dataBack) {
+		$("#recordTbody").empty();
+		if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+		var datal = dataBack.data.list;
+		//获取操作类型
+//		var operationList=dataBack.operationList;
+		var str = '';
+		for(var i = 0; i < datal.length; i++) {
+			str += "<tr customerOrderId='" + datal[i].customerOrderId + "' patientId='" + datal[i].customerId + "' customerPatientId='"+datal[i].customerPatientId+"'>";
+			str += "<td patientId ='" + datal[i].patientId  + "' cartId ='" + datal[i].cartId + "' orderNo ='" + datal[i].orderNo + "'>";
+//			if(operationList.select==1){
+			    str += "<a href='#checkOrderList' title='查看信息' data-toggle='modal' onclick='checkOrderList(this)'><i class='fa fa-eye'></i></a>";
+//			}
+			if(datal[i].orderStatus == 33) {
+				str += '<a onclick="refund(this)" title="申请退款" data-toggle="modal" class="padding_4px"><i class="fa fa-reply"></i></a></td>';
+			}
+			str += "<td>" + datal[i].orderNo + "</td>";
+			if(datal[i].branchName.length > 10) {
+				str += "<td>" + datal[i].branchName.substring(0, 9) + "...</td>";
+			} else {
+				str += "<td>" + datal[i].branchName + "</td>";
+			}
+			if(datal[i].examSuiteName.length > 10) {
+				str += "<td>" + datal[i].examSuiteName.substring(0, 9) + "...</td>";
+			} else {
+				str += "<td>" + datal[i].examSuiteName + "</td>";
+			}
+			str += "<td>" + datal[i].customerPatientName + "</td>";
+			str += "<td>" + datal[i].examTime + "</td>";
+			str += "<td>" + datal[i].customerPatientIdCard + "</td>";
+			str += "<td>" + datal[i].customerPatientPhone + "</td>";
+			str += "<td>" + getLocalTime(datal[i].customerOrderCreateTime) + "</td>";
+			if(datal[i].orderStatus == 40) {
+				str += "<td class='org-order-span'>支付完成<input class='org-order-btn' type='button' onclick='startExam(this)' value='开始体检'></td>";
+			} else {
+				str += "<td class='org-order-span'>" + datal[i].customerOrderStatusName + "</td>";
+			}
+			str += "</tr>";
+		}
+		$("#recordTbody").append(str);
+		return false;
+	}
+
+	function refund(orderNum) {
+		var orderNo = $(orderNum).parent().attr('orderNo');
+		window.location.href = gwIp + '/br-order-org-plat-controller/alipayRefund/refund?' + 'orderNO=' + orderNo;
+	}
+	//开始体检
+	function startExam(examStatus) {
+		var customerOrderId = $(examStatus).parent().parent().attr("customerOrderId");
+		var param = {
+			"customerOrderId": customerOrderId
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(updateStartExamStatusUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			$(examStatus).replaceWith("正在体检<input class='org-order-btn' type='button' onclick='endExam(this)' value='结束体检'>");
+		} else {
+			alert(reqResult.data);
+		}
+	}
+	//结束体检
+	function endExam(examStatus) {
+		var customerOrderId = $(examStatus).parent().parent().attr("customerOrderId");
+		var param = {
+			"customerOrderId": customerOrderId
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(updateEndExamStatusUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			$(examStatus).parent().html("订单完成");
+		} else {
+			alert(reqResult.data);
+		}
+	}
+	//	查看回显信息
+	function checkOrderList(check) {
+		var patientId = $(check).parent().parent().attr("customerPatientId");
+		var cartId = $(check).parent().attr("cartId");
+		var orderNo = $(check).parent().attr("orderNo");
+		var param = {
+			"orderNo": orderNo,
+			"cartId": cartId,
+			"patientId": patientId
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(getCustomerOrderUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			brands();
+			$('#checkOrderNo').val(reqResult.data.orderNo);
+			suitListInfo('#checkExamSuiteIs','1');
+			$('#checkBranchId').val(reqResult.data.branchId);
+			$('#checkExamSuiteIs').val(reqResult.data.examSuiteId);
+			$('#checkCustomerInfoName').val(reqResult.data.customerPatientName);
+			$('#checkExamTime').val(reqResult.data.examTime);
+			$('#checkpatientIdCardNo').val(reqResult.data.customerPatientIdCard);
+			$('#checkPositionPhone').val(reqResult.data.customerPatientPhone);
+			$('#checkCustomerOrderCreateTime').val(getLocalTime(reqResult.data.customerOrderCreateTime));
+			$('#checkCustomerOrderStatusName').val(reqResult.data.customerOrderStatusName);
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//		订单导出
+	function exportInfo() {
+		self.location = orderListInfo_export_url;
+	}
+</script>

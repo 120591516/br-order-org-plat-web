@@ -1,0 +1,125 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h2>
+		 <small>用户角色管理</small>
+	</h2>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">管理</a>
+		</li>
+		<li class="active"><a href="#">用户管理</a></li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+	<input type="hidden" id="form_user_id" name="form_user_id" />
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+					<div class="row">
+						<div class="col-xs-10 col-md-8 col-lg-11">
+							<h3 class="box-title">列表</h3>
+						</div>
+						<div class="col-xs-2 col-md-4 col-lg-1 pull-right">
+							<button type="submit" class="btn-default" id='userrole_submit'>提交</button>
+							<button type="button" class="btn-default" id='userrole_back'>返回</button>
+						</div>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table class="table table-bordered table-striped" id="user_role">
+						<thead>
+							<tr>
+								<th>编辑</th>
+								<th>用户名</th>
+								<th>权限</th>
+							</tr>
+						</thead>
+						<tbody id="user_role_list">
+						</tbody>
+					</table>
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+</section>
+<!-- /.content -->
+
+<script>
+	$(document).ready(function() {
+		$('#user_role_list').empty();
+		$("#form_user_id").val(init_param_Id);
+		var param = {
+			"userId" : init_param_Id
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(userRole_getRoles_url, param, otype, osync);
+		if (reqResult.result == 0) {
+			var roleData = reqResult.data;
+			var str = '';
+			for (var i = 0; i < roleData.length; i++) {
+				var urlActorPower = '/org_plat/pages/userActor/actorPower.html';
+				var pageUrl = '"'+urlActorPower+'","'+roleData[i].id+'"';
+				str += "<tr><td 'colid'='" + roleData[i].id + "'>";
+				if (roleData[i].checked == true) {
+					str += "<input type='checkbox' checked='true'>";
+				} else {
+					str += "<input type='checkbox' >";
+				}
+				str += "</td>";
+				str += "<td>" + roleData[i].roleName + "</td>";
+				str += "<td><button class='btn btn-default' onclick='loadpageLi(" + pageUrl + ")'>权限</button></td>";
+				str += "</tr>";
+			}
+			$("#user_role_list").append(str);
+		} else {
+			alert(reqResult.message);
+		}
+	});
+	//		点击提交角色设置
+	$('#userrole_submit').on('click', function() {
+		var showval = $("#form_user_id").val();
+		var tdl = $('#user_role_list tr td:first-child').length;
+		var select_role_id = "";
+		for (var i = 0; i < tdl; i++) {
+			var inputa = $('#user_role_list tr td:first-child input')[i].checked;
+			var inputid = $($('#user_role_list tr td:first-child input')[i]).parent()[0].attributes[0].value;
+			if (inputa == true) {
+				select_role_id += inputid + ",";
+			}
+		}
+		if (select_role_id.length > 0) {
+			select_role_id = select_role_id.substring(0, select_role_id.length - 1);
+		}
+		var param = {
+			"userId" : showval,
+			"strRolesId" : select_role_id
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(userRole_updateUserRole_url, param, otype, osync);
+		if (reqResult.result == 0) {
+			alert('分配成功');
+			userrole_back_userlist();
+		} else {
+			alert(reqResult.message);
+		}
+	})
+	//点击返回用户列表页
+	$('#userrole_back').on('click', function() {
+		userrole_back_userlist();
+	})
+	function userrole_back_userlist() {
+        loadpage("/org_plat/pages/userList/userAdmin.html");
+	}
+</script>

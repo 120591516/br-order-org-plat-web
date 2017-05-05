@@ -1,0 +1,254 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<!--<div class="margin-bottom">-->
+	<!--<ol class="breadcrumb">
+			<li>
+				<a><i class="fa fa-dashboard"></i> 首页</a>
+			</li>
+			<li>
+				<a>套餐</a>
+			</li>
+			<li class="active">套餐列表</li>
+		</ol>-->
+	<div class="box container-fluid no-margin">
+		<div class="box-header">
+			<div class="row margin-bottom">
+				<div class="col-xs-12 col-md-8">
+					<h3 class="box-title">套餐列表</h3>
+				</div>
+			</div>
+			<div class="row margin-bottom">
+				<form class="form-group container-fluid">
+					<div class="row margin-bottom">
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">名称</span>
+									<input type="text" class="form-control" id="examSuiteName" placeholder="名称">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">代码</span>
+									<input type="text" class="form-control" id="examSuiteCode" placeholder="代码">
+								</div>
+							</div>
+
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">性别</span>
+									<select class="form-control selectpicker" id="examSuiteSex">
+										<option value="please">请选择</option>
+										<option value="0">通用</option>
+										<option value="1">男</option>
+										<option value="2">女</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">输入码</span>
+									<input type="text" class="form-control" id="inputCode" placeholder="名称">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">价格区间</span>
+									<input type="text" class="form-control" id="priceStart" placeholder="￥">
+
+								</div>
+							</div>
+							<div class="col-md-6">
+								<input type="text" class="form-control" id="priceEnd" placeholder="￥">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">类型</span>
+									<select class="form-control selectpicker suiteTypeId" id="suiteTypeId">
+
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+									<button class="btn btn-primary fa fa-search" id="mecSearch">搜 索</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+					<table class="table table-bordered table-striped" id="SelectPackage">
+						<thead>
+							<tr>
+								<th>选择</th>
+								<th>名称</th>
+								<th>代码</th>
+								<th>英文名称</th>
+								<th>价格</th>
+								<th>输入码</th>
+								<th>适用性别</th>
+								<th>类型</th>
+							</tr>
+						</thead>
+						<tbody id="mainContent">
+						</tbody>
+					</table>
+				</div>
+				<div class="row margin-bottom">
+					<div class="col-xs-8 col-md-8" id="callBackPager"></div>
+				</div>
+				<div class="col-lg-4"></div>
+				<div class="col-lg-4">
+					<div class="col-lg-4"></div>
+					<div class="col-lg-4">
+						<button type="button" class="btn btn-primary" onclick="submitPackAge()">提 交 套 餐</button>
+					</div>
+					<div class="col-lg-4"></div>
+				</div>
+				<div class="col-lg-4"></div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /Main content -->
+<!--模态框修改-->
+<script>
+	areaSearch();
+	suiteTypeId();
+
+	function areaSearch() {
+		var examSuiteName = jQuery.trim($('#examSuiteName').val());
+		var examSuiteCode = jQuery.trim($('#examSuiteCode').val());
+		var examSuiteSex = jQuery.trim($('#examSuiteSex').val());
+		var inputCode = jQuery.trim($('#inputCode').val());
+		var priceStart = jQuery.trim($('#priceStart').val());
+		var priceEnd = jQuery.trim($('#priceEnd').val());
+		var suiteTypeId = jQuery.trim($('#suiteTypeId').val());
+		var param = {
+			"page": 1,
+			"rows": 10
+		};
+		if(getParamValue()) {
+			param.branchId = getParamValue()
+		}
+		if(examSuiteName) {
+			param.examSuiteName = examSuiteName;
+		}
+		if(examSuiteCode) {
+			param.examSuiteCode = examSuiteCode;
+		}
+		if(inputCode) {
+			param.inputCode = inputCode;
+		}
+		if(priceStart) {
+			param.priceStart = priceStart;
+		}
+		if(priceEnd) {
+			param.priceEnd = priceEnd;
+		}
+		if(examSuiteSex != 'please') {
+			param.examSuiteSex = examSuiteSex;
+		}
+		if(suiteTypeId != '') {
+			param.suiteTypeId = suiteTypeId;
+		}
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(packAgeSearchOul, param, otype, osync);
+		if(reqResult.result == 0) {
+			callBackPagination(reqResult);
+			return false;
+		} else {
+			alert("error");
+		}
+	}
+
+	function createTable(currPage, limit, total, dataBack) {
+		var showNum = limit;
+		//获取操作类型
+		var operationList = dataBack.operationList;
+		var str = '';
+		if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+		for(var i = 0; i < dataBack.data.list.length; i++) {
+			str += "<tr><td idOrgExamSuite='" + dataBack.data.list[i].examSuiteId + "'><input type='checkbox'></td>";
+			if(operationList.select==1){
+			    str += "<td><a style='margin-right:5px' title='查看信息' href='/org_plat/pages/examination/package/viewOrgExamSuite.shtml?idOrgExamSuite=" + dataBack.data.list[i].examSuiteId + "'><i class='fa fa-eye'></i></a></td>";
+			}
+			if(dataBack.data.list[i].examSuiteName =='' || dataBack.data.list[i].examSuiteName == null){
+				str += "<td>空</td>";
+			}else if(dataBack.data.list[i].examSuiteName.length > 10) {
+				str += "<td>" + dataBack.data.list[i].examSuiteName.substring(0, 9) + "...</td>";
+			}else{
+				str += "<td>" + dataBack.data.list[i].examSuiteName + "</td>";
+			}
+			str += "<td>" + dataBack.data.list[i].examSuiteCode + "</td>";
+			str += "<td>" + dataBack.data.list[i].examSuiteNameEng + "</td>";
+			str += "<td>" + dataBack.data.list[i].examSuitePrice + "</td>";
+			str += "<td>" + dataBack.data.list[i].examSuiteInputCode + "</td>";
+			str += "<td>" + dataBack.data.list[i].orgExamSuiteSex + "</td>";
+			if(dataBack.data.list[i].typeNameList == ''||dataBack.data.list[i].typeNameList == null){
+				str += "<td>空</td>";
+			}else if(dataBack.data.list[i].typeNameList.length > 10){
+				str += "<td>" + dataBack.data.list[i].typeNameList.substring(0, 9) + "...</td>";
+			}else {
+				str += "<td>" + dataBack.data.list[i].typeNameList + "</td>";
+			}
+			str += '</tr>';
+		}
+		$("#mainContent").append(str);
+		return false;
+	}
+	$('#mecSearch').on('click', function() {
+		areaSearch();
+		return false;
+	})
+	var bo = 1;
+
+	function submitPackAge() {
+		if(bo = 1) {
+			bo = 0;
+			var otype = "get";
+			var osync = false;
+			var tdl = $('#SelectPackage tr td:first-child').length;
+			var select_package_id = "";
+			for(var i = 0; i < tdl; i++) {
+				var inputa = $('#SelectPackage tr td:first-child input')[i].checked;
+				var inputid = $($('#SelectPackage tr td:first-child input')[i]).parent()[0].attributes[0].value;
+				if(inputa == true) {
+					select_package_id += inputid + ",";
+				}
+			}
+			if(select_package_id.length > 0) {
+				select_package_id = select_package_id.substring(0, select_package_id.length - 1);
+			}
+
+			var param = {
+				"branchId": getParamValue(),
+				"suiteIds": select_package_id
+			};
+			var reqResult = httpRequest(packAge_SelectPackage, param, otype, osync);
+			if(reqResult.result == 0) {
+				loadpageLi("/org_plat/pages/store/StorePackageManagement.html",getParamValue());
+				alert("添加套餐成功");
+				return false;
+			}
+		}
+	}
+</script>

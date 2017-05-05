@@ -1,0 +1,101 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<div class="margin-bottom">
+		<h2><small>机构信息</small></h2></div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">机构</a>
+		</li>
+		<li class="active">机构信息</li>
+	</ol>
+
+</section>
+<!-- /Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+	<!-- 基本信息 -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">基本信息</h3>
+				</div>
+				<div class="box-body">
+					<form class="bs-example bs-example-form" id="MecaddTJ">
+						<input id="orgId" name="orgId" type="text" hidden="hidden" />
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="input-group">
+									<span class="input-group-addon">名称</span>
+									<input type="text" class="form-control" aria-label="..." placeholder="名称" name="orgShortName" id="orgName" disabled="true">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="input-group">
+									<span class="input-group-addon">全称</span>
+									<input type="text" class="form-control" aria-label="..." placeholder="全称" name="orgTotalName" id="orgFullname" disabled="true">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="input-group">
+									<span class="input-group-addon">性质</span>
+									<input type="text" class="form-control" aria-label="..." placeholder="性质" name="orgNature" id="orgNature" disabled="true">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="input-group">
+									<span class="input-group-addon">等级</span>
+									<input type="text" class="form-control" aria-label="..." placeholder="等级" name="orgLevelId" id="orgLevelId" disabled="true">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="input-group">
+									<span class="input-group-addon">地址</span>
+									<input type="text" class="form-control" aria-label="..." placeholder="地址" name="orgAddress" id="orgAddress" disabled="true">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="input-group">
+									<span class="input-group-addon">营业面积</span>
+									<input type="text" class="form-control" aria-label="..." placeholder="营业面积" name="orgSize" id="orgArea" disabled="true">
+									<span class="input-group-addon">m<sup>2</sup> </span>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</section>
+<!-- /Main content -->
+<script>
+	$(document).ready(function() {
+		organizationInfo();
+	})
+	function organizationInfo() {
+		var otype = "GET";
+		var osync = false;
+		var reqResult = httpRequest(organizationInfoUrl, null, otype, osync);
+		if(reqResult.result == 0) {
+			$("#orgId").val(reqResult.data.orgId);
+			$("#orgName").val(reqResult.data.orgShortName);
+			$("#orgFullname").val(reqResult.data.orgTotalName);
+			$("#orgNature").val(reqResult.data.orgNatureName);
+			$("#orgAddress").val(reqResult.data.orgAddress);
+			$("#orgLevelId").val(reqResult.data.orgLevelName);
+			$("#orgArea").val(reqResult.data.orgSize);
+		} else {
+			alert(reqResult.message);
+		}
+	}
+</script>

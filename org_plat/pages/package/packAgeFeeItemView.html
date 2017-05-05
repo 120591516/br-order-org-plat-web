@@ -1,0 +1,226 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<div class="margin-bottom">
+		<h2><small>套餐收费项列表</small></h2></div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">套餐</a>
+		</li>
+		<li class="active">套餐收费项列表</li>
+	</ol>
+	<div class="box container-fluid no-margin">
+		<!--box-header -->
+		<div class="box-header">
+			<div class="row margin-bottom">
+				<div class="col-xs-12 col-md-8">
+					<h3 class="box-title">列表</h3>
+				</div>
+				<div class="col-xs-6 col-md-4  text-right">
+					<a class="btn btn-default" id="addFeeItemDeptInfo">添 加</a>
+					<a class="btn btn-default" id="backInfo">返回</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- /.box-header -->
+	</div>
+</section>
+
+<!-- /Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body">
+					<table class="table table-bordered table-striped" id="example3">
+						<thead>
+							<tr>
+								<th>操作</th>
+								<th>收费项名称</th>
+								<th>收费项名称简称</th>
+								<th>收费项英文名称</th>
+								<th>英文名称缩写</th>
+								<th>套餐内价格</th>
+								<th>单价</th>
+								<th>成本价</th>
+								<th>耗材价</th>
+								<th>外送价</th>
+								<th>适用性别</th>
+							</tr>
+						</thead>
+						<tbody id="mainContent">
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /Main content -->
+<!--模态框修改-->
+<script>
+	//添加回显所属科室下拉框
+	$('#addDepartInfo').on('click', function() {
+			feeItemDept();
+		})
+		//分页
+	init_page();
+
+	function init_page() {
+		page_curr = 1;
+		$('#mainContent').empty();
+		feeItemDept();
+		//1.请求后端信息并展示
+		suiteSearch();
+		init_pager();
+	}
+	//搜索请求
+	function searchAll() {
+		suiteSearch();
+		init_pager();
+	}
+	//请求后端信息并展示
+	function suiteSearch() {
+		//1.采集参数数据
+		$('#mainContent').empty();
+		var thisURL = document.URL;
+		if(thisURL.indexOf("?") != -1) {
+			getval = thisURL.split('?')[1];
+			showval = getval.split("=")[1];
+		}
+		var param = {
+			"page": page_curr,
+			"rows": count_curr,
+			"orgExamSuiteId": showval
+		};
+		//2.请求后台
+		var otype = "GET";
+		var osync = false;
+		var reqResult = httpRequest(getOrgExamFeeItemBySIdUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			//4.展示数据
+			total_count = reqResult.data.total;
+			createTable(page_curr, limit, total_count, reqResult);
+		}
+		return false;
+	}
+	// 初始化分页信息
+	function init_pager() {
+		$('#callBackPager').extendPagination({
+			totalCount: total_count,
+			showCount: count_curr,
+			limit: limit,
+			callback: function(curr, limit, totalCount) {
+				page_curr = curr;
+				total_count = totalCount;
+				suiteSearch();
+			}
+		});
+	}
+	//展示数据
+	function createTable(currPage, limit, total, dataBack) {
+		var showNum = limit;
+		if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+		for(var i = 0; i < showNum; i++) {
+			var statuWord = "";
+			var Tbody = document.getElementById('mainContent');
+			var lRow = Tbody.insertRow(); //创建行	
+			if(dataBack.data.list[i].fMale == 0 && dataBack.data.list[i].fFemale == 0) {
+				var showSex = '通用';
+			} else if(dataBack.data.list[i].fMale == 0 && dataBack.data.list[i].fFemale == 1) {
+				var showSex = '男性';
+			} else if(dataBack.data.list[i].fMale == 1 && dataBack.data.list[i].fFemale == 1) {
+				var showSex = '无';
+			} else if(dataBack.data.list[i].fMale == 1 && dataBack.data.list[i].fFemale == 0) {
+				var showSex = '女性';
+			}
+			//创建列
+			var firstColumn = lRow.insertCell();
+			var secondColumn = lRow.insertCell();
+			var thirdColumn = lRow.insertCell();
+			var forthColumn = lRow.insertCell();
+			var fifthColumn = lRow.insertCell();
+			var sixthColumn = lRow.insertCell();
+			var seventhColumn = lRow.insertCell();
+			var eighthColumn = lRow.insertCell();
+			var ninethColumn = lRow.insertCell();
+			var tenthColumn = lRow.insertCell();
+			var eleventhColumn = lRow.insertCell();
+			firstColumn.setAttribute('id', dataBack.data.list[i].id);
+			firstColumn.setAttribute('examFisId', dataBack.data.list[i].examFisId); //给td添加属性
+			//添加第一列内容
+			//创建查看标签
+//			var aCheck = document.createElement("a");
+//			var iElement = document.createElement("i");
+//			iElement.className = "fa fa-eye";
+//			aCheck.appendChild(iElement);
+//			aCheck.setAttribute("onclick", "loadpageLi('/org_plat/pages/examination/charges/checkFeeItem.html','" + dataBack.data.list[i].id + "')");
+//			aCheck.setAttribute("title", "查看信息");
+//			aCheck.className = "suite-check";
+//			aCheck.style.marginLeft = "5px";
+//			firstColumn.appendChild(aCheck);
+
+			//创建删除标签
+			var aDelete = document.createElement("a");
+			var iElement = document.createElement("i");
+			iElement.className = "fa fa-trash-o";
+			aDelete.appendChild(iElement);
+			aDelete.setAttribute("title", "删除信息");
+			aDelete.style.marginLeft = "5px";
+			aDelete.setAttribute("onclick", "delTeeItem(this)");
+			firstColumn.appendChild(aDelete);
+
+			//添加第二列内容	
+			secondColumn.innerText = dataBack.data.list[i].examFeeItemName;
+			//添加第三列内容	
+			thirdColumn.innerText = dataBack.data.list[i].examFeeItemNameAbr;
+			//添加第四列内容	
+			forthColumn.innerText = dataBack.data.list[i].examFeeItemNameEng;
+			//添加第五列内容	
+			fifthColumn.innerText = dataBack.data.list[i].examFeeItemNameEngAbr;
+			//添加第六列内容	
+			sixthColumn.innerText = dataBack.data.list[i].examFeeItemSuitePrice;
+			//添加第七列内容	
+			seventhColumn.innerText = dataBack.data.list[i].examFeeItemUnitPrice;
+			//添加第八列内容	
+			eighthColumn.innerText = dataBack.data.list[i].examFeeItemCostPrice;
+			//添加第九列内容	
+			ninethColumn.innerText = dataBack.data.list[i].examFeeItemMaterialPrice;
+			//添加第十列内容	
+			tenthColumn.innerText = dataBack.data.list[i].examFeeItemCoopPrice;
+			//添加第十一列内容	
+			eleventhColumn.innerText = showSex;
+		}
+		return false;
+	}
+//	添加时
+	$('#addFeeItemDeptInfo').on('click', function() {
+			loadpage('/org_plat/pages/package/packAgeFeeItemEdit.html?id=' + showval);
+		})
+//	返回
+	$('#backInfo').on('click', function() {
+			loadpage('/org_plat/pages/package/packAge.html?id=' + showval);
+		})
+		//删除操作
+	function delTeeItem(id) {
+		if(confirm("确认禁用该检查项吗？")) {
+			var delExam = $(id).parent().attr("examFisId");
+			var param = {
+				"examFisId": delExam
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(org_exam_feeItem_suite_delete, param, otype, osync);
+			if(reqResult.result == 0 && reqResult.data > 0) {
+				alert("删除成功！");
+				window.location.reload();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+</script>

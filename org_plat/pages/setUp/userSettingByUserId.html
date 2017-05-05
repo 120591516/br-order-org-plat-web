@@ -1,0 +1,378 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<div class="margin-bottom">
+		<h2><small>用户设置</small></h2></div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">设置</a>
+		</li>
+		<li class="active">用户设置</li>
+	</ol>
+</section>
+<!-- /Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<!--box-header -->
+				<div class="box-header">
+					<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+						<a href="#addUser" onclick="getUserName()" data-toggle="modal" class="btn btn-default" id="addUserInfo">添加</a>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>操作</th>
+								<th>管理员</th>
+								<th>管理对象类型</th>
+								<th>管理对象名称</th>
+								<th>编辑时间</th>
+								<th>状态</th>
+							</tr>
+							<tr class="warning no-result">
+								<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+							</tr>
+						</thead>
+						<tbody id="userTboody">
+							<tr>
+								<td></td>
+								<td></td>
+								<th></th>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /Main content -->
+<!--模态框查看-->
+<div class="modal fade" id="checkUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">查看信息</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="checkUserForm">
+					<div class="input-group">
+						<span class="input-group-addon">管理员</span>
+						<input type="text" id="checkUserName" class="form-control check_userloginname_validate" name="userName" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">管理对象名称</span>
+						<input type="text" id="checkUserManagerObjName" class="form-control check_userloginname_validate" name="userManagerObjName" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">编辑时间</span>
+						<input type="text" id="checkUserManagerCreateTime" class="form-control" name="userManagerCreateTime" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group" id="checkUserManagerType">
+						<span class="input-group-addon userlist_status_right_border">管理对象类型</span>
+						<input type="radio" name='userManagerType' value="1" class="userlist_statusinput_vertical" disabled="disabled" />门店
+						<input type="radio" name='userManagerType' value="2" class="userlist_statusinput_vertical" disabled="disabled" />科室
+					</div>
+					<div class="input-group" id='checkUserManagerStatus'>
+						<span class="input-group-addon userlist_status_right_border">状 态</span>
+						<input type="radio" name='userManagerStatus' value="0" class="userlist_statusinput_vertical" disabled="disabled" />启用
+						<input type="radio" name='userManagerStatus' value="1" class="userlist_statusinput_vertical" disabled="disabled" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框编辑-->
+<div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">编辑信息</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="editUserForm">
+					<div class="input-group">
+						<span class="input-group-addon">管理员</span>
+						<input type="text" id="editUserName" class="form-control check_userloginname_validate" name="userName" aria-describedby="basic-addon1">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">管理对象名称</span>
+						<select class="form-control selectpicker userManagerObjNameSelect" id="editUserManagerObjName" name="userManagerObjName">
+						</select>
+					</div>
+					<div class="input-group" id='editUserManagerType'>
+						<span class="input-group-addon userlist_status_right_border">管理对象类型</span>
+						<input type="radio" name='userManagerType' value="1" onclick='switchRebackUserMagObj(this)' class="userlist_statusinput_vertical" />门店
+						<input type="radio" name='userManagerType' value="2" onclick='switchRebackUserMagObj(this)' class="userlist_statusinput_vertical" />科室
+					</div>
+					<div class="input-group" id='editUserManagerStatus'>
+						<span class="input-group-addon userlist_status_right_border">状 态</span>
+						<input type="radio" name='userManagerStatus' value="0" class="userlist_statusinput_vertical" />启用
+						<input type="radio" name='userManagerStatus' value="1" class="userlist_statusinput_vertical" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id='editUserSave'>保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框添加-->
+<div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加信息</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="addUserForm">
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">管理员</span>
+						<input type="text" id="addUserName" class="form-control check_userloginname_validate" name="userName" aria-describedby="basic-addon1" required>
+					</div>
+					<div class="input-group" id='addUserManagerType'>
+						<span class="input-group-addon userlist_status_right_border">管理对象类型</span>
+						<input type="radio" name='userManagerType' value="1" onclick='switchRebackUserMagObj(this)' class="userlist_statusinput_vertical" checked="checked"/>门店
+						<input type="radio" name='userManagerType' value="2" onclick='switchRebackUserMagObj(this)' class="userlist_statusinput_vertical" />科室
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">管理对象名称</span>
+						<select name="userManagerObjName" class="form-control check_userloginname_validate userManagerObjNameSelect" id="addUserManagerObjName" aria-describedby="basic-addon1" required></select>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="addUserSubmit">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/org_plat/js/plugins/extendPagination.js"></script>
+<script>
+	createTable();
+	//  展示列表信息
+	function createTable() {
+		$('#userTboody').empty();
+		var param = {
+			"userId": init_param_Id
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(getOrgUserManagerByUserIdUrl, param, otype, osync);
+		var str = '';
+		if(reqResult.result == 0);
+		var datal = reqResult.data;
+		for(var i = 0; i < datal.length; i++) { //判断数据长度
+			str += "<tr><td userManagerId='" + datal[i].userManagerId + "' userId='" + datal[i].userId + "'userManagerType='" + datal[i].userManagerType + "'>"; //list列表的id名称
+			str += "<a href='#checkUser' title='查看信息' data-toggle='modal' onclick='checkUser(this)'><i class='fa fa-eye'></i></a> ";
+			str += "<a href='#editUser' title='编辑信息' data-toggle='modal' onclick='editUser(this)'><i class='fa fa-pencil'></i></a> ";
+			str += "<a href='#' title='禁用信息' style='margin-right:5px' onclick='delUser(this)'><i class='fa fa-trash-o'></i></a>";
+			str += "</td>";
+			str += "<td>" + nullformat(datal[i].userName) + "</td>";
+			if(datal[i].userManagerType == 1) {
+				str += "<td>" + '门店' + "</td>";
+			} else {
+				str += "<td>" + '科室' + "</td>";
+			}
+			str += "<td>" + nullformat(datal[i].userManagerObjName) + "</td>";
+			str += "<td>" + nullformat(getLocalTime(datal[i].userManagerCreateTime)) + "</td>";
+			if(datal[i].userManagerStatus == 0) {
+				str += "<td>" + '启用 ' + "</td>";
+			} else {
+				str += "<td>" + '禁用' + "</td>";
+			}
+			str += '</tr>';
+		}
+		$("#userTboody").append(str);
+		return false;
+	}
+	//	查看回显信息
+	function checkUser(check) {
+		var checkUserId = $(check).parent().attr("userManagerId");
+		var param = {
+			"userManagerId": checkUserId
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(getOrgUserManagerUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			if(reqResult.data.userManagerType == 1) {
+				$('#checkUserManagerType input')[0].checked = "checked";
+			} else {
+				$('#checkUserManagerType input')[1].checked = "checked";
+			}
+			$('#checkUserName').val(reqResult.data.userName);
+			$('#checkUserManagerObjName').val(reqResult.data.userManagerObjName);
+			$('#checkUserManagerCreateTime').val(getLocalTime(reqResult.data.userManagerCreateTime));
+			if(reqResult.data.userManagerStatus == 0) {
+				$('#checkUserManagerStatus input')[0].checked = "checked";
+			} else {
+				$('#checkUserManagerStatus input')[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//  删除信息
+	function delUser(del_li) {
+		if(confirm("确认删除该用户信息吗？")) {
+			var delUserId = $(del_li).parent().attr("userManagerId");
+			var param = {
+				"userManagerId": delUserId
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(deleteOrgUserManagerUrl, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("删除成功！");
+				loadpage("/org_plat/pages/setUp/userSettingByUserId.html");
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+	//	編輯回显信息
+	//	var userId='';
+	var userManagerId = "";
+
+	function editUser(edit_li) {
+		userManagerId = $(edit_li).parent().attr("userManagerId");
+		init_param_Id = $(edit_li).parent().attr("userId");
+		var param = {
+			"userManagerId": userManagerId
+		};
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(getOrgUserManagerUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#userManagerId').val(reqResult.data.userManagerId); //回显
+			if(reqResult.data.userManagerType == 1) {
+				$('#editUserManagerType input')[0].checked = "checked";
+				userMagBranch();
+				$('#editUserManagerObjName').val(reqResult.data.userManagerObjId);
+			} else {
+				$('#editUserManagerType input')[1].checked = "checked";
+				userMagDept();
+				$('#editUserManagerObjName').val(reqResult.data.userManagerObjId);
+			}
+			$('#editUserName').val(reqResult.data.userName);
+			if(reqResult.data.userManagerStatus == 0) {
+				$('#editUserManagerStatus input')[0].checked = "checked";
+			} else {
+				$('#editUserManagerStatus input')[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//添加门店或科室下拉框切换回显
+	var typeNum = '';
+
+	function switchRebackUserMagObj(inputs) {
+		typeNum = $(inputs).attr('value');
+		if(typeNum == 1) {
+			$("#editUserManagerObjName").empty();
+			$('#addUserManagerObjName').empty();
+			userMagBranch();
+		} else {
+			$("#editUserManagerObjName").empty();
+			$('#addUserManagerObjName').empty();
+			userMagDept();
+		}
+	}
+	//  编辑保存信息
+	$('#editUserSave').on('click', function() {
+			var editUserName = $('#editUserName').val();
+			var editUserManagerObjId = $("#editUserManagerObjName").val();
+			typeNum = $('#editUserManagerType input').val();
+			var editUserManagerStatus = $('#editUserManagerStatus input:checked').val();
+			if(editUserName == '' || editUserManagerObjId == '' || editUserManagerType == '' || editUserManagerStatus == '') {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				var param = {
+					"userManagerId": userManagerId,
+					"userId": userId,
+					"userName": editUserName,
+					"userManagerType": typeNum,
+					"userManagerStatus": editUserManagerStatus,
+					"userManagerObjId": editUserManagerObjId
+				}
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(updateOrgUserManagerUrl, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功!');
+					$('#editDept').modal("toggle");
+					$(".modal-backdrop").remove(); //删除class值为modal-backdrop的标签，可去除阴影
+					loadpage("/org_plat/pages/setUp/userSettingByUserId.html");
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		})
+		//获取医生姓名
+	function getUserName() {
+		var param = {
+			"doctorId": init_param_Id,
+		}
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(getOrgUserByIdUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#addUserName').val(reqResult.data.userName);
+		} else {
+			alert(reqResult.message);
+		}
+		userMagBranch();
+	}
+	//  添加保存信息
+	$('#addUserSubmit').on('click', function() {
+		var addUserName = $('#addUserName').val();
+		var addUserManagerObjId = $('#addUserManagerObjName').val();
+		var addUserManagerType = $('#addUserManagerType input').val();
+		if(addUserName == '' || addUserManagerObjName == '' || addUserManagerType == '') {
+			alert('请输入完整信息！');
+			return false;
+		} else {
+			var param = {
+				"userId": init_param_Id,
+				"userName": addUserName,
+				"userManagerType": typeNum,
+				"userManagerObjId": addUserManagerObjId
+			}
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(insertOrgUserManagerUrl, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("添加成功");
+				$('#addDept').modal("toggle");
+				$(".modal-backdrop").remove(); //删除class值为modal-backdrop的标签，可去除阴影
+				loadpage("/org_plat/pages/setUp/userSettingByUserId.html");
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	})
+</script>

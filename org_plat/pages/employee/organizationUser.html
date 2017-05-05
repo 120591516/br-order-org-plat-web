@@ -1,0 +1,789 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<div class="margin-bottom">
+		<h2><small>医生设置</small></h2></div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">设置</a>
+		</li>
+		<li class="active">医生设置</li>
+	</ol>
+	<div class="box container-fluid no-margin">
+		<!--box-header -->
+		<div class="box-header">
+			<div class="row margin-bottom">
+				<div class="col-md-11">
+					<h3 class="box-title">搜索</h3>
+				</div>
+				<div class="col-md-1">
+					<div class="input-group pull-right">
+						<a href="#addOrgUser" data-toggle="modal" id="addDepartInfo" class="btn btn-default">添加</a>
+					</div>
+				</div>
+			</div>
+			<div class="row margin-bottom">
+				<form class="form-group container-fluid">
+					<div class="row margin-bottom">
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">门店</span>
+									<input class="form-control store_search_form hide" id="serbranchId" />
+									<select class="form-control selectpicker" id="serbranchName" name="branchName">
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">科室名称</span>
+									<select class="form-control selectpicker" id="serorgDeptId" name="orgDeptId">
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">医生姓名</span>
+									<input type="text" class="form-control store_search_form" name="userName" id="seruserName" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">邮箱</span>
+									<input type="text" class="form-control store_search_form" name="userEmail" id="seruserEmail" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon">手机号</span>
+									<input type="text" class="form-control store_search_form" name="userPhone" id="seruserPhone" aria-describedby="basic-addon1" maxlength='12' required>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<div class="input-group">
+									<span class="input-group-addon hide"></span>
+									<select class="form-control selectpicker brands hide" id="orgId" name="orgId">
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="input-group pull-right">
+									<input type="button" class="btn btn-primary fa fa-search" id="search_user_btn" value="搜索" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- /.box-header -->
+	</div>
+</section>
+<!-- /Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<!--box-header -->
+				<div class="box-header">
+					<h3 class="box-title col-lg-10 col-md-9 col-sm-9 col-xs-9">列表</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>操作</th>
+								<th>登录名</th>
+								<th>用户姓名</th>
+								<th>门店名称</th>
+								<th>科室</th>
+								<th>手机号</th>
+								<th>邮箱</th>
+								<th>创建时间</th>
+								<th>状态</th>
+							</tr>
+							<tr class="warning no-result">
+								<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+							</tr>
+						</thead>
+						<tbody id="orgUserTboody"></tbody>
+					</table>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /Main content -->
+</div>
+
+<!--模态框添加-->
+<div class="modal fade" id="addOrgUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加医生</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="addOrgUserForm">
+					<div class="input-group">
+						<span class="input-group-addon">门店名称</span>
+						<select class="form-control selectpicker getBranchName" id="addbranchName" name="orgBranchId">
+						</select>
+					</div>
+					<span class='checkaddbranchName color_rgba font_16'></span>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室</span>
+						<select class="form-control selectpicker SuperiorDepartment" id="orgDeptIdadd" name="orgBranchDeptId">
+						</select>
+					</div>
+					<span class='checkadddepartName'></span>
+					<div class="input-group hide">
+						<span class="input-group-addon"></span>
+						<select class="form-control selectpicker brands" id="addorgId" name="orgId">
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">登录名</span>
+						<input type="text" id="adduserLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<span class='checkloginname color_rgba font_16'></span>
+
+					<div class="input-group">
+						<span class="input-group-addon">医生姓名</span>
+						<input type="text" id="adduserName" class="form-control check_userloginname_validate" name="userName" aria-describedby="basic-addon1" maxlength='10' required>
+					</div>
+					<span class='checkAdduserName color_rgba font_16'></span>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">手机号</span>
+						<input type="text" id="adduserPhone" class="form-control check_userphone_validate" name="userPhone" aria-describedby="basic-addon1" required>
+					</div>
+					<span class='checkAdduserPhone color_rgba font_16'></span>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">邮箱</span>
+						<input type="text" id="adduserEmail" class="form-control check_userphone_validate" name="userEmail" aria-describedby="basic-addon1" required>
+					</div>
+					<span class='checkaddUserEmail color_rgba font_16'></span>
+					<div class="input-group" id='addFlag'>
+						<span class="input-group-addon letter_spacing_30">管理员</span>
+						<input type="radio" name='flag' value="1" class="check_userphone_validate" checked="checked" />是
+						<input type="radio" name='flag' value="0" class="check_userphone_validate" />否
+					</div>
+					<span class='checkAddFlag color_rgba font_16'></span>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<span class="color_rgba dis_flex">*初始密码88888888</span>
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="addOrgUserSubmit">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--模态框编辑-->
+<div class="modal fade" id="editOrgUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">编辑医生</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="editOrgUserForm">
+					<input type="hidden" name="userId" id="edituserId" />
+					<div class="input-group">
+						<span class="input-group-addon">门店名称</span>
+						<select class="form-control selectpicker getBranchName" id="editbranchName" name="orgBranchId">
+						</select>
+					</div>
+					<span class='checkaddbranchName color_rgba font_16'></span>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室</span>
+						<select class="form-control selectpicker SuperiorDepartment" id="editOrgDeptIdedit" name="orgBranchDeptId">
+						</select>
+					</div>
+					<span class='checkeditdepartName color_rgba font_16'></span>
+					<div class="input-group">
+						<span class="input-group-addon">登录名</span>
+						<input type="text" id="edituserLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" maxlength='12' disabled="disabled">
+					</div>
+					<span class='checkeditUserLoginName color_rgba font_16'></span>
+					<div class="input-group">
+						<span class="input-group-addon">医生姓名</span>
+						<input type="text" id="edituserName" class="form-control check_userloginname_validate" name="userName" aria-describedby="basic-addon1" maxlength='10' required>
+					</div>
+					<span class='checkeditUserName color_rgba font_16'></span>
+					<div class="input-group">
+						<span class="input-group-addon">手机号</span>
+						<input type="text" id="edituserPhone" class="form-control check_userphone_validate" name="userPhone" aria-describedby="basic-addon1" required>
+					</div>
+					<span class='checkeditUserPhone color_rgba font_16'></span>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">邮箱</span>
+						<input type="text" id="edituserEmail" class="form-control check_userphone_validate" name="userEmail" aria-describedby="basic-addon1" required>
+					</div>
+					<span class='checkeditUserEmail color_rgba font_16'></span>
+					<div class="input-group" id='edituserStatus'>
+						<span class="input-group-addon userlist_userStatus_right_border">状 态</span>
+						<input type="radio" name='userStatus' value="0" class="userlist_userStatusinput_vertical" />启用
+						<input type="radio" name='userStatus' value="1" class="userlist_userStatusinput_vertical" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id='editOrgUserSave'>保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--模态框查看-->
+<div class="modal fade" id="checkOrgUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">查看医生</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="editOrgUserForm">
+					<div class="input-group">
+						<span class="input-group-addon">门店名称</span>
+						<select class="form-control selectpicker getBranchName" id="checkbranchName" name="orgBranchId" disabled="disabled">
+						</select>
+					</div>
+
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">科室</span>
+						<select class="form-control selectpicker SuperiorDepartment" id="checkdepartName" name="orgDeptId" disabled="disabled">
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">登录名</span>
+						<input type="text" id="checkuserLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<span class="userlist_checkloginname"></span>
+					<div class="input-group">
+						<span class="input-group-addon">医生姓名</span>
+						<input type="text" id="checkuserName" class="form-control check_userloginname_validate" name="userName" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">手机号</span>
+						<input type="text" id="checkuserPhone" class="form-control check_userphone_validate" name="userPhone" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon letter_spacing_30">邮箱</span>
+						<input type="text" id="checkuserEmail" class="form-control check_userphone_validate" name="userEmail" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">创建时间</span>
+						<input type="text" id="checkuserCreateTime" class="form-control" name="userCreateTime" aria-describedby="basic-addon1" disabled="disabled">
+					</div>
+					<div class="input-group" id='checkuserStatus'>
+						<span class="input-group-addon userlist_userStatus_right_border">状 态</span>
+						<input type="radio" name='userStatus' value="0" class="userlist_userStatusinput_vertical" disabled="disabled" />启用
+						<input type="radio" name='userStatus' value="1" class="userlist_userStatusinput_vertical" disabled="disabled" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--模态框查看体检项-->
+<div class="modal fade" id="checkExamItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel_see">收费项列表</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-bordered table-striped" id="examItemTb">
+					<thead>
+						<tr>
+							<th>收费项名称</th>
+						</tr>
+					</thead>
+					<tbody id="examItemList">
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/org_plat/js/plugins/extendPagination.js"></script>
+<script>
+	//orguserJumpParamBranchId科室跳转员工的branchId,orguserJumpParamDeptId科室跳转员工的deptId
+	orguserPageUrl = window.location.href;
+	orguserPageUrlLength = orguserPageUrl.split('#')[1].length;
+	if(orguserPageUrlLength > 0) {
+		orguserJumpParamBranchId = '';
+		orguserJumpParamDeptId = '';
+	} else {
+		orguserJumpParamBranchId = branchId;
+		orguserJumpParamDeptId = deptId;
+	}
+
+	page_curr = 1;
+	orgUserInfo();
+
+	function orgUserInfo() {
+		//  	初始化门店
+		getBranchName('#serbranchName', '0');
+		$('#serbranchName').val(orguserJumpParamBranchId);
+		SuperiorDepartment($('#serbranchName').val(), '#serorgDeptId', '0');
+		$('#serorgDeptId').val(orguserJumpParamDeptId);
+		storeSearch();
+		init_pager();
+	}
+	//		定义上级科室
+	$('#serbranchName').on('change', function() {
+		SuperiorDepartment($('#serbranchName').val(), '#serorgDeptId', '0');
+		event.preventDefault();
+	})
+	$('#search_user_btn').on('click', function() {
+		storeSearch();
+		init_pager();
+		return false;
+	})
+	$('#adduserLoginName').blur(function() {
+		check_userloginname();
+	})
+
+	function check_userloginname() {
+		var flag = false;
+		var username = $('#adduserLoginName').val().trim();
+		if(username == '') {
+			$(".checkloginname").html("登录名不能为空!");
+			flag = false;
+			return;
+		} else if(username.length < 6 || username.length > 20) {
+			$(".checkloginname").html("登录名长度6~20");
+			flag = false;
+			return;
+		} else {
+			$(".checkloginname").html("");
+		}
+		var param = {
+			'userName': username
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(userAdmin_getCountByUserName_url, param, otype, osync);
+		if(reqResult.data == 1) {
+			$(".checkloginname").html("登录名已存在");
+			flag = false;
+		} else {
+			$(".checkloginname").html("");
+			flag = false;
+			return;
+		}
+	}
+	//  搜索功能
+	function storeSearch() {
+		$('#orgUserTboody').empty();
+		var orgId = $('#orgId').val();
+		var serbranchId = $('#serbranchId').val();
+		var serbranchName = $('#serbranchName').val();
+		var serorgDeptId = $('#serorgDeptId').val();
+		var seruserName = $('#seruserName').val().trim();
+		var seruserPhone = $('#seruserPhone').val().trim();
+		var seruserEmail = $("#seruserEmail").val().trim();
+		var param = {
+			"page": page_curr,
+			"rows": 10
+		};
+		if(orgId != null && orgId != 0 && orgId != -1) {
+			param.orgId = orgId;
+		}
+		if(serbranchName) {
+			param.orgBranchId = serbranchName;
+		}
+		if(serorgDeptId) {
+			param.orgBranchDeptId = serorgDeptId;
+		}
+		if(seruserName != '') {
+			param.userName = seruserName;
+		}
+		if(seruserPhone != '') {
+			param.userPhone = seruserPhone;
+		}
+		if(seruserEmail != '') {
+			param.userEmail = seruserEmail;
+		}
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(getOrgUserListUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			total_count = reqResult.data.total;
+			createTable(page_curr, limit, total_count, reqResult);
+			return false;
+		}
+	}
+	// 初始化分页信息
+	function init_pager() {
+		$('#callBackPager').extendPagination({
+			totalCount: total_count,
+			showCount: count_curr,
+			limit: limit,
+			callback: function(curr, limit, totalCount) {
+				page_curr = curr;
+				total_count = totalCount;
+				storeSearch();
+			}
+		});
+	}
+	//  展示列表信息
+	function createTable(currPage, limit, total, dataBack) {
+		var showNum = limit;
+		if(total - (currPage * limit) < 0) showNum = total - ((currPage - 1) * limit);
+		var datal = dataBack.data.list;
+		//获取操作类型
+		//		var operationList = dataBack.operationList;
+		//		//			判断添加按钮
+		//		if(operationList.add == 1) {
+		//			$('#addDepartInfo').show();
+		//		} else {
+		//			$('#addDepartInfo').hide();
+		//		}
+		var str = '';
+		for(var i = 0; i < datal.length; i++) { //判断数据长度
+			str += "<tr><td orgUserid='" + datal[i].userId + "' orgBranchId='" + datal[i].orgBranchId + "' orgBranchDeptId='" + datal[i].orgBranchDeptId + "'>"; //list列表的id名称
+			//			if(operationList.select==1){
+			str += "<a href='#checkOrgUser' title='查看机构员工信息' data-toggle='modal' onclick='checkOrgUser(this)'><i class='fa fa-eye'></i></a> ";
+			//			}
+			//			if(operationList.update==1){
+			str += "<a href='#editOrgUser' title='编辑机构员工信息' data-toggle='modal' onclick='editOrgUser(this)'><i class='fa fa-pencil'></i></a> ";
+			//			}
+			//			if(operationList.delete==1){
+			str += "<a title='禁用机构员工信息' style='margin-right:5px' onclick='delOrgUser(this)'><i class='fa fa-trash-o'></i></a>";
+			//			}
+			str += "<a title='添加体检项' style='margin-right:5px' onclick='viewExamItem(this)'><i class='fa fa-stethoscope'></i></a> ";
+			str += "<a title='管理范围' onclick='checkUserManager(this)'><i class='fa fa-user'></i></a>";
+
+			str += "</td>";
+			str += "<td>" + nullformat(datal[i].userLoginName) + "</td>";
+			str += "<td>" + nullformat(datal[i].userName) + "</td>";
+			str += "<td>" + nullformat(datal[i].branchName) + "</td>";
+			str += "<td>" + nullformat(datal[i].departName) + "</td>";
+			str += "<td>" + nullformat(datal[i].userPhone) + "</td>";
+			str += "<td>" + nullformat(datal[i].userEmail) + "</td>";
+			str += "<td>" + nullformat(getLocalTime(datal[i].userCreateTime)) + "</td>";
+			if(datal[i].userStatus == 0) {
+				str += "<td>" + '启用 ' + "</td>";
+			} else {
+				str += "<td>" + '禁用' + "</td>";
+			}
+			str += '</tr>';
+		}
+		$("#orgUserTboody").append(str);
+		return false;
+	}
+	//查看体检项
+	function viewExamItem(id) {
+		var uid = $(id).parent().attr("orgUserid");
+		var orgBranchId = $(id).parent().attr("orgBranchId");
+		var orgBranchDeptId = $(id).parent().attr("orgBranchDeptId");
+		if(orgBranchId != 0 && orgBranchDeptId != 0) {
+			loadpageLi("/org_plat/pages/employee/userExamItemView.html", uid);
+		} else {
+			alert('没有所属门店或科室，请确认后操作！');
+		}
+	}
+	//查看管理范围
+	function checkUserManager(id) {
+		var uid = $(id).parent().attr("orgUserid");
+		loadpageLi("/org_plat/pages/setUp/userSettingByUserId.html", uid);
+	}
+	//  根据医生姓名回显体检项信息
+	function getExamItem(check) {
+		var getUserId = $(check).parent().attr("orgUserid");
+		var param = {
+			"userId": getUserId
+		};
+		$("#examItemList").empty();
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(getOrgExamItemByUserIdUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			var examItemData = reqResult.data;
+			var str = '';
+			for(var i = 0; i < examItemData.length; i++) {
+				str += "<tr>";
+				str += "<td>" + examItemData[i].examItemName + "</td>";
+				str += "</tr>";
+			}
+			$("#examItemList").append(str);
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	$('#addDepartInfo').on('click', function() {
+			if(orguserJumpParamBranchId != '' && orguserJumpParamDeptId != '') {
+				getBranchName('#addbranchName', '1');
+				$("#addbranchName").val(orguserJumpParamBranchId);
+				SuperiorDepartment($('#addbranchName').val(), '#orgDeptIdadd', '1');
+				$("#orgDeptIdadd").val(orguserJumpParamDeptId);
+				$("#addbranchName").attr('readonly', true);
+				$("#orgDeptIdadd").attr('readonly', true);
+			} else {
+				$("#addbranchName").attr('readonly', false);
+				$("#orgDeptIdadd").attr('readonly', false);
+				getBranchName('#addbranchName', '1');
+				$("#addbranchName").val('');
+			}
+		})
+		//添加时门店科室级联
+	$('#addbranchName').on('change', function() {
+			var addbranchName = $('#addbranchName').val();
+			SuperiorDepartment(addbranchName, '#orgDeptIdadd', '1');
+		})
+		//	编辑时
+	$('#editbranchName').on('change', function() {
+			var editbranchName = $('#editbranchName').val();
+			SuperiorDepartment(editbranchName, '#editOrgDeptIdedit', '1');
+		})
+		//  添加保存信息
+	$('#addOrgUserSubmit').on('click', function() {
+			var adduserLoginName = $('#adduserLoginName').val();
+			var adduserName = $('#adduserName').val();
+			var adduserPhone = $('#adduserPhone').val();
+			var adduserEmail = $('#adduserEmail').val();
+			var adddepartName = $('#orgDeptIdadd').val();
+			var addbranchName = $('#addbranchName').val();
+			var addorgTotalName = $('#addorgTotalName').val();
+			if(adduserLoginName == '' || adduserName == '' || adduserPhone == '' || adduserEmail == '' || adddepartName == '' || addbranchName == '' || addorgTotalName == '') {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				var param = $('#addOrgUserForm').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(addOrgUserUrl, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert("添加成功");
+					$('#addOrgUser').modal("toggle");
+					$(".modal-backdrop").remove(); //删除class值为modal-backdrop的标签，可去除阴影
+					loadpage("/org_plat/pages/employee/organizationUser.html");
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		})
+		//	查看回显信息
+	function checkOrgUser(check) {
+		var editOrgUser_id = $(check).parent().attr("orgUserid");
+		var param = {
+			"doctorId": editOrgUser_id
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(getOrgUserByIdUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#checkuserLoginName').val(reqResult.data.userLoginName);
+			$('#checkuserName').val(reqResult.data.userName);
+			$('#checkuserPhone').val(reqResult.data.userPhone);
+			$('#checkuserEmail').val(reqResult.data.userEmail);
+			$('#checkuserCreateTime').val(getLocalTime(reqResult.data.userCreateTime));
+			//  	初始化门店
+			getBranchName('#checkbranchName','1');
+			$('#checkbranchName').val(reqResult.data.orgBranchId); //获取当前门店value
+			//			定义科室
+			SuperiorDepartment(reqResult.data.orgBranchId, '#checkdepartName','1'); //获取当前上级科室value
+			$('#checkdepartName').val(reqResult.data.orgBranchDeptId);
+			if(reqResult.data.userStatus == 0) {
+				$('#checkuserStatus input')[0].checked = "checked";
+			} else {
+				$('#checkuserStatus input')[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//  删除信息
+	function delOrgUser(del_li) {
+		if(confirm("确认禁用该员工信息吗？")) {
+			var del_user_id = $(del_li).parent().attr("orgUserid");
+			var param = {
+				"doctorId": del_user_id
+			};
+			var otype = "get";
+			var osync = false;
+			var reqResult = httpRequest(deleteOrgUserUrl, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("禁用成功！");
+				loadpage("/org_plat/pages/employee/organizationUser.html");
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+	//	編輯回显信息
+	function editOrgUser(edit_li) {
+		var editOrgUser_id = $(edit_li).parent().attr("orgUserid");
+		var param = {
+			"doctorId": editOrgUser_id
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(getOrgUserByIdUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			$('#edituserId').val(reqResult.data.userId); //回显
+			$('#edituserLoginName').val(reqResult.data.userLoginName);
+			$('#edituserName').val(reqResult.data.userName);
+			$('#edituserPhone').val(reqResult.data.userPhone);
+			$('#edituserEmail').val(reqResult.data.userEmail);
+			//  	初始化门店
+			getBranchName('#editbranchName','1');
+			$('#editbranchName').val(reqResult.data.orgBranchId); //获取当前门店value
+			//			定义科室
+			SuperiorDepartment(reqResult.data.orgBranchId, '#editOrgDeptIdedit','1'); //获取当前上级科室value
+			$('#editOrgDeptIdedit').val(reqResult.data.orgBranchDeptId);
+			if(reqResult.data.userStatus == 0) {
+				$('#edituserStatus input')[0].checked = "checked";
+			} else {
+				$('#edituserStatus input')[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	//  编辑保存信息
+	$('#editOrgUserSave').on('click', function() {
+			var edit_userLoginName = $('#edituserLoginName').val();
+			var edit_userName = $('#edituserName').val();
+			var edit_userPhone = $('#edituserPhone').val();
+			var edit_userEmail = $('#edituserEmail').val();
+			var edit_orgDeptIdedit = $('#orgDeptIdedit').val();
+			var edit_userStatus = $('#edituserStatus input').val();
+			if(edit_userLoginName == '' || edit_userName == '' || edit_userPhone == '' || edit_userEmail == '' || edit_orgDeptIdedit == '' || edituserStatus == '') {
+				alert('请输入完整信息！');
+				return false;
+			} else {
+				var param = $('#editOrgUserForm').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(updateOrgUserUrl, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功!');
+					$('#editOrgUserForm').modal("toggle");
+					$(".modal-backdrop").remove(); //删除class值为modal-backdrop的标签，可去除阴影
+					loadpage("/org_plat/pages/employee/organizationUser.html");
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		})
+		//	添加登录名验证
+	$("#adduserLoginName").blur(function() {
+		check_adduserLoginName();
+	});
+
+	function check_adduserLoginName() {
+		var flag = false;
+		var adduserLoginName = $('#adduserLoginName').val().trim();
+		if(adduserLoginName == '') {
+			$(".checkAdduserLoginName").html("登录名不能为空!");
+			$('#adduserLoginName').focus(function() {
+				$(".checkAdduserLoginName").html("");
+			});
+			flag = false;
+			return;
+		} else if(adduserLoginName.length < 2 || adduserLoginName.length > 16) {
+			$(".checkAdduserLoginName").html("注册名长度2~16");
+			flag = false;
+			return;
+		} else {
+			$(".checkAdduserLoginName").html("");
+		}
+	}
+	//	添加用户名验证
+	$("#adduserName").blur(function() {
+		check_adduserName();
+	});
+
+	function check_adduserName() {
+		var flag = false;
+		var adduserName = $('#adduserName').val().trim();
+		if(adduserName == '') {
+			$(".checkAdduserName").html("用户名不能为空!");
+			$('#adduserName').focus(function() {
+				$(".checkAdduserName").html("");
+			});
+			flag = false;
+			return;
+		} else if(adduserName.length < 2 || adduserName.length > 16) {
+			$(".checkAdduserName").html("注册名长度2~16");
+			flag = false;
+			return;
+		} else {
+			$(".checkAdduserName").html("");
+		}
+	}
+	//	添加手机验证
+	$("#adduserPhone").blur(function() {
+		check_adduserPhone();
+	});
+
+	function check_adduserPhone() {
+		var phone = $('#adduserPhone');
+		if(phone.val() == "") {
+			$(".checkAdduserPhone").html("<font class='font'>手机号码不能为空，请重新输入！</font>");
+			phone.focus(function() {
+				$(".checkAdduserPhone").html("");
+			});
+			return false;
+		} else if(!phone.val().match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/)) {
+			$(".checkAdduserPhone").html("<font class='fontphone'>手机号码格式不正确！请重新输入</font>");
+			return false;
+		} else {
+			$(".checkAdduserPhone").html("");
+		}
+	}
+	//   添加邮箱校验
+	$("#adduserEmail").blur(function() {
+		check_adduserEmail();
+	});
+
+	function check_adduserEmail() {
+		var email = $("#adduserEmail");
+		if(email.val() == "") {
+			$(".checkaddUserEmail").html("<font class='font'>邮箱不能为空，请重新输入！</font>");
+			return false;
+		} else if(!email.val().match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)) {
+			$(".checkaddUserEmail").html("<font class='fontmail'>邮箱格式不正确，请重新输入！</font>");
+			email.focus(function() {
+				$(".checkaddUserEmail").html("");
+			});
+			return false;
+		} else {
+			$(".checkaddUserEmail").html("");
+		}
+	}
+</script>

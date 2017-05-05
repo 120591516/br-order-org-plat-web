@@ -1,0 +1,673 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h2>
+		<small>用户管理</small>
+	</h2>
+	</div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">管理</a>
+		</li>
+		<li class="active">用户管理</li>
+	</ol>
+</section>
+<!-- /Content Header (Page header) -->
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<!--box-header -->
+				<div class="box-header">
+					<h3 class="box-title col-lg-9 col-md-8 col-sm-8 col-xs-8">列表</h3>
+
+					<form action="" class="bs-example col-lg-2 col-md-3 col-sm-3 col-xs-3" role="form">
+						<div class="input-group">
+							<input type="text" class="form-control" id="user_input" placeholder="搜索"> <span class="input-group-addon" id="search_userlist"><a href="" class="fa fa-search"></a></span>
+						</div>
+					</form>
+					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+						<a href="#myModal" data-toggle="modal" id="addUserAdmin" onclick='user_info_add()' class="btn btn-default">添加</a>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table class="table table-bordered table-striped" id="example1">
+						<thead>
+							<tr>
+								<th>编辑</th>
+								<th>用户名</th>
+								<th>姓名</th>
+								<th>门店</th>
+								<th>科室</th>
+								<th>手机号码</th>
+								<th>邮箱</th>
+								<th>角色</th>
+								<th>创建时间</th>
+								<th>状态</th>
+							</tr>
+							<tr class="warning no-result">
+								<td colspan="7"><i class="fa fa-warning"></i>没有任何搜索结果!</td>
+							</tr>
+						</thead>
+						<tbody id="user_list">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="row">
+						<div class="col-xs-12 col-md-8" id="callBackPager"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /Main content -->
+<!--模态框-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">添加用户</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" method="post" novalidate="novalidate" id='user_aform'>
+					<div class="input-group">
+						<span class="input-group-addon">门店</span>
+						<select class="form-control selectpicker departMs" id="orgBranchIdAdd" name="orgBranchId" onchange="initBranchDept(this,$('#orgBranchDeptIdAdd'))">
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">科室名称</span>
+						<select class="form-control selectpicker departMs" id="orgBranchDeptIdAdd" name="orgBranchDeptId">
+							<option value="">请选择</option>
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">登录名</span> <input type="text" id="userLoginName" class="form-control" name="userLoginName" aria-describedby="basic-addon1" maxlength='12' >
+					</div>
+					<span class='userlist_checkloginname color_rgba font_16'></span>
+					<div class="input-group">
+						<span class="input-group-addon">员工名称</span> <input type="text" id="userName" class="form-control check_userloginname_validate" name="userName" aria-describedby="basic-addon1" maxlength='12' required>
+					</div>
+					<span class='userlist_checkname color_rgba font_16'></span>
+					<div class="input-group">
+						<span class="input-group-addon">手机号码</span> <input type="text" id="userPhone" class="form-control" name="userPhone" aria-describedby="basic-addon1" required>
+					</div>
+					<span class='userlist_checkphone color_rgba font_16'></span>
+					<div class="input-group">
+						<span class="input-group-addon">邮 箱</span> <input type="email" id="userEmail" class="form-control" name="userEmail" aria-describedby="basic-addon1" required>
+					</div>
+					<span class="userlist_checkmail color_rgba font_16"></span>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<span class="color_rgba dis_flex">*初始密码88888888</span>
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" id="user_button">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--模态框修改-->
+<div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel_edit">编辑用户</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="form_edit">
+					<input type="hidden" name="userId" id="userLoginName_id" value="" />
+					<div class="input-group">
+						<span class="input-group-addon">门店</span>
+						<select class="form-control selectpicker departMs" id="orgBranchIdEdit" name="orgBranchId" onchange="initBranchDept(this,$('#orgBranchDeptIdEdit'))">
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">部门</span>
+						<select class="form-control selectpicker departMs" id="orgBranchDeptIdEdit" name="orgBranchDeptId">
+							<option value="">请选择门店</option>
+						</select>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">用户名</span> <input type="text" id="edit_userLoginName" name="userLoginName" class="form-control" maxlength='12' aria-describedby="basic-addon1" value="" disabled="disabled">
+					</div>
+					<span class='userlist_check_editloginname'></span>
+					<div class="input-group">
+						<span class="input-group-addon">姓名</span> <input type="text" id="edit_form_name" name="userName" class="form-control" maxlength='12' aria-describedby="basic-addon1" value="">
+					</div>
+					<span class="userlist_check_editname"></span>
+					<div class="input-group">
+						<span class="input-group-addon">手机号码</span> <input type="text" id="edit_form_phone" name="userPhone" class="form-control" aria-describedby="basic-addon1" value="">
+					</div>
+					<span class='userlist_checkphone'></span>
+					<div class="input-group">
+						<span class="input-group-addon">邮 箱</span> <input type="text" id="edit_form_mail" name="userEmail" class="form-control" aria-describedby="basic-addon1" value="">
+					</div>
+					<span class="userlist_checkmail"></span>
+					<div class="input-group" id="edit_form_state">
+						<span class="input-group-addon userlist_status_right_border">状 态</span> <input type="radio" name='userStatus' value="0" class="userlist_statusinput_vertical" />启用 <input type="radio" name='userStatus' value="1" class="userlist_statusinput_vertical" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id='user_form_save'>保存</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+
+<!--模态框查看-->
+<div class="modal fade" id="myModal_see" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel_see">查看用户</h4>
+			</div>
+			<div class="modal-body">
+				<form class="bs-example bs-example-form" role="form" id="form_see">
+					<div class="input-group">
+						<span class="input-group-addon">门店</span> <input type="text" id="check_branch" class="form-control userAdmin_height_40" aria-describedby="basic-addon1" value="" disabled="true">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">科室</span> <input type="text" id="check_branchdept" class="form-control userAdmin_height_40" aria-describedby="basic-addon1" value="" disabled="true">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">用户名</span> <input type="text" id="check_userloginname" class="form-control userAdmin_height_40" aria-describedby="basic-addon1" value="" disabled="true">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">姓名</span> <input type="text" id="check_username" class="form-control userAdmin_height_40" aria-describedby="basic-addon1" value="" disabled="true">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">手机号码</span> <input type="text" id="check_userphone" class="form-control userAdmin_height_40" aria-describedby="basic-addon1" value="" disabled="true">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">邮 箱</span> <input type="text" id="check_usermail" class="form-control userAdmin_height_40" aria-describedby="basic-addon1" value="" disabled="true">
+					</div>
+					<div class="input-group" id="see_state">
+						<span class="input-group-addon userlist_status_right_border">状 态</span> <input type="radio" name='state_see' value="0" disabled="true" class="userlist_statusinput_vertical" />启用 <input type="radio" name='state_see' value="1" disabled="true" class="userlist_statusinput_vertical" />禁用
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+<script src="/org_plat/js/plugins/extendPagination.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		initUserPagination();
+	})
+
+	function initBranch(branchId) {
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(get_invalid_branch_url, null, otype, osync);
+		if(reqResult.result == 0) {
+			var branchOptions = "";
+			$(branchId).empty();
+			var branchArray = reqResult.data;
+			for(var i = 0; i < branchArray.length; i++) {
+				branchOptions += "<option value='" + branchArray[i].branchId + "'>" + branchArray[i].branchName + "</option>"
+			}
+			$(branchId).append(branchOptions);
+		} else {
+			alert(reqResult.message);
+		}
+	}
+
+	function initBranchDept(branchId, deptId) {
+		var otype = "post";
+		var osync = false;
+		var param = {
+			"branid": $(branchId).val()
+		};
+		var reqResult = httpRequest(getOrgDeptByBranidUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			var branchDeptOptions = "";
+			$(deptId).empty();
+			var branchDeptArray = reqResult.data;
+			for(var i = 0; i < branchDeptArray.length; i++) {
+				branchDeptOptions += "<option value='" + branchDeptArray[i].orgDeptId + "'>" + branchDeptArray[i].departName + "</option>"
+			}
+			$(deptId).append(branchDeptOptions);
+		} else {
+			alert(reqResult.message);
+		}
+	}
+
+	function initUserPagination() {
+		$('#example1').children('tbody').empty();
+		var otype = "post";
+		var osync = false;
+		var reqResult = httpRequest(userPagination, null, otype, osync);
+		if(reqResult.result == 0) {
+			callBackPaginationInit(reqResult);
+		}
+	}
+
+	function createTable(currPage, limit, total, dataBack) {
+		var datal = dataBack.data.list;
+		//获取操作类型
+//		var operationList = dataBack.operationList;
+		//			判断添加按钮
+//		if(operationList.add == 1) {
+//			$('#addUserAdmin').show();
+//		} else {
+//			$('#addUserAdmin').hide();
+//		}
+		var str = '';
+		for(var i = 0; i < datal.length; i++) {
+			var oDiv = '"' + '#contentWrapper' + '"';
+			var urlShowUserRole = '"' + '/org_plat/pages/userPermission/userRole.html"';
+			var pageUrl = "" + urlShowUserRole + "," + '"' + datal[i].userId + '"';
+			str += "<tr><td rowid='" + datal[i].userId + "'>";
+//			if(operationList.select==1){
+			    str += "<a href='#myModal_see' title='查看用户' class='padding_4px' data-toggle='modal' onclick='user_info_see(this)' value='" + datal[i].userId + "'><i class='fa fa-eye'></i></a> ";
+//			}
+//			if(operationList.update==1){
+			    str += "<a href='#myModal_edit' title='编辑用户' class='padding_4px' data-toggle='modal' onclick='user_info_edit(this)' value='" + datal[i].userId + "'><i class='fa fa-pencil'></i></a> ";
+//			}
+//			if(operationList.delete==1){
+			    str += "<a href='#' class='padding_4px' title='删除用户' onclick='user_info_del(this)'><i class='fa fa-trash-o' value='" + datal[i].userId + "'></i></a>";
+//			}
+			str += "<a onclick='loadpageLi(" + pageUrl + ")' class='padding_4px' title='分配角色'><i class='fa fa-user-plus'></i></a>";
+			str += "<a href='#' title='重置密码' class='padding_4px' onclick='reset_word(this)'><i class='fa fa-unlock '></i></a>";
+			str += "</td>";
+			str += "<td>" + nullformat(datal[i].userLoginName) + "</td>";
+			str += "<td>" + nullformat(datal[i].userName) + "</td>";
+			str += "<td>" + nullformat(datal[i].branchName) + "</td>";
+			str += "<td>" + nullformat(datal[i].departName) + "</td>";
+			str += "<td>" + nullformat(datal[i].userPhone) + "</td>";
+			str += "<td>" + nullformat(datal[i].userEmail) + "</td>";
+
+			if(nullformat(datal[i].roleName).length > 10) {
+				str += "<td title='" + datal[i].roleName + "'>" + nullformat(datal[i].roleName).substring(0, 9) + "...</td>";
+			} else {
+				str += "<td>" + nullformat(datal[i].roleName) + "</td>";
+			}
+			str += "<td>" + getLocalTime(nullformat(datal[i].userEditTime)) + "</td>";
+			if(datal[i].userStatus == 0) {
+				str += "<td>" + '启用 ' + "</td>";
+			} else {
+				str += "<td>" + '禁用' + "</td>";
+			}
+			str += '</tr>';
+		}
+		$("#user_list").append(str);
+		return false;
+	}
+
+	function check_userloginname() {
+		var flag = false;
+		var username = $('#userLoginName').val().trim();
+		if(username == '') {
+			$(".userlist_checkloginname").html("登录名不能为空!");
+			flag = false;
+			return;
+		} else if(username.length < 6 || username.length > 20) {
+			$(".userlist_checkloginname").html("登录名长度6~20");
+			flag = false;
+			return;
+		} else {
+			$(".userlist_checkloginname").html("");
+		}
+		var param = {
+			'userName': username
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(userAdmin_getCountByUserName_url, param, otype, osync);
+		if(reqResult.data == 0) {
+			$(".userlist_checkloginname").html("");
+		} else {
+			$(".userlist_checkloginname").html("员工姓名已存在");
+			flag = false;
+			return;
+		}
+		flag = true;
+	}
+
+	function check_edit_userloginname() {
+		var flag = false;
+		var username = $('#edit_userLoginName').val().trim();
+		var userid = $('#edit_userLoginName').val().trim();
+		if(username == '') {
+			$(".userlist_check_editloginname").html("员工姓名不能为空!");
+			flag = false;
+			return;
+		} else if(username.length < 6 || username.length > 20) {
+			$(".userlist_check_editloginname").html("员工姓名长度6~20");
+			flag = false;
+			return;
+		} else {
+			$(".userlist_check_editloginname").html("");
+		}
+		var param = {
+			'userName': username,
+			'userId': $("#userLoginName_id").val()
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(userAdmin_getCountByUserName_url, param, otype, osync);
+		if(reqResult.data == 0) {
+			$(".userlist_check_editloginname").html("");
+		} else {
+			$(".userlist_check_editloginname").html("员工姓名已存在");
+			flag = false;
+			return;
+		}
+		flag = true;
+	}
+	//提交添加用戶信息
+	$('#user_button').on('click', function() {
+		var add_userloginname_validate = $('#userLoginName').val();
+		var add_username_validate = $('#userName').val();
+		var add_usermail_validate = $('#userEmail').val();
+		var add_userphone_validate = $('#userPhone').val();
+		if(add_userloginname_validate == '' || add_username_validate == '' || add_usermail_validate == '' || add_userphone_validate == '') {
+			check_userloginname();
+			check_addusername();
+			check_addphone();
+			check_addmail();
+			return false;
+		} else {
+			var param = $('#user_aform').serialize();
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(userAdmin_insertBrUser_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("添加成功");
+				initUserPagination();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	});
+
+	function user_info_add() {
+		initBranch($("#orgBranchIdAdd"));
+		initBranchDept($("#orgBranchIdAdd"), $("#orgBranchDeptIdAdd"));
+	}
+	//	查看用户信息
+	function user_info_see(userinfoa) {
+		var otype = "post";
+		var osync = false;
+		var param = {
+			"userId": $(userinfoa).attr("value")
+		};
+		var reqResult = httpRequest(getBrUserByIdUrl, param, otype, osync);
+		if(reqResult.result == 0) {
+			var check_all_userinput_info = $('#see_state input');
+			param = {
+				"id": reqResult.data.orgBranchId
+			};
+			var branchResult = httpRequest(storeManagement_getOrgBranchById_url, param, otype, osync);
+			param = {
+				"pid": reqResult.data.orgBranchDeptId
+			};
+			var branchDeptResult = httpRequest(getOrgDeptByIdUrl, param, otype, osync);
+			$('#check_branch').val(branchResult.data.branchName);
+			$('#check_branchdept').val(branchDeptResult.data.departName);
+			$('#check_userloginname').val(reqResult.data.userLoginName);
+			$('#check_username').val(reqResult.data.userName);
+			$('#check_userphone').val(reqResult.data.userPhone);
+			$('#check_usermail').val(reqResult.data.userEmail);
+			if(reqResult.data.userStatus == 0) {
+				check_all_userinput_info[0].checked = "checked";
+			} else {
+				check_all_userinput_info[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+
+	function user_info_del(del_li) {
+		if(confirm("确认删除该用户吗？")) {
+			var del_user_id = $(del_li).parent().attr("rowid");
+			var param = {
+				"userId": del_user_id
+			};
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(userAdmin_deleteBrUser_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				alert("删除成功");
+				initUserPagination();
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+
+	//	編輯修改保存信息
+	function user_info_edit(edit_li) {
+		var edit_user_id = $(edit_li).parent().attr("rowid");
+		var param = {
+			"userId": edit_user_id
+		};
+		var otype = "get";
+		var osync = false;
+		var reqResult = httpRequest(userAdmin_getBrUser_url, param, otype, osync);
+		if(reqResult.result == 0) {
+			$("#userLoginName_id").val(reqResult.data.userId);
+			getBranchName($("#orgBranchIdEdit"));
+			$("#orgBranchIdEdit").val(reqResult.data.orgBranchId);
+			getDept($("#orgBranchIdEdit"), $("#orgBranchDeptIdEdit"));
+			$("#orgBranchDeptIdEdit").val(reqResult.data.orgBranchDeptId);
+			var userName = $('#edit_userLoginName');
+			var formName = $('#edit_form_name');
+			var formPhone = $('#edit_form_phone');
+			var formMail = $('#edit_form_mail');
+			var statu = $('#edit_form_state');
+			var StatuC = $('#edit_form_state input');
+			userName.val(reqResult.data.userLoginName);
+			formName.val(reqResult.data.userName);
+			formPhone.val(reqResult.data.userPhone);
+			formMail.val(reqResult.data.userEmail);
+			if(reqResult.data.userStatus == 0) {
+				StatuC[0].checked = "checked";
+			} else {
+				StatuC[1].checked = "checked";
+			}
+		} else {
+			alert(reqResult.message);
+		}
+	}
+	$('#user_form_save').on('click', function() {
+			var edit_userloginname_validate = $('#edit_userLoginName').val();
+			var edit_userloginname_validate = $('#edit_form_name').val();
+			var edit_usermail_validate = $('#edit_form_mail').val();
+			var edit_userphone_validate = $('#edit_form_phone').val();
+			if(edit_userloginname_validate == '' || edit_userloginname_validate == '' || edit_usermail_validate == '' || edit_userphone_validate == '') {
+				check_edit_userloginname();
+				check_editusername();
+				check_editphone();
+				check_editmail();
+				return false;
+			} else {
+				var param = $('#form_edit').serialize();
+				var otype = "post";
+				var osync = false;
+				var reqResult = httpRequest(userAdmin_updateBrUser_url, param, otype, osync);
+				if(reqResult.result == 0) {
+					alert('编辑成功');
+					initUserPagination();
+				} else {
+					alert(reqResult.message);
+				}
+			}
+		})
+		//	重置密码
+	function reset_word(reset) {
+		if(confirm('确定重置密码？')) {
+			var rowid = $(reset).parent().attr('rowid');
+			var param = {
+				"userId": rowid
+			};
+			var otype = "post";
+			var osync = false;
+			var reqResult = httpRequest(userAdmin_resetPassWord_url, param, otype, osync);
+			if(reqResult.result == 0) {
+				if(reqResult.data == 1) {
+					alert('重置密码成功！');
+				} else {
+					alert(reqResult.message);
+				}
+			} else {
+				alert(reqResult.message);
+			}
+		}
+	}
+	//	添加用户名验证
+	function check_addusername() {
+		var flag = false;
+		var username = $('#userName').val().trim();
+		if(username == '') {
+			$(".userlist_checkname").html("用户名不能为空!");
+			$('#userName').focus(function() {
+				$(".userlist_checkname").html("");
+			});
+			flag = false;
+			return;
+		} else if(username.length < 2 || username.length > 4) {
+			$(".userlist_checkname").html("注册名长度2~4");
+			flag = false;
+			return;
+		} else {
+			$(".userlist_checkname").html("");
+		}
+	}
+	//	编辑用户名验证
+	function check_editusername() {
+		var flag = false;
+		var username = $('#edit_form_name').val().trim();
+		if(username == '') {
+			$(".userlist_check_editname").html("用户名不能为空!");
+			$('#edit_form_name').focus(function() {
+				$(".userlist_check_editname").html("");
+			});
+			flag = false;
+			return;
+		} else if(username.length < 2 || username.length > 4) {
+			$(".userlist_check_editname").html("注册名长度2~4");
+			flag = false;
+			return;
+		} else {
+			$(".userlist_check_editname").html("");
+		}
+	}
+	//	添加手机验证
+	function check_addphone() {
+		var phone = $('#userPhone');
+		if(phone.val() == "") {
+			$(".userlist_checkphone").html("<font class='font'>手机号码不能为空，请重新输入！</font>");
+			phone.focus(function() {
+				$(".userlist_checkphone").html("");
+			});
+			return false;
+		} else if(!phone.val().match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/)) {
+			$(".userlist_checkphone").html("<font class='fontphone'>手机号码格式不正确！请重新输入</font>");
+			return false;
+		} else {
+			$(".userlist_checkphone").html("");
+		}
+	}
+	//	编辑手机验证
+	function check_editphone() {
+		var editphone = $('#edit_form_phone');
+		if(editphone.val() == "") {
+			$(".userlist_checkphone").html("<font class='font'>手机号码不能为空，请重新输入！</font>");
+			editphone.focus(function() {
+				$(".userlist_checkphone").html("");
+			});
+			return false;
+		} else if(!editphone.val().match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/)) {
+			$(".userlist_checkphone").html("<font class='fontphone'>手机号码格式不正确！请重新输入</font>");
+			return false;
+		} else {
+			$(".userlist_checkphone").html("");
+		}
+	}
+	//添加邮箱校验
+	function check_addmail() {
+		var email = $("#userEmail");
+		if(email.val() == "") {
+			$(".userlist_checkmail").html("<font class='font'>邮箱不能为空，请重新输入！</font>");
+			return false;
+		} else if(!email.val().match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)) {
+			$(".userlist_checkmail").html("<font class='fontmail'>邮箱格式不正确，请重新输入！</font>");
+			email.focus(function() {
+				$(".userlist_checkmail").html("");
+			});
+			return false;
+		} else {
+			$(".userlist_checkmail").html("");
+		}
+	}
+	//编辑邮箱校验
+	function check_editmail() {
+		var editemail = $("#edit_form_mail");
+		if(editemail.val() == "") {
+			$(".userlist_checkmail").html("<font class='font'>邮箱不能为空，请重新输入！</font>");
+			return false;
+		} else if(!editemail.val().match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)) {
+			$(".userlist_checkmail").html("<font class='fontmail'>邮箱格式不正确，请重新输入！</font>");
+			editemail.focus(function() {
+				$(".userlist_checkmail").html("");
+			});
+			return false;
+		} else {
+			$(".userlist_checkmail").html("");
+		}
+	}
+	//	表单验证
+	$("#userLoginName").blur(function() {
+		check_userloginname();
+	});
+	$("#edit_userLoginName").blur(function() {
+		check_edit_userloginname();
+	});
+	$("#userName").blur(function() {
+		check_addusername();
+	});
+	$("#edit_form_name").blur(function() {
+		check_editusername();
+	});
+	$("#userPhone").blur(function() {
+		check_addphone();
+	})
+	$('#userEmail').blur(function() {
+		check_addmail();
+	})
+	$("#edit_form_phone").blur(function() {
+		check_editphone();
+	})
+	$('#edit_form_mail').blur(function() {
+		check_editmail();
+	})
+</script>
